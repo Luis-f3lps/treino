@@ -39,11 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-// Iniciar o servidor
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
-});
+
 app.get('/api/musculos', async (req, res) => {
     try {
         // Query simples: Pega tudo da tabela musculos
