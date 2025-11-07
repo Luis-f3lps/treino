@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+}
+
+.viewer-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#workout-string-input {
+  flex: 1; /* Ocupa o máximo de espaço */
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+#load-workout-button {
+  padding: 0 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+#load-workout-button:hover {
+  background-color: #0056b3;
+}
+
+#workout-display-area {
+  border-top: 2px solid #f0f0f0;
+  padding-top: 20px;
+}
+
+.exercise-card {
+  display: flex;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fdfdfd;
+  border-radius: 5px;
+  overflow: hidden; /* Garante que o card contenha tudo */
+}
+
+.exercise-gif {
+  width: 300px; /* Como você pediu */
+  min-width: 300px;
+  margin-right: 15px;
+}
+.exercise-gif img {
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.exercise-info {
+  flex: 1;
+}
+
+.exercise-info h4 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.exercise-info .day-highlight {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+}
+
+.logoIFNMG {
+  width: 80px;
+  margin-right: 30px;
+}
+/* Adicione isso ao seu style.css */
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 22px;
+  position: relative;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  position: relative;
+}
+a {
+  color: #007bff;
+  transition: color 0.3s ease-in-out;
+}

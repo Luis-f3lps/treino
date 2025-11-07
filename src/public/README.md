@@ -1,59 +1,52 @@
-# Portfólio de Projetos de Inovação | Hub IFNMG - Campus Salinas
+# Treino Black | Montador de Fichas de Treino
 
-![Status](https://img.shields.io/badge/status-ativo-success)
-![Instituição](https://img.shields.io/badge/instituição-IFNMG-blue)
-![Licença](https://img.shields.io/badge/license-CC--BY--NC--SA%204.0-lightgrey)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Tech](https://img.shields.io/badge/stack-full--stack-blue)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-Este repositório funciona como a vitrine digital e o catálogo dinâmico dos projetos de pesquisa aplicada, inovação e extensão tecnológica desenvolvidos no âmbito do **Hub de Inovação do Instituto Federal do Norte de Minas Gerais - Campus Salinas**.
+Este repositório contém o código-fonte do **Treino Black**, uma aplicação web full-stack pensada para simplificar a criação, visualização e compartilhamento de fichas de treino de academia.
 
-Nosso principal objetivo é ser a ponte entre o conhecimento científico gerado na academia e as necessidades práticas de empresas, empresários e produtores do Norte de Minas, fomentando o desenvolvimento regional por meio da inovação.
+Nosso principal objetivo é ser a ponte entre um catálogo complexo de exercícios e a necessidade de um treino estruturado (A, B, C, D), permitindo que qualquer pessoa monte uma rotina visual e funcional em minutos.
 
-## 🎯 Objetivo do Portfólio
+## 🎯 Objetivo da Aplicação
 
-* **Apresentar** de forma clara e organizada as competências e tecnologias desenvolvidas no IFNMG - Campus Salinas.
-* **Facilitar** a conexão entre os desafios do mercado e as soluções científicas disponíveis.
-* **Fomentar** a cultura da inovação e da parceria Universidade-Empresa na região.
-* **Servir** como uma ferramenta de consulta para potenciais parceiros, investidores e para a comunidade em geral.
+* **Facilitar** a criação de rotinas de treino através de uma interface visual interativa (70/30).
+* **Apresentar** de forma clara a execução de cada exercício através de GIFs.
+* **Centralizar** informações como nome, músculo primário, secundários e repetições recomendadas.
+* **Gerar** um "link" ou string de treino compartilhável, permitindo que o treino seja visualizado em qualquer lugar.
 
-## 🔬 Áreas de Foco
+## 🏋️ Funcionalidades Principais
 
-Nossas áreas prioritárias de atuação estão alinhadas com os arranjos produtivos locais, com destaque para:
+As funcionalidades da aplicação focam na simplicidade e eficiência do fluxo de montagem de treino:
 
-* **Tecnologia em Cachaça e Derivados**
-* **Nutrição Animal e Zootecnia de Precisão**
+* **Catálogo de Exercícios:** Busca dinâmica no banco de dados com filtro por grupo muscular.
+* **Montador Interativo:** Painel duplo onde você explora os exercícios (esquerda) e monta sua ficha (direita).
+* **Visualizador de Treino:** Uma página dedicada que lê uma string (`exercicio/a01,a+g03,b...`) e renderiza o treino completo, com todos os detalhes e GIFs.
 
-Além do foco principal, estamos de portas abertas para desenvolver projetos e parcerias em outras áreas estratégicas, como:
-* Fruticultura e Agroindústria
-* Energias Renováveis Aplicadas ao Campo
-* Gestão Hídrica e Agricultura de Precisão
-* Apicultura e Derivados
-* Turismo Tecnológico e Cultural
+## 📂 Tecnologias Utilizadas
 
-## 📂 Como Navegar nos Projetos
+Este projeto foi construído "na unha" (Vanilla JS) para ser leve e performático, consumindo uma API RESTful.
 
-Os projetos estão organizados em diretórios por área de atuação dentro da pasta `/projetos`.
+* **Front-End:** HTML5, CSS3, JavaScript (ES6+)
+* **Back-End (API):** Node.js, Express.js
+* **Banco de Dados:** PostgreSQL
+* **Deploy (Padrão):** Vercel
 
-Cada projeto possui seu próprio arquivo `README.md` com informações detalhadas, incluindo:
-* Resumo do Projeto
-* Problema que Resolve
-* Estágio de Desenvolvimento (Ex: Ideia, Protótipo, Produto Final)
-* Pesquisadores Envolvidos
-* Modelo de Parceria Buscado
+## 🤝 Como Contribuir
 
-## 🤝 Como Contribuir ou Sugerir um Projeto
+Este projeto é um portfólio vivo. Se você quiser contribuir, sinta-se à vontade:
 
-Este é um portfólio vivo e em constante atualização.
-
-* **Pesquisadores do IFNMG:** Se você tem um projeto com potencial de inovação e quer incluí-lo no portfólio, entre em contato conosco ou abra uma "Issue" neste repositório descrevendo a sua proposta.
-* **Empresas e Produtores:** Se você tem um desafio ou um problema e acredita que a ciência pode ajudar, nos envie sua demanda! Podemos conectar seu desafio a um pesquisador capaz de desenvolver uma solução.
+* **Reportar Bugs:** Achou um problema (tipo, o "biceps corno" aparecendo onde não devia)? Abra uma "Issue".
+* **Sugerir Novas Features:** Tem uma ideia para melhorar o app? Estamos ouvindo.
+* **Pull Requests:** Se você é dev e quer adicionar algo, seu PR é bem-vindo.
 
 ## ✉️ Contato
 
-Para mais informações, parcerias ou dúvidas, entre em contato com o Hub de Inovação do IFNMG - Campus Salinas.
+Para mais informações ou sugestões, entre em contato.
 
-* **Agente de Inovação Local:** [Seu Nome]
-* **E-mail:** [Seu e-mail profissional ou do Hub]
-* **Website:** [Link para o site do IFNMG ou do Hub, se houver]
+* **Desenvolvedor:** Luis Gustavo Barbosa Santiago
+* **E-mail:** `[seu-email-aqui@dominio.com]`
+* **LinkedIn:** `[link-do-seu-linkedin-aqui]`
 
 ---
-O conteúdo textual deste portfólio está licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
