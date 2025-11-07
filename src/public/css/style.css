@@ -122,9 +122,16 @@ nav ul li {
         .result-info {
             flex: 1;
         }
-        .exercise-gif{
-width: 300px;
-        }
+.exercise-gif {
+    width: 300px;       
+    min-width: 300px;    
+    margin-right: 15px;
+}
+
+.exercise-gif img {
+    width: 100%; 
+    border: 1px solid #eee;
+}
        .exercise-card {
             display: flex;
         }
