@@ -111,6 +111,7 @@ app.get('/api/exercicios/por-musculo', async (req, res) => {
   }
 });
 
+
 app.get('/api/exercicios/info', async (req, res) => {
     
     const { ids } = req.query; 
@@ -122,7 +123,6 @@ app.get('/api/exercicios/info', async (req, res) => {
     const idArray = ids.split(',');
 
     try {
-  
         const sqlQuery = `
             SELECT 
                 e.id_exercicio, 
@@ -139,12 +139,11 @@ app.get('/api/exercicios/info', async (req, res) => {
             FROM 
                 exercicios e
             LEFT JOIN 
-                musculos m_prim ON e.musculo_primario_id = m_prim.id_mu-sculo
+                musculos m_prim ON e.musculo_primario_id = m_prim.id_musculo 
             WHERE
                 e.id_exercicio = ANY($1::varchar[])
         `;
         
-        // Passa o array de IDs como parâmetro
         const { rows } = await pool.query(sqlQuery, [idArray]);
         
         res.status(200).json(rows);
