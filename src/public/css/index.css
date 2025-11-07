@@ -244,3 +244,17 @@ a {
     transition: color 0.3s 
 ease-in-out;
 }
+.day-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #111;
+    margin-top: 30px; /* Espaço acima do título */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #007bff; /* Linha azul de destaque */
+}
+
+/* O primeiro título não precisa de espaço em cima */
+#workout-display-area .day-title:first-of-type {
+    margin-top: 0;
+}
