@@ -59,5 +59,51 @@ app.get('/api/musculos', async (req, res) => {
     res.status(500).json({ erro: 'Erro interno do servidor.' });
   }
 });
+// Rota da API para BUSCAR exercícios (com JOIN e Secundários)
+app.get('/api/exercicios/por-musculo', async (req, res) => {
+  
+  const { id } = req.query; 
 
+  try {
+    // 1. O 'baseQuery' agora usa os nomes que você confirmou
+    const baseQuery = `
+      SELECT 
+        e.id_exercicio, 
+        e.nome, 
+        e.link_gif, 
+        e.repeticoes_recomendadas,
+        m_prim.nome_musculo AS musculo_primario_nome,
+        (
+          SELECT STRING_AGG(m_sec.nome_musculo, ', ')
+          FROM exercicio_musculos_secundarios ems
+          JOIN musculos m_sec ON ems.musculo_id = m_sec.id_musculo
+          WHERE ems.exercicio_id = e.id_exercicio
+        ) AS musculos_secundarios_nomes
+      FROM 
+        exercicios e
+      LEFT JOIN 
+        musculos m_prim ON e.musculo_primario_id = m_prim.id_musculo
+    `;
+    
+    let sqlQuery;
+    let params = [];
+
+    if (id) {
+      // Filtra por músculo primário (AQUI ESTÁ O CHUTE)
+      sqlQuery = baseQuery + ` WHERE e.musculo_primario_id = $1 ORDER BY e.nome`;
+      params.push(id);
+    } else {
+      // Busca todos
+      sqlQuery = baseQuery + ` ORDER BY e.nome`;
+    }
+    
+    const { rows } = await pool.query(sqlQuery, params);
+
+    res.status(200).json(rows);
+
+  } catch (err) {
+    console.error('Erro ao buscar exercícios por músculo:', err);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+});
 export default app;
