@@ -175,7 +175,7 @@
     }
     
     #muscle-group-select { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
-    #exercise-results-container { margin-top: 20px;    display: flex; }
+    #exercise-results-container { margin-top: 20px;    display: ruby; }
 
     /* --- MUDANÇAS AQUI --- */
     .exercise-card {
@@ -184,6 +184,7 @@
         margin-bottom: 15px;
         padding: 10px;
         background-color: #fdfdfd;
+        width: 50%;
         /* Não precisa mais de cursor aqui */
     }
 
