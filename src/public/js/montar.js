@@ -195,11 +195,3 @@ saveButton.addEventListener('click', () => {
             init(); 
 
         }); 
-
-        var sidemenu = document.getElementById("sidemenu");
-        function openmenu() {
-            sidemenu.style.right = "0";
-        }
-        function clossmenu() {
-            sidemenu.style.right = "-200px";
-        }

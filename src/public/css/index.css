@@ -49,7 +49,9 @@
             width: 100%;
             display: flex;
         }
-
+    nav ul {
+        display: none; 
+    }
         nav ul li {
             display: inline-block;
             list-style: none;
@@ -205,13 +207,35 @@
 /* --- RESPONSIVIDADE (Ajuste rápido para mobile) --- */
 @media (max-width: 768px) {
     nav ul {
-        /* (Aqui entra sua lógica de menu hamburguer) */
-        display: none; 
+        display: block; 
+        background: black;
+        top: 0;
+        right: -600px;
+        width: 600px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+        position: fixed;
     }
     nav .fa-solid {
         display: block;
         color: white;
         margin-right: 30px;
+    }
+        nav ul li {
+        display: block;
+        margin: 45px;
+    }
+        nav ul li a {
+        font-size: 52px;
+    }
+        #sidemenu li a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #ffffff;
+        transition: background-color 0.3s;
     }
     body {
     font-family: Arial, sans-serif;
