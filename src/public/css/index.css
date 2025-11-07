@@ -49,9 +49,7 @@
             width: 100%;
             display: flex;
         }
-    nav ul {
-        display: none; 
-    }
+
         nav ul li {
             display: inline-block;
             list-style: none;
@@ -59,16 +57,10 @@
             color: rgb(255, 255, 255);
 
         }
+fa-solid fa-bars{
+    display: none;
+}
 
-        nav ul .fa-solid {
-            position: absolute;
-            top: 25px;
-            left: 200px;
-            display: none;
-
-            cursor: pointer;
-            color: white;
-        }
 
        .viewer-container {
     max-width: 900px; /* Limita a largura do conteúdo */
@@ -230,6 +222,9 @@
         nav ul li a {
         font-size: 52px;
     }
+    fa-solid fa-bars{
+    display: block;
+}
         #sidemenu li a {
         display: block;
         padding: 10px;
