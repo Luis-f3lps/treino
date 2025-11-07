@@ -36,7 +36,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+app.get('/montar', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'montar.html'));
+});
+app.get('/tmb', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'tmb.html'));
+});
 app.get('/api/musculos', async (req, res) => {
   try {
 
@@ -59,13 +67,11 @@ app.get('/api/musculos', async (req, res) => {
     res.status(500).json({ erro: 'Erro interno do servidor.' });
   }
 });
-// Rota da API para BUSCAR exercícios (com JOIN e Secundários)
 app.get('/api/exercicios/por-musculo', async (req, res) => {
   
   const { id } = req.query; 
 
   try {
-    // 1. O 'baseQuery' agora usa os nomes que você confirmou
     const baseQuery = `
       SELECT 
         e.id_exercicio, 
@@ -89,11 +95,9 @@ app.get('/api/exercicios/por-musculo', async (req, res) => {
     let params = [];
 
     if (id) {
-      // Filtra por músculo primário (AQUI ESTÁ O CHUTE)
       sqlQuery = baseQuery + ` WHERE e.musculo_primario_id = $1 ORDER BY e.nome`;
       params.push(id);
     } else {
-      // Busca todos
       sqlQuery = baseQuery + ` ORDER BY e.nome`;
     }
     
@@ -105,5 +109,49 @@ app.get('/api/exercicios/por-musculo', async (req, res) => {
     console.error('Erro ao buscar exercícios por músculo:', err);
     res.status(500).json({ erro: 'Erro interno do servidor.' });
   }
+});
+
+app.get('/api/exercicios/info', async (req, res) => {
+    
+    const { ids } = req.query; 
+
+    if (!ids) {
+        return res.status(400).json({ erro: 'Parâmetro "ids" é obrigatório.' });
+    }
+
+    const idArray = ids.split(',');
+
+    try {
+  
+        const sqlQuery = `
+            SELECT 
+                e.id_exercicio, 
+                e.nome, 
+                e.link_gif, 
+                e.repeticoes_recomendadas,
+                m_prim.nome_musculo AS musculo_primario_nome,
+                (
+                    SELECT STRING_AGG(m_sec.nome_musculo, ', ')
+                    FROM exercicio_musculos_secundarios ems
+                    JOIN musculos m_sec ON ems.musculo_id = m_sec.id_musculo
+                    WHERE ems.exercicio_id = e.id_exercicio
+                ) AS musculos_secundarios_nomes
+            FROM 
+                exercicios e
+            LEFT JOIN 
+                musculos m_prim ON e.musculo_primario_id = m_prim.id_mu-sculo
+            WHERE
+                e.id_exercicio = ANY($1::varchar[])
+        `;
+        
+        // Passa o array de IDs como parâmetro
+        const { rows } = await pool.query(sqlQuery, [idArray]);
+        
+        res.status(200).json(rows);
+
+    } catch (err) {
+        console.error('Erro ao buscar exercícios por IDs:', err);
+        res.status(500).json({ erro: 'Erro interno do servidor.' });
+    }
 });
 export default app;

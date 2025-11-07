@@ -1,130 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/tl.webp" type="image/png">
-    <title>Agência de Projetos de Inovação do IFNMG Salinas</title>
-    <link rel="stylesheet" href="css/artigos.css">
+    <title>Visualizar Treino - Agência de Projetos</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
     <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .viewer-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        #workout-string-input {
+            flex: 1; /* Ocupa o máximo de espaço */
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #load-workout-button {
+            padding: 0 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #load-workout-button:hover {
+            background-color: #0056b3;
+        }
+
+        #workout-display-area {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        
+        .exercise-card {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fdfdfd;
+            border-radius: 5px;
+            overflow: hidden; /* Garante que o card contenha tudo */
+        }
+
+        .exercise-gif {
+            width: 300px; /* Como você pediu */
+            min-width: 300px;
+            margin-right: 15px;
+        }
+        .exercise-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .exercise-info {
+            flex: 1;
+        }
+        
+        .exercise-info h4 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        
+        .exercise-info .day-highlight {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div id="header">
-            <nav>
-                <img src="images/tl.webp" class="logo">
-                <ul id="sidemenu">
-                    <li><a href="/index">Home</a></li>
-                    <li><a href="/monstar">Montar Treino</a></li>
-                    <li><a href="/tbm">TBN</a></li>
-                    <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
-                </ul>
-                <img src="images/musc.jpg" class="logoIFNMG">
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-            </nav>
-        </div>
-        <div id="about" style="margin-top: 120px;">
-            <div class="row">
-                <div class="port1">
-                    <h1 class="sub-title">Artigos</h1>
-                    <p style="background-color: rgba(255, 255, 255, 0.05); 
-           color: black; 
-           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-           font-size: 16px; 
-           line-height: 1.7; 
-           padding: 25px; 
-           border-left: 5px solid #28a745; 
-           border-radius: 5px; 
-           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
-                        A produção de artigos do IFNMG destaca-se pela sua diversidade e forte aplicação regional,
-                        abrangendo desde as ciências agrárias e tecnologia de alimentos até as áreas de humanidades e
-                        inovação tecnológica. As pesquisas publicadas buscam resolver desafios específicos do Norte de
-                        Minas Gerais, fortalecendo o ecossistema de conhecimento local. Com isso, o instituto reafirma
-                        seu compromisso com o desenvolvimento científico e social, transformando a pesquisa em impacto
-                        real para a comunidade.</p>
-                    </br>
-                    <p></p>
-                    <div class="container-artigos">
-                        <div class="search-container">
-                            <label for="filtro-titulo">Pesquisar por Título:</label>
-                            <input type="text" id="filtro-titulo" placeholder="Digite um título...">
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Título</th>
-                                    <th>Autores</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody id="artigos-tbody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="header">
+        <nav>
+            <img src="images/tl.webp" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/monstar">Montar Treino</a></li>
+                <li><a href="/tbm">TBN</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/musc.jpg" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
     </div>
 
+    <div class="viewer-container">
+        <h2>Visualizar Treino</h2>
+        <p>Cole a string gerada (ex: <code>exercicio/t01,a+t03,b</code>) para carregar os detalhes.</p>
 
-
-    <!----------------- Contato ------------>
-    <div id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-                    <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
-                    <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/profile.php?id=100008665060845"><i
-                                class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
-                                class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Pega todos os elementos com a classe "tab-links" e "tab-contents"
-        var tablinks = document.getElementsByClassName("tab-links");
-        var tabcontents = document.getElementsByClassName("tab-contents");
-        //abre uma aba específica
-        function opentab(tabname) {
-            // Loop para remover a classe "active-link" de todos os links das abas
-            for (var i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active-link");
-            }
-            // Mesma coisa da de cima só que com "active-tab" 
-            for (var i = 0; i < tabcontents.length; i++) {
-                tabcontents[i].classList.remove("active-tab");
-                // Se o id for igual ao nome da aba, adiciona a classe "active-tab" a esse trem para mostrar
-                if (tabcontents[i].id === tabname) {
-                    tabcontents[i].classList.add("active-tab");
-                }
-            }
-            // Adiciona a classe "active-link" ao link da aba que foi clicada
-            event.currentTarget.classList.add("active-link");
+        <div class="input-area">
+            <input type="text" id="workout-string-input" placeholder="Cole sua string aqui...">
+            <button id="load-workout-button">Carregar</button>
         }
-    </script>
+        </div>
+
+        <div id="workout-display-area">
+            </div>
+    </div>
+
 
     <script>
         var sidemenu = document.getElementById("sidemenu");
         function openmenu() {
-            sidemenu.style.right = "-200px";
-            sidemenu.style.left = "0px";
+            sidemenu.style.right = "0";
         }
         function clossmenu() {
-            sidemenu.style.left = "-800px";
+            sidemenu.style.right = "-200px";
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const input = document.getElementById('workout-string-input');
+            const button = document.getElementById('load-workout-button');
+            const displayArea = document.getElementById('workout-display-area');
+
+            button.addEventListener('click', () => {
+                carregarTreino();
+            });
+
+            async function carregarTreino() {
+                const rawString = input.value;
+                
+                if (!rawString.startsWith('exercicio/')) {
+                    displayArea.innerHTML = '<p>String inválida. Deve começar com "exercicio/".</p>';
+                    return;
+                }
+
+                const pairs = rawString.replace('exercicio/', '').split('+'); // ["t01,a", "t03,b"]
+                
+                const exercisesToFetch = []; // Guarda [{id: 't01', day: 'a'}, {id: 't03', day: 'b'}]
+                const idList = []; // Guarda ['t01', 't03']
+
+                pairs.forEach(pair => {
+                    const parts = pair.split(',');
+                    const id = parts[0];
+                    const day = parts[1];
+                    if (id && day) {
+                        exercisesToFetch.push({ id, day });
+                        idList.push(id);
+                    }
+                });
+
+                if (idList.length === 0) {
+                    displayArea.innerHTML = '<p>Nenhum exercício válido encontrado na string.</p>';
+                    return;
+                }
+
+                try {
+                    displayArea.innerHTML = '<p>Buscando dados...</p>';
+                                        const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Erro da API: ${response.statusText}`);
+                    }
+                    
+                    const exercisesInfo = await response.json(); // Array com infos do banco
+
+                    displayArea.innerHTML = ''; // Limpa o "Buscando..."
+                    
+                    exercisesToFetch.forEach(exercise => {
+                        const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
+                        
+                        if (!info) {
+                            displayArea.innerHTML += `<p>Erro: Info para ${exercise.id} não encontrada.</p>`;
+                            return; 
+                        }
+                        
+                        const diaFormatado = `Dia ${exercise.day.toUpperCase()}`;
+                        
+                        const cardHTML = `
+                            <div class="exercise-card">
+                                <div class="exercise-gif">
+                                    <img src="${info.link_gif}" alt="${info.nome}">
+                                </div>
+                                <div class="exercise-info">
+                                    <h4>${info.nome}</h4>
+                                    <p class="day-highlight">${diaFormatado}</p>
+                                    <p><strong>Repetições:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
+                                    <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
+                                    <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
+                                </div>
+                            </div>
+                        `;
+                        displayArea.innerHTML += cardHTML;
+                    });
+
+                } catch (err) {
+                    displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
+                    console.error(err);
+                }
+            }
+        });
     </script>
-    <script src="js/artigos.js"></script>
-
 </body>
-
 </html>
