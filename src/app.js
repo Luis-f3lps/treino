@@ -44,7 +44,7 @@ app.get('/api/musculos', async (req, res) => {
     try {
         // Query simples: Pega tudo da tabela musculos
         // Adicionei um ORDER BY para vir em ordem alfabética
-        const sqlQuery = 'SELECT id_musculo, nome FROM musculos';
+        const sqlQuery = 'SELECT id_musculo';
 
         const { rows } = await pool.query(sqlQuery);
 
