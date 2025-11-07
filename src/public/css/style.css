@@ -22,17 +22,29 @@
             width: 100%;
             display: flex;
         }
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
-}
+
+        nav ul li {
+            display: inline-block;
+            list-style: none;
+            margin: 10px 20px;
+            color: rgb(255, 255, 255);
+
+        }
+
+        nav ul .fa-solid {
+            position: absolute;
+            top: 25px;
+            left: 200px;
+            display: none;
+
+            cursor: pointer;
+            color: white;
+        }
+
         .workout-interface {
             display: flex;
             border: 1px solid #ccc;
             background-color: #fff;
-            height: 60vh;
-            /* Diminuí um pouco a altura */
         }
 
         .exercise-list-panel {
@@ -122,19 +134,30 @@ nav ul li {
         .result-info {
             flex: 1;
         }
-.exercise-gif {
-    width: 300px;       
-    min-width: 300px;    
-    margin-right: 15px;
-}
 
-.exercise-gif img {
-    width: 100%; 
-    border: 1px solid #eee;
-}
-       .exercise-card {
+        .exercise-gif {
+            width: 300px;
+            min-width: 300px;
+            margin-right: 15px;
+        }
+
+        .exercise-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        .exercise-card {
             display: flex;
         }
-        .a{
+
+        .a {
             color: white;
+        }
+
+        @media only screen and (min-width: 901px) and (min-height: 1601px) {
+            nav .fa-solid {
+                display: block;
+                font-size: 40px;
+                color: black;
+            }
         }
