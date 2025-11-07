@@ -41,21 +41,37 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/musculos', async (req, res) => {
-    try {
-        // Query simples: Pega tudo da tabela musculos
-        // Adicionei um ORDER BY para vir em ordem alfabética
-        const sqlQuery = 'SELECT id_musculo';
+  try {
+    //
+    // A QUERY CORRIGIDA BASEADA NA SUA IMAGEM:
+    //
+    const sqlQuery = 'SELECT id_musculo, nome_musculo FROM musculos ORDER BY nome_musculo';
+    
+    const { rows } = await pool.query(sqlQuery);
+    
+    // Agora, um problema:
+    // O front-end está esperando { id_musculo: 1, nome: 'Peito' }
+    // Mas o banco vai mandar { id_musculo: 1, nome_musculo: 'Peito' }
+    //
+    // Vamos corrigir isso no front-end... NÃO. 
+    // Vamos corrigir aqui, que é mais fácil.
+    
+    // Mapeamos a resposta para o formato que o front-end espera
+    const respostaFormatada = rows.map(musculo => {
+      return {
+        id_musculo: musculo.id_musculo, // Já está certo
+        nome: musculo.nome_musculo      // Renomeia 'nome_musculo' para 'nome'
+      };
+    });
 
-        const { rows } = await pool.query(sqlQuery);
+    res.status(200).json(respostaFormatada);
 
-        // Retorna a lista de músculos como JSON
-        res.status(200).json(rows);
-
-    } catch (err) {
-        console.error('Erro ao buscar músculos:', err);
-        res.status(500).json({ erro: 'Erro interno do servidor.' });
-    }
-}); app.get('/api/exercicios/buscar', async (req, res) => {
+  } catch (err) {
+    console.error('Erro ao buscar músculos:', err);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+});
+ app.get('/api/exercicios/buscar', async (req, res) => {
 
     // 1. Pega o termo de busca da URL (ex: ?termo=supino)
     const { termo } = req.query;
