@@ -19,7 +19,7 @@
                 <li><a href="/tbm">TBN</a></li>
                 <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
             </ul>
-            <img src="images/musc.png" class="logoIFNMG">
+            <img src="images/musc.jpg" class="logoIFNMG">
             <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
     </div>
@@ -43,77 +43,28 @@
         <div class="exercise-detail-panel">
             <h3>Exercícios Selecionados</h3>
 
-            <div id="exercise-detail-content">
-                <p>
-                    Aqui ficará a lista de exercícios que você
-                    adicionar (ainda sem fazer nada).
-                </p>
+            <div id="exercise-detail-content" class="is-empty">
+                <p>Adicione exercícios da lista ao lado.</p>
             </div>
         </div>
 
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <script>document.addEventListener('DOMContentLoaded', () => {
 
+            // --- Seleção dos Elementos ---
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');
-            const detailPanel = document.getElementById('exercise-detail-content');
+            // A div de 30% (agora usada)
+            const detailPanelContent = document.getElementById('exercise-detail-content');
 
+            // --- (Funções carregarMusculos, preencherSelect, buscarExerciciosPorMusculo) ---
+            // ... (Cole as funções da resposta anterior aqui, elas não mudam) ...
 
-            async function carregarMusculos() {
-                try {
-                    const response = await fetch('/api/musculos');
+            /* =======================================================
+               COLE AS FUNÇÕES ANTERIORES (carregarMusculos, etc) AQUI
+               ======================================================= */
 
-                    if (!response.ok) {
-                        throw new Error(`Erro HTTP: ${response.status}`);
-                    }
-
-                    const musculos = await response.json();
-                    preencherSelect(musculos);
-
-                } catch (error) {
-                    console.error('Falha ao carregar músculos:', error);
-                    muscleSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-                }
-            }
-
-            function preencherSelect(musculos) {
-                muscleSelect.innerHTML = ''; // Limpa o "Carregando..."
-                muscleSelect.add(new Option('Selecione um músculo', ''));
-                musculos.forEach(musculo => {
-                    muscleSelect.add(new Option(musculo.nome, musculo.id_musculo));
-                });
-            }
-
-            muscleSelect.addEventListener('change', () => {
-                const muscleId = muscleSelect.value;
-                if (muscleId) {
-                    buscarExerciciosPorMusculo(muscleId);
-                } else {
-                    resultsContainer.innerHTML = '<p>Selecione um músculo acima.</p>';
-                }
-            });
-
-            async function buscarExerciciosPorMusculo(id) {
-                resultsContainer.innerHTML = '<p>Buscando exercícios...</p>';
-
-                try {
-
-                    const response = await fetch(`/api/exercicios/por-musculo?id=${id}`);
-
-                    if (!response.ok) {
-                        throw new Error(`Erro HTTP: ${response.status}`);
-                    }
-
-                    const exercicios = await response.json();
-                    renderizarExercicios(exercicios);
-
-                } catch (error) {
-                    console.error('Falha ao buscar exercícios:', error);
-                    resultsContainer.innerHTML = '<p>Erro ao buscar exercícios.</p>';
-                }
-            }
-
+            // --- 5. FUNÇÃO PARA RENDERIZAR OS CARDS (MODIFICADA) ---
             function renderizarExercicios(exercicios) {
                 resultsContainer.innerHTML = '';
 
@@ -125,7 +76,7 @@
                 exercicios.forEach(ex => {
                     const cardDiv = document.createElement('div');
                     cardDiv.className = 'exercise-card';
-                    cardDiv.dataset.id = ex.id_exercicio;
+                    // Remove o dataset do card principal, não precisamos mais
 
                     const gifDiv = document.createElement('div');
                     gifDiv.className = 'exercise-gif';
@@ -133,21 +84,105 @@
 
                     const infoDiv = document.createElement('div');
                     infoDiv.className = 'exercise-info';
-                    infoDiv.innerHTML = `
-                        <h4>${ex.nome}</h4>
-                        <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas}</p>
-                        <p><strong>ID:</strong> ${ex.id_exercicio}</p>
-                    `;
 
+                    // --- NOVO BOTÃO ADICIONADO AQUI ---
+                    infoDiv.innerHTML = `
+                    <h4>${ex.nome}</h4>
+                    <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas}</p>
+                    <p><strong>ID:</strong> ${ex.id_exercicio}</p>
+                    <button class="add-button">Adicionar</button>
+                `;
+
+                    // Adiciona os dados ao botão para sabermos o que adicionar
+                    const addButton = infoDiv.querySelector('.add-button');
+                    addButton.dataset.id = ex.id_exercicio;
+                    addButton.dataset.nome = ex.nome;
+
+                    // Monta o card
                     cardDiv.appendChild(gifDiv);
                     cardDiv.appendChild(infoDiv);
                     resultsContainer.appendChild(cardDiv);
                 });
             }
 
+            // --- 6. NOVA FUNÇÃO: Adicionar na lista da direita ---
+            function adicionarExercicioNoPainel(id, nome) {
+
+                // Remove a mensagem "Adicione exercícios..."
+                if (detailPanelContent.classList.contains('is-empty')) {
+                    detailPanelContent.innerHTML = ''; // Limpa a mensagem
+                    detailPanelContent.classList.remove('is-empty');
+                }
+
+                // Verifica se o item já não está na lista
+                if (document.getElementById(`selected-${id}`)) {
+                    alert('Esse exercício já foi adicionado!');
+                    return;
+                }
+
+                // 1. Cria a nova "linha"
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'selected-exercise-item';
+                itemDiv.id = `selected-${id}`; // ID para controle
+
+                // 2. Cria o nome
+                const nomeSpan = document.createElement('span');
+                nomeSpan.textContent = nome;
+
+                // 3. Cria o select de dias
+                const daySelect = document.createElement('select');
+                daySelect.className = 'day-select';
+
+                const days = ['Dia A', 'Dia B', 'Dia C', 'Dia D'];
+                days.forEach(day => {
+                    // new Option(texto, valor)
+                    daySelect.add(new Option(day, day.toLowerCase().replace(' ', '')));
+                });
+
+                // 4. Monta a linha
+                itemDiv.appendChild(nomeSpan);
+                itemDiv.appendChild(daySelect);
+
+                // 5. Adiciona no painel de 30%
+                detailPanelContent.appendChild(itemDiv);
+            }
+
+
+            // --- "OUVIDOR" DE EVENTOS PRINCIPAL ---
+
+            // Ouvidor do Select (igual a antes)
+            muscleSelect.addEventListener('change', () => {
+                const muscleId = muscleSelect.value;
+                if (muscleId) {
+                    buscarExerciciosPorMusculo(muscleId);
+                } else {
+                    resultsContainer.innerHTML = '<p>Selecione um músculo acima.</p>';
+                }
+            });
+
+            // NOVO OUVIDOR: Detecta cliques nos botões "Adicionar"
+            // (Escuta na área de resultados inteira)
+            resultsContainer.addEventListener('click', (event) => {
+                // Verifica se o que foi clicado foi um botão com a classe 'add-button'
+                if (event.target && event.target.classList.contains('add-button')) {
+                    const button = event.target;
+                    const id = button.dataset.id;
+                    const nome = button.dataset.nome;
+
+                    adicionarExercicioNoPainel(id, nome);
+                }
+            });
+
             // --- INICIA TUDO ---
             carregarMusculos();
-        });
+        }); var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
+        }
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
     </script>
 
 </body>
