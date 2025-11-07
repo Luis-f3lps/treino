@@ -53,22 +53,17 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- 1. SELEÇÃO DE ELEMENTOS ---
-            // Todas as variáveis declaradas AQUI, no topo.
-            // Assim, TODAS as funções abaixo conseguem enxergar elas.
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');
-            const detailPanelContent = document.getElementById('exercise-detail-content'); // <-- O CULPADO
-
+            const detailPanelContent = document.getElementById('exercise-detail-content');
 
             // --- 2. FUNÇÃO: Carregar Músculos (API) ---
             async function carregarMusculos() {
                 try {
                     const response = await fetch('/api/musculos');
                     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-
                     const musculos = await response.json();
                     preencherSelect(musculos);
-
                 } catch (error) {
                     console.error('Falha ao carregar músculos:', error);
                     muscleSelect.innerHTML = '<option value="">Erro ao carregar</option>';
@@ -80,7 +75,6 @@
                 muscleSelect.innerHTML = '';
                 muscleSelect.add(new Option('Selecione um músculo', ''));
                 musculos.forEach(musculo => {
-                    // O front-end espera 'nome' (graças ao .map() da API)
                     muscleSelect.add(new Option(musculo.nome, musculo.id_musculo));
                 });
             }
@@ -91,10 +85,8 @@
                 try {
                     const response = await fetch(`/api/exercicios/por-musculo?id=${id}`);
                     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-
                     const exercicios = await response.json();
                     renderizarExercicios(exercicios);
-
                 } catch (error) {
                     console.error('Falha ao buscar exercícios:', error);
                     resultsContainer.innerHTML = '<p>Erro ao buscar exercícios.</p>';
@@ -108,6 +100,12 @@
                     resultsContainer.innerHTML = '<p>Nenhum exercício encontrado.</p>';
                     return;
                 }
+
+                // Pega a lista de IDs que JÁ ESTÃO na lista da direita
+                const addedIds = new Set();
+                detailPanelContent.querySelectorAll('.selected-exercise-item').forEach(item => {
+                    addedIds.add(item.id.replace('selected-', ''));
+                });
 
                 exercicios.forEach(ex => {
                     const cardDiv = document.createElement('div');
@@ -130,17 +128,22 @@
                     addButton.dataset.id = ex.id_exercicio;
                     addButton.dataset.nome = ex.nome;
 
+                    // *** MÁGICA AQUI ***
+                    // Se o ID do exercício já está na lista da direita,
+                    // já deixa o botão desabilitado.
+                    if (addedIds.has(ex.id_exercicio)) {
+                        addButton.disabled = true;
+                        addButton.textContent = 'Adicionado';
+                    }
+
                     cardDiv.appendChild(gifDiv);
                     cardDiv.appendChild(infoDiv);
                     resultsContainer.appendChild(cardDiv);
                 });
             }
 
-            // --- 6. FUNÇÃO: Adicionar Item na Direita ---
-            function adicionarExercicioNoPainel(id, nome) {
-
-                // Esta é a linha que estava quebrando.
-                // Agora 'detailPanelContent' está visível.
+            // --- 6. FUNÇÃO: Adicionar Item na Direita (MODIFICADA) ---
+            function adicionarExercicioNoPainel(button, id, nome) {
                 if (detailPanelContent.classList.contains('is-empty')) {
                     detailPanelContent.innerHTML = '';
                     detailPanelContent.classList.remove('is-empty');
@@ -151,30 +154,42 @@
                     return;
                 }
 
+                // --- MUDANÇA 1: Desabilita o botão clicado ---
+                button.disabled = true;
+                button.textContent = 'Adicionado';
+
+                // --- Cria os elementos (igual antes) ---
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'selected-exercise-item';
-                itemDiv.id = `selected-${id}`;
+                itemDiv.id = `selected-${id}`; // ID para controle (ex: selected-t01)
+                itemDiv.dataset.rawId = id; // Guarda o ID puro (ex: t01)
 
                 const nomeSpan = document.createElement('span');
                 nomeSpan.textContent = nome;
 
                 const daySelect = document.createElement('select');
                 daySelect.className = 'day-select';
-
                 const days = ['Dia A', 'Dia B', 'Dia C', 'Dia D'];
                 days.forEach(day => {
                     daySelect.add(new Option(day, day.toLowerCase().replace(' ', '')));
                 });
 
+                // --- MUDANÇA 2: Cria o botão "Excluir" ---
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Excluir';
+
+                // Monta a linha
                 itemDiv.appendChild(nomeSpan);
                 itemDiv.appendChild(daySelect);
+                itemDiv.appendChild(deleteButton); // Adiciona o botão
+
                 detailPanelContent.appendChild(itemDiv);
             }
 
-
             // --- 7. "OUVIDORES" DE EVENTOS ---
 
-            // Ouvidor do Select de Músculo
+            // Ouvidor do Select de Músculo (igual antes)
             muscleSelect.addEventListener('change', () => {
                 const muscleId = muscleSelect.value;
                 if (muscleId) {
@@ -184,25 +199,59 @@
                 }
             });
 
-            // Ouvidor dos cliques em "Adicionar"
+            // Ouvidor dos cliques em "Adicionar" (MODIFICADO)
             resultsContainer.addEventListener('click', (event) => {
                 if (event.target && event.target.classList.contains('add-button')) {
                     const button = event.target;
-                    adicionarExercicioNoPainel(button.dataset.id, button.dataset.nome);
+                    // Passa o *botão* inteiro, além do id e nome
+                    adicionarExercicioNoPainel(button, button.dataset.id, button.dataset.nome);
+                }
+            });
+
+            // --- NOVO OUVIDOR: Para os botões "Excluir" ---
+            detailPanelContent.addEventListener('click', (event) => {
+                if (event.target && event.target.classList.contains('delete-button')) {
+                    const itemToRemove = event.target.closest('.selected-exercise-item');
+                    const id = itemToRemove.dataset.rawId; // Pega o ID puro (ex: t01)
+
+                    // 1. Remove o item da lista da direita
+                    itemToRemove.remove();
+
+                    // 2. RE-ABILITA o botão "Adicionar" na lista da esquerda
+                    //    (Apenas se ele estiver visível)
+                    const originalAddButton = resultsContainer.querySelector(`.add-button[data-id="${id}"]`);
+                    if (originalAddButton) {
+                        originalAddButton.disabled = false;
+                        originalAddButton.textContent = 'Adicionar';
+                    }
+
+                    // 3. Verifica se o painel da direita ficou vazio
+                    if (detailPanelContent.children.length === 0) {
+                        detailPanelContent.classList.add('is-empty');
+                        detailPanelContent.innerHTML = '<p>Adicione exercícios da lista ao lado.</p>';
+                    }
                 }
             });
 
             // --- 8. INICIA TUDO ---
             carregarMusculos();
 
-        });
+        }); // Fim do DOMContentLoaded
+
+        // --- Suas funções de menu (mantidas) ---
         var sidemenu = document.getElementById("sidemenu");
+
         function openmenu() {
-            sidemenu.style.right = "-200px";
-            sidemenu.style.left = "0px";
+            // Ajustei seu CSS aqui. O 'left' estava estranho.
+            // Isso faz o menu deslizar da direita para a tela.
+            sidemenu.style.right = "0";
         }
+
         function clossmenu() {
-            sidemenu.style.left = "-800px";
+            // Isso faz o menu sair da tela para a direita.
+            sidemenu.style.right = "-200px";
+            // Você estava usando 'left = -800px', o que é muito.
+            // Assumi que seu menu tem 200px de largura.
         }
     </script>
 
