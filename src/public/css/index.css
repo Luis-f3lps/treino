@@ -209,11 +209,18 @@
         display: none; 
     }
     nav .fa-solid {
-        display: block; /* Mostra os ícones */
+        display: block;
+        color: white;
+        margin-right: 30px;
     }
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0px;
+    background-color: #ffffff;
+}
 
     .viewer-container {
-        margin: 20px;
+        margin: 0px;
         padding: 20px;
     }
 
@@ -227,6 +234,11 @@
         margin-right: 0;
         margin-bottom: 15px;
     }
+    .logo{
+        margin-left: 40px;
+
+    }
+
 }
 nav ul li a {
     text-decoration: none;
