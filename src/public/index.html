@@ -1,15 +1,107 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Treinos
-    </title>
+    <link rel="icon" href="images/tl.webp" type="image/png">
+    <title>Visualizar Treino - Agência de Projetos</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .viewer-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        #workout-string-input {
+            flex: 1; /* Ocupa o máximo de espaço */
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #load-workout-button {
+            padding: 0 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #load-workout-button:hover {
+            background-color: #0056b3;
+        }
+
+        #workout-display-area {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 20px;
+        }
+
+        
+        .exercise-card {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fdfdfd;
+            border-radius: 5px;
+            overflow: hidden; /* Garante que o card contenha tudo */
+        }
+
+        .exercise-gif {
+            width: 300px; /* Como você pediu */
+            min-width: 300px;
+            margin-right: 15px;
+        }
+        .exercise-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .exercise-info {
+            flex: 1;
+        }
+        
+        .exercise-info h4 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+        
+        .exercise-info .day-highlight {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+    </style>
 </head>
 
 <body>
-
     <div id="header">
         <nav>
             <img src="images/tl.webp" class="logo">
@@ -23,230 +115,23 @@
             <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
     </div>
-    <!DOCTYPE html>
-    <div class="workout-interface">
 
-        <div class="exercise-list-panel">
-            <h2>Explorar Exercícios</h2>
+    <div class="viewer-container">
+        <h2>Visualizar Treino</h2>
+        <p>Cole a string gerada (ex: <code>exercicio/t01,a+t03,b</code>) para carregar os detalhes.</p>
 
-            <p>Selecione um grupo muscular para ver os exercícios:</p>
-
-            <select id="muscle-group-select">
-                <option value="">Carregando músculos...</option>
-            </select>
-
-            <div id="exercise-results-container">
-                <p>Selecione um músculo acima.</p>
-            </div>
+        <div class="input-area">
+            <input type="text" id="workout-string-input" placeholder="Cole sua string aqui...">
+            <button id="load-workout-button">Carregar</button>
+        }
         </div>
 
-        <div class="exercise-detail-panel">
-            <h3>Exercícios Selecionados</h3>
-
-            <div id="exercise-detail-content" class="is-empty">
-                <p>Adicione exercícios da lista ao lado.</p>
+        <div id="workout-display-area">
             </div>
-            <input type="text" id="workout-string-output" 
-       placeholder="Sua string aparecerá aqui..." readonly>
-            <button id="save-workout-button">Salvar Treino (Gerar String)</button>
-        </div>
-
     </div>
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const muscleSelect = document.getElementById('muscle-group-select');
-            const resultsContainer = document.getElementById('exercise-results-container');
-            const detailPanelContent = document.getElementById('exercise-detail-content');
-const saveButton = document.getElementById('save-workout-button'); 
-            async function carregarMusculos() {
-                try {
-                    const response = await fetch('/api/musculos');
-                    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-                    const musculos = await response.json();
-                    preencherSelect(musculos);
-                } catch (error) {
-                    console.error('Falha ao carregar músculos:', error);
-                    muscleSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-                }
-            }
-
-            function preencherSelect(musculos) {
-                muscleSelect.innerHTML = '';
-                muscleSelect.add(new Option('Todos os músculos', '')); // <-- Trocado
-
-                musculos.forEach(musculo => {
-                    muscleSelect.add(new Option(musculo.nome, musculo.id_musculo));
-                });
-            }
-            async function buscarExerciciosPorMusculo(id) {
-                resultsContainer.innerHTML = '<p>Buscando exercícios...</p>';
-                try {
-                    const response = await fetch(`/api/exercicios/por-musculo?id=${id}`);
-                    if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-                    const exercicios = await response.json();
-                    renderizarExercicios(exercicios);
-                } catch (error) {
-                    console.error('Falha ao buscar exercícios:', error);
-                    resultsContainer.innerHTML = '<p>Erro ao buscar exercícios.</p>';
-                }
-            }
-
-            function renderizarExercicios(exercicios) {
-                resultsContainer.innerHTML = '';
-                if (exercicios.length === 0) {
-                    resultsContainer.innerHTML = '<p>Nenhum exercício encontrado.</p>';
-                    return;
-                }
-
-                const addedIds = new Set();
-                detailPanelContent.querySelectorAll('.selected-exercise-item').forEach(item => {
-                    addedIds.add(item.id.replace('selected-', ''));
-                });
-
-                exercicios.forEach(ex => {
-                    const cardDiv = document.createElement('div');
-                    cardDiv.className = 'exercise-card';
-
-                    const gifDiv = document.createElement('div');
-                    gifDiv.className = 'exercise-gif';
-                    gifDiv.innerHTML = `<img src="${ex.link_gif}" alt="${ex.nome}">`;
-
-                    const infoDiv = document.createElement('div');
-                    infoDiv.className = 'exercise-info';
-
-                    infoDiv.innerHTML = `
-            <h4>${ex.nome}</h4>
-            <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas || 'N/A'}</p>
-            <p><strong>Músculo Primário:</strong> ${ex.musculo_primario_nome || 'N/A'}</p>
-            <p><strong>Músculos Secundários:</strong> ${ex.musculos_secundarios_nomes || 'Nenhum'}</p>
-            <p><strong>ID:</strong> ${ex.id_exercicio}</p>
-            <button class="add-button">Adicionar</button>
-        `;
-
-                    const addButton = infoDiv.querySelector('.add-button');
-                    addButton.dataset.id = ex.id_exercicio;
-                    addButton.dataset.nome = ex.nome;
-
-                    if (addedIds.has(ex.id_exercicio)) {
-                        addButton.disabled = true;
-                        addButton.textContent = 'Adicionado';
-                    }
-
-                    cardDiv.appendChild(gifDiv);
-                    cardDiv.appendChild(infoDiv);
-                    resultsContainer.appendChild(cardDiv);
-                });
-            }
-           function adicionarExercicioNoPainel(button, id, nome) {
-                if (detailPanelContent.classList.contains('is-empty')) {
-                    detailPanelContent.innerHTML = '';
-                    detailPanelContent.classList.remove('is-empty');
-                }
-                if (document.getElementById(`selected-${id}`)) {
-                    alert('Esse exercício já foi adicionado!');
-                    return;
-                }
-                button.disabled = true;
-                button.textContent = 'Adicionado';
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'selected-exercise-item';
-                itemDiv.id = `selected-${id}`;
-                itemDiv.dataset.rawId = id;
-                const nomeSpan = document.createElement('span');
-                nomeSpan.textContent = nome;
-                const daySelect = document.createElement('select');
-                daySelect.className = 'day-select';
-                
-                const days = {
-                    'a': 'Dia A',
-                    'b': 'Dia B',
-                    'c': 'Dia C',
-                    'd': 'Dia D'
-                };
-                // Cria as options usando o {valor: texto}
-                for (const [value, text] of Object.entries(days)) {
-                    daySelect.add(new Option(text, value));
-                }
-
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'delete-button';
-                deleteButton.textContent = 'Excluir';
-                
-                itemDiv.appendChild(nomeSpan);
-                itemDiv.appendChild(daySelect);
-                itemDiv.appendChild(deleteButton);
-                detailPanelContent.appendChild(itemDiv);
-            }
-
-function gerarStringDeTreino() {
-    const items = detailPanelContent.querySelectorAll('.selected-exercise-item');
-    
-
-    const outputBox = document.getElementById('workout-string-output');
-
-    if (items.length === 0) {
-        alert('Nenhum exercício selecionado para salvar.');
-        outputBox.value = ''; // Limpa a caixa se estiver vazia
-        return;
-    }
-
-    const workoutParts = [];
-    items.forEach(item => {
-        const id = item.dataset.rawId;
-        const dia = item.querySelector('.day-select').value;
-        workoutParts.push(`${id},${dia}`);
-    });
-
-    const finalString = `exercicio/${workoutParts.join('+')}`;
-
-    console.log(finalString); // Mantém no console (bom pra debugar)
-    outputBox.value = finalString; // Coloca a string DENTRO da caixa de texto
-}
-
-
-            muscleSelect.addEventListener('change', () => {
-                const muscleId = muscleSelect.value;
-                buscarExerciciosPorMusculo(muscleId);
-            });
-
-            resultsContainer.addEventListener('click', (event) => {
-                if (event.target && event.target.classList.contains('add-button')) {
-                    const button = event.target;
-                    adicionarExercicioNoPainel(button, button.dataset.id, button.dataset.nome);
-                }
-            });
-
-            detailPanelContent.addEventListener('click', (event) => {
-                if (event.target && event.target.classList.contains('delete-button')) {
-                    const itemToRemove = event.target.closest('.selected-exercise-item');
-                    const id = itemToRemove.dataset.rawId;
-                    itemToRemove.remove();
-                    const originalAddButton = resultsContainer.querySelector(`.add-button[data-id="${id}"]`);
-                    if (originalAddButton) {
-                        originalAddButton.disabled = false;
-                        originalAddButton.textContent = 'Adicionar';
-                    }
-                    if (detailPanelContent.children.length === 0) {
-                        detailPanelContent.classList.add('is-empty');
-                        detailPanelContent.innerHTML = '<p>Adicione exercícios da lista ao lado.</p>';
-                    }
-                }
-            });
-
-            saveButton.addEventListener('click', () => {
-                gerarStringDeTreino();
-            });
-
-
-            async function init() {
-                await carregarMusculos();
-                buscarExerciciosPorMusculo('');
-            }
-            init(); 
-
-        }); 
-
         var sidemenu = document.getElementById("sidemenu");
         function openmenu() {
             sidemenu.style.right = "0";
@@ -254,8 +139,90 @@ function gerarStringDeTreino() {
         function clossmenu() {
             sidemenu.style.right = "-200px";
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const input = document.getElementById('workout-string-input');
+            const button = document.getElementById('load-workout-button');
+            const displayArea = document.getElementById('workout-display-area');
+
+            button.addEventListener('click', () => {
+                carregarTreino();
+            });
+
+            async function carregarTreino() {
+                const rawString = input.value;
+                
+                if (!rawString.startsWith('exercicio/')) {
+                    displayArea.innerHTML = '<p>String inválida. Deve começar com "exercicio/".</p>';
+                    return;
+                }
+
+                const pairs = rawString.replace('exercicio/', '').split('+'); // ["t01,a", "t03,b"]
+                
+                const exercisesToFetch = []; // Guarda [{id: 't01', day: 'a'}, {id: 't03', day: 'b'}]
+                const idList = []; // Guarda ['t01', 't03']
+
+                pairs.forEach(pair => {
+                    const parts = pair.split(',');
+                    const id = parts[0];
+                    const day = parts[1];
+                    if (id && day) {
+                        exercisesToFetch.push({ id, day });
+                        idList.push(id);
+                    }
+                });
+
+                if (idList.length === 0) {
+                    displayArea.innerHTML = '<p>Nenhum exercício válido encontrado na string.</p>';
+                    return;
+                }
+
+                try {
+                    displayArea.innerHTML = '<p>Buscando dados...</p>';
+                                        const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Erro da API: ${response.statusText}`);
+                    }
+                    
+                    const exercisesInfo = await response.json(); // Array com infos do banco
+
+                    displayArea.innerHTML = ''; // Limpa o "Buscando..."
+                    
+                    exercisesToFetch.forEach(exercise => {
+                        const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
+                        
+                        if (!info) {
+                            displayArea.innerHTML += `<p>Erro: Info para ${exercise.id} não encontrada.</p>`;
+                            return; 
+                        }
+                        
+                        const diaFormatado = `Dia ${exercise.day.toUpperCase()}`;
+                        
+                        const cardHTML = `
+                            <div class="exercise-card">
+                                <div class="exercise-gif">
+                                    <img src="${info.link_gif}" alt="${info.nome}">
+                                </div>
+                                <div class="exercise-info">
+                                    <h4>${info.nome}</h4>
+                                    <p class="day-highlight">${diaFormatado}</p>
+                                    <p><strong>Repetições:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
+                                    <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
+                                    <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
+                                </div>
+                            </div>
+                        `;
+                        displayArea.innerHTML += cardHTML;
+                    });
+
+                } catch (err) {
+                    displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
+                    console.error(err);
+                }
+            }
+        });
     </script>
-
 </body>
-
 </html>

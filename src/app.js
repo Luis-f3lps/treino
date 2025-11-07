@@ -42,8 +42,8 @@ app.get('/home', (req, res) => {
 app.get('/montar', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'montar.html'));
 });
-app.get('/tmb', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'tmb.html'));
+app.get('/tbm', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'tbm.html'));
 });
 app.get('/api/musculos', async (req, res) => {
   try {
