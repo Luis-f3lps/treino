@@ -126,14 +126,12 @@ const saveButton = document.getElementById('save-workout-button');
 
 function gerarStringDeTreino() {
     const items = detailPanelContent.querySelectorAll('.selected-exercise-item');
-    
-
     const outputBox = document.getElementById('workout-string-output');
 
     if (items.length === 0) {
         alert('Nenhum exercício selecionado para salvar.');
-        outputBox.value = ''; // Limpa a caixa se estiver vazia
-        return;
+        outputBox.value = '';
+        return null; // <-- Retorna nulo se falhar
     }
 
     const workoutParts = [];
@@ -145,8 +143,10 @@ function gerarStringDeTreino() {
 
     const finalString = `exercicio/${workoutParts.join('+')}`;
 
-    console.log(finalString); // Mantém no console (bom pra debugar)
-    outputBox.value = finalString; // Coloca a string DENTRO da caixa de texto
+    console.log(finalString);
+    outputBox.value = finalString;
+
+    return finalString; // <-- FALTAVA ISSO AQUI, PÔ!
 }
 
 
