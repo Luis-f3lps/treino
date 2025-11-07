@@ -176,11 +176,7 @@
 
             muscleSelect.addEventListener('change', () => {
                 const muscleId = muscleSelect.value;
-                if (muscleId) {
-                    buscarExerciciosPorMusculo(muscleId);
-                } else {
-                    resultsContainer.innerHTML = '<p>Selecione um músculo acima.</p>';
-                }
+                buscarExerciciosPorMusculo(muscleId);
             });
 
             resultsContainer.addEventListener('click', (event) => {
