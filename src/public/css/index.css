@@ -240,4 +240,169 @@ ease-in-out;
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #e0e0e0;
+}#save-workout-button {
+    display: block; /* Ocupa a largura toda */
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px; /* Espaço da lista */
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
+#save-workout-button:hover {
+    background-color: #0056b3;
+}
+/* Adicione isso ao seu style.css */
+
+#workout-string-output {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px; /* Espaço */
+    background-color: #eee;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Importante */
+}
+        .logo {
+            width: 40px;
+            margin-left: 40px;
+        }
+
+        nav {
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #21202e;
+            width: 100%;
+            display: flex;
+        }
+
+        nav ul li {
+            display: inline-block;
+            list-style: none;
+            margin: 10px 20px;
+            color: rgb(255, 255, 255);
+
+        }
+
+        nav ul .fa-solid {
+            position: absolute;
+            top: 25px;
+            left: 200px;
+            display: none;
+
+            cursor: pointer;
+            color: white;
+        }
+
+        .workout-interface {
+            display: flex;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        .exercise-list-panel {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px solid #eee;
+            overflow-y: auto;
+        }
+
+        .exercise-detail-panel {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .exercise-list-panel input[type="text"],
+        .exercise-list-panel select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #exercise-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #exercise-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        #exercise-list li:hover {
+            background-color: #efefef;
+        }
+
+
+        .search-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-controls input {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .search-controls button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #search-results-container {
+            margin-top: 20px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fdfdfd;
+        }
+
+        .result-gif {
+            flex-basis: 150px;
+            margin-right: 15px;
+        }
+
+        .result-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .exercise-gif {
+            width: 300px;
+            min-width: 300px;
+            margin-right: 15px;
+        }
+
+        .exercise-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        .exercise-card {
+            display: flex;
+        }
