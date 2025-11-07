@@ -68,255 +68,163 @@
             color: white;
         }
 
-        .workout-interface {
-            display: flex;
-            border: 1px solid #ccc;
-            background-color: #fff;
-        }
+       .viewer-container {
+    max-width: 900px; /* Limita a largura do conteúdo */
+    margin: 40px auto; /* Centraliza e dá espaço do header */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px; /* Cantos mais arredondados */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
 
-        .exercise-list-panel {
-            flex: 1;
-            padding: 20px;
-            border-right: 2px solid #eee;
-            overflow-y: auto;
-        }
+.viewer-container h2 {
+    font-size: 28px;
+    color: #222;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
 
-        .exercise-detail-panel {
-            flex-basis: 30%;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
+/* --- ÁREA DO INPUT --- */
+.input-area {
+    display: flex;
+    gap: 10px; /* Espaço entre o input e o botão */
+    margin-bottom: 30px;
+}
 
-        .exercise-list-panel input[type="text"],
-        .exercise-list-panel select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+#workout-string-input {
+    flex: 1; /* Faz o input crescer */
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        #exercise-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+/* Efeito "bonito" quando clica no input */
+#workout-string-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+    outline: none;
+}
 
-        #exercise-list li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
+#load-workout-button {
+    padding: 0 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
 
-        #exercise-list li:hover {
-            background-color: #efefef;
-        }
+#load-workout-button:hover {
+    background-color: #0056b3; /* Azul mais escuro no hover */
+}
+#load-workout-button:active {
+    transform: scale(0.98); /* Efeito de clique */
+}
 
+/* --- ÁREA DE DISPLAY (Resultados) --- */
+#workout-display-area {
+    border-top: 2px solid #f0f0f0;
+    padding-top: 20px;
+}
 
-        .search-section {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-        }
+/* Estilo para as mensagens de "Buscando..." ou "Erro" */
+#workout-display-area p {
+    font-size: 16px;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+}
 
-        .search-controls {
-            display: flex;
-            gap: 10px;
-        }
+/* --- O CARD DE EXERCÍCIO (O mais importante) --- */
+/* Estilos para o que o seu JavaScript vai criar */
 
-        .search-controls input {
-            flex: 1;
-            padding: 10px;
-        }
+.exercise-card {
+    display: flex;
+    flex-wrap: wrap; /* Ajuda em telas pequenas */
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fdfdfd; /* Quase branco */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
+}
 
-        .search-controls button {
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+.exercise-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
 
-        #search-results-container {
-            margin-top: 20px;
-            border-top: 2px solid #eee;
-            padding-top: 20px;
-        }
+.exercise-gif {
+    width: 300px;
+    min-width: 300px; /* Garante o tamanho */
+    margin-right: 20px;
+    flex-shrink: 0; /* Impede o GIF de encolher */
+}
 
-        .result-item {
-            display: flex;
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #fdfdfd;
-        }
+.exercise-gif img {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
 
-        .result-gif {
-            flex-basis: 150px;
-            margin-right: 15px;
-        }
+.exercise-info {
+    flex: 1; /* Ocupa o resto do espaço */
+    min-width: 250px; /* Impede de ficar espremido */
+}
 
-        .result-gif img {
-            width: 100%;
-            border: 1px solid #eee;
-        }
+.exercise-info h4 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #111;
+}
 
-        .result-info {
-            flex: 1;
-        }
+.exercise-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    text-align: left; /* Alinha o texto do card */
+    font-style: normal; /* Sobrescreve o p padrão */
+}
 
-        .exercise-gif {
-            width: 300px;
-            min-width: 300px;
-            margin-right: 15px;
-        }
+/* Destaque para o DIA A, B, C... */
+.day-highlight {
+    font-size: 18px !important; /* !importante para garantir */
+    font-weight: bold;
+    color: #007bff; /* Azul de destaque */
+    margin-bottom: 10px;
+}
 
-        .exercise-gif img {
-            width: 100%;
-            border: 1px solid #eee;
-        }
-
-        .exercise-card {
-            display: flex;
-        }
-
-        .a {
-            color: white;
-        }
-
-        @media only screen and (min-width: 901px) and (min-height: 1601px) {
-            nav .fa-solid {
-                display: block;
-                font-size: 40px;
-                color: black;
-            }
-        }
-         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-    .workout-interface { display: flex; height: 90vh; border: 1px solid #ccc; background-color: #fff; }
-    .exercise-list-panel { flex: 1; padding: 20px; border-right: 2px solid #eee; overflow-y: auto; }
-    
-    /* Mudei o padding da div de 30% para o conteúdo não colar na borda */
-    .exercise-detail-panel {
-        flex-basis: 30%;
-        padding: 0 20px; /* Padding só nas laterais */
-        background-color: #f9f9f9;
-        border-left: 1px solid #ddd;
-        overflow-y: auto; /* Scroll se a lista ficar grande */
+/* --- RESPONSIVIDADE (Ajuste rápido para mobile) --- */
+@media (max-width: 768px) {
+    nav ul {
+        /* (Aqui entra sua lógica de menu hamburguer) */
+        display: none; 
     }
-    
-    #muscle-group-select { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
-    #exercise-results-container { margin-top: 20px;    display: ruby; }
+    nav .fa-solid {
+        display: block; /* Mostra os ícones */
+    }
 
-    /* --- MUDANÇAS AQUI --- */
+    .viewer-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    /* Em telas pequenas, o GIF fica em cima e o texto embaixo */
     .exercise-card {
-        display: flex;
-        border: 1px solid #ddd;
-        margin-bottom: 15px;
-        padding: 10px;
-        background-color: #fdfdfd;
-        width: 50%;
-        /* Não precisa mais de cursor aqui */
+        flex-direction: column;
     }
 
     .exercise-gif {
-        width: 300px;
-        min-width: 300px;
-        margin-right: 15px;
+        width: 100%; /* GIF ocupa tudo */
+        margin-right: 0;
+        margin-bottom: 15px;
     }
-    .exercise-gif img { width: 100%; border: 1px solid #eee; }
-    .exercise-info { flex: 1; }
-
-    /* Estilo para o novo botão "Adicionar" */
-    .exercise-info .add-button {
-        padding: 8px 12px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        font-size: 14px;
-    }
-    .exercise-info .add-button:hover {
-        background-color: #218838;
-    }
-
-    /* --- NOVOS ESTILOS PARA A DIV DE 30% --- */
-    
-    /* Remove a mensagem "clique ao lado" */
-    #exercise-detail-content.is-empty {
-        padding-top: 20px;
-        text-align: center;
-        color: #777;
-    }
-    
-    /* A linha do exercício selecionado */
-    .selected-exercise-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; /* Coloca o select no final */
-        padding: 12px 0;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    
-    .selected-exercise-item span {
-        font-size: 16px;
-        flex: 1; /* Ocupa o espaço */
-        padding-right: 10px;
-    }
-
-    /* O select de dias (A, B, C, D) */
-    .selected-exercise-item .day-select {
-        padding: 5px;
-        font-size: 14px;
-        flex-basis: 100px; /* Tamanho fixo para o select */
-    }
-nav ul li a {
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-a {
-    color: #007BFF;
-    transition: color 0.3s 
-ease-in-out;
-}
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    box-sizing: border-box;
-}/* No seu style.css */
-
-/* Deixa o botão "Adicionar" cinza quando desabilitado */
-.add-button:disabled {
-    background-color: #6c757d; /* Um cinza */
-    cursor: not-allowed;
-}
-
-/* O novo botão "Excluir" na lista da direita */
-.delete-button {
-    padding: 3px 8px;
-    background-color: #dc3545; /* Vermelho */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-left: 10px; /* Espaço do select */
-}
-.delete-button:hover {
-    background-color: #c82333;
-}
-
-/* Ajuste no item da direita para caber o botão */
-.selected-exercise-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #e0e0e0;
 }
