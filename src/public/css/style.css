@@ -175,7 +175,7 @@
     }
     
     #muscle-group-select { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
-    #exercise-results-container { margin-top: 20px; }
+    #exercise-results-container { margin-top: 20px;    display: flex; }
 
     /* --- MUDANÇAS AQUI --- */
     .exercise-card {
