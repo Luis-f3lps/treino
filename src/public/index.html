@@ -19,7 +19,7 @@
                 <li><a href="/tbm">TBN</a></li>
                 <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
             </ul>
-            <img src="images/musc.jpg" class="logoIFNMG">
+            <img src="images/mus.png" class="logoIFNMG">
             <i class="fa-solid fa-bars" onclick="openmenu()"></i>
         </nav>
     </div>
@@ -51,20 +51,27 @@
     </div>
     <script>document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Seleção dos Elementos ---
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');
-            // A div de 30% (agora usada)
-            const detailPanelContent = document.getElementById('exercise-detail-content');
+            const detailPanel = document.getElementById('exercise-detail-content');
 
-            // --- (Funções carregarMusculos, preencherSelect, buscarExerciciosPorMusculo) ---
-            // ... (Cole as funções da resposta anterior aqui, elas não mudam) ...
 
-            /* =======================================================
-               COLE AS FUNÇÕES ANTERIORES (carregarMusculos, etc) AQUI
-               ======================================================= */
+            async function carregarMusculos() {
+                try {
+                    const response = await fetch('/api/musculos');
 
-            // --- 5. FUNÇÃO PARA RENDERIZAR OS CARDS (MODIFICADA) ---
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP: ${response.status}`);
+                    }
+
+                    const musculos = await response.json();
+                    preencherSelect(musculos);
+
+                } catch (error) {
+                    console.error('Falha ao carregar músculos:', error);
+                    muscleSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                }
+            }
             function renderizarExercicios(exercicios) {
                 resultsContainer.innerHTML = '';
 
