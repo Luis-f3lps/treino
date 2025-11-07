@@ -46,6 +46,9 @@
             <div id="exercise-detail-content" class="is-empty">
                 <p>Adicione exercícios da lista ao lado.</p>
             </div>
+            <input type="text" id="workout-string-output" 
+       placeholder="Sua string aparecerá aqui..." readonly>
+            <button id="save-workout-button">Salvar Treino (Gerar String)</button>
         </div>
 
     </div>
@@ -55,7 +58,7 @@
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');
             const detailPanelContent = document.getElementById('exercise-detail-content');
-
+const saveButton = document.getElementById('save-workout-button'); // <-- NOVO
             async function carregarMusculos() {
                 try {
                     const response = await fetch('/api/musculos');
@@ -135,45 +138,72 @@
                     resultsContainer.appendChild(cardDiv);
                 });
             }
-            function adicionarExercicioNoPainel(button, id, nome) {
+           function adicionarExercicioNoPainel(button, id, nome) {
                 if (detailPanelContent.classList.contains('is-empty')) {
                     detailPanelContent.innerHTML = '';
                     detailPanelContent.classList.remove('is-empty');
                 }
-
                 if (document.getElementById(`selected-${id}`)) {
                     alert('Esse exercício já foi adicionado!');
                     return;
                 }
-
                 button.disabled = true;
                 button.textContent = 'Adicionado';
-
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'selected-exercise-item';
-                itemDiv.id = `selected-${id}`; 
-                itemDiv.dataset.rawId = id; 
-
+                itemDiv.id = `selected-${id}`;
+                itemDiv.dataset.rawId = id;
                 const nomeSpan = document.createElement('span');
                 nomeSpan.textContent = nome;
-
                 const daySelect = document.createElement('select');
                 daySelect.className = 'day-select';
-                const days = ['Dia A', 'Dia B', 'Dia C', 'Dia D'];
-                days.forEach(day => {
-                    daySelect.add(new Option(day, day.toLowerCase().replace(' ', '')));
-                });
+                
+                const days = {
+                    'a': 'Dia A',
+                    'b': 'Dia B',
+                    'c': 'Dia C',
+                    'd': 'Dia D'
+                };
+                // Cria as options usando o {valor: texto}
+                for (const [value, text] of Object.entries(days)) {
+                    daySelect.add(new Option(text, value));
+                }
 
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-button';
                 deleteButton.textContent = 'Excluir';
-
+                
                 itemDiv.appendChild(nomeSpan);
                 itemDiv.appendChild(daySelect);
-                itemDiv.appendChild(deleteButton); 
-
+                itemDiv.appendChild(deleteButton);
                 detailPanelContent.appendChild(itemDiv);
             }
+
+function gerarStringDeTreino() {
+    const items = detailPanelContent.querySelectorAll('.selected-exercise-item');
+    
+
+    const outputBox = document.getElementById('workout-string-output');
+
+    if (items.length === 0) {
+        alert('Nenhum exercício selecionado para salvar.');
+        outputBox.value = ''; // Limpa a caixa se estiver vazia
+        return;
+    }
+
+    const workoutParts = [];
+    items.forEach(item => {
+        const id = item.dataset.rawId;
+        const dia = item.querySelector('.day-select').value;
+        workoutParts.push(`${id},${dia}`);
+    });
+
+    const finalString = `exercicio/${workoutParts.join('+')}`;
+
+    console.log(finalString); // Mantém no console (bom pra debugar)
+    outputBox.value = finalString; // Coloca a string DENTRO da caixa de texto
+}
+
 
             muscleSelect.addEventListener('change', () => {
                 const muscleId = muscleSelect.value;
@@ -190,16 +220,13 @@
             detailPanelContent.addEventListener('click', (event) => {
                 if (event.target && event.target.classList.contains('delete-button')) {
                     const itemToRemove = event.target.closest('.selected-exercise-item');
-                    const id = itemToRemove.dataset.rawId; 
-
+                    const id = itemToRemove.dataset.rawId;
                     itemToRemove.remove();
-
                     const originalAddButton = resultsContainer.querySelector(`.add-button[data-id="${id}"]`);
                     if (originalAddButton) {
                         originalAddButton.disabled = false;
                         originalAddButton.textContent = 'Adicionar';
                     }
-
                     if (detailPanelContent.children.length === 0) {
                         detailPanelContent.classList.add('is-empty');
                         detailPanelContent.innerHTML = '<p>Adicione exercícios da lista ao lado.</p>';
@@ -207,19 +234,23 @@
                 }
             });
 
+            saveButton.addEventListener('click', () => {
+                gerarStringDeTreino();
+            });
+
+
             async function init() {
                 await carregarMusculos();
                 buscarExerciciosPorMusculo('');
             }
+            init(); 
 
-            init();
-        });
+        }); 
+
         var sidemenu = document.getElementById("sidemenu");
-
         function openmenu() {
             sidemenu.style.right = "0";
         }
-
         function clossmenu() {
             sidemenu.style.right = "-200px";
         }
