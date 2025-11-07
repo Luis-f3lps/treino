@@ -111,12 +111,15 @@
 
                     const infoDiv = document.createElement('div');
                     infoDiv.className = 'exercise-info';
+
                     infoDiv.innerHTML = `
-                        <h4>${ex.nome}</h4>
-                        <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas}</p>
-                        <p><strong>ID:</strong> ${ex.id_exercicio}</p>
-                        <button class="add-button">Adicionar</button>
-                    `;
+            <h4>${ex.nome}</h4>
+            <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas || 'N/A'}</p>
+            <p><strong>Músculo Primário:</strong> ${ex.musculo_primario_nome || 'N/A'}</p>
+            <p><strong>Músculos Secundários:</strong> ${ex.musculos_secundarios_nomes || 'Nenhum'}</p>
+            <p><strong>ID:</strong> ${ex.id_exercicio}</p>
+            <button class="add-button">Adicionar</button>
+        `;
 
                     const addButton = infoDiv.querySelector('.add-button');
                     addButton.dataset.id = ex.id_exercicio;
@@ -132,7 +135,6 @@
                     resultsContainer.appendChild(cardDiv);
                 });
             }
-
             function adicionarExercicioNoPainel(button, id, nome) {
                 if (detailPanelContent.classList.contains('is-empty')) {
                     detailPanelContent.innerHTML = '';
@@ -149,8 +151,8 @@
 
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'selected-exercise-item';
-                itemDiv.id = `selected-${id}`; // ID para controle (ex: selected-t01)
-                itemDiv.dataset.rawId = id; // Guarda o ID puro (ex: t01)
+                itemDiv.id = `selected-${id}`; 
+                itemDiv.dataset.rawId = id; 
 
                 const nomeSpan = document.createElement('span');
                 nomeSpan.textContent = nome;
@@ -162,14 +164,13 @@
                     daySelect.add(new Option(day, day.toLowerCase().replace(' ', '')));
                 });
 
-                // --- MUDANÇA 2: Cria o botão "Excluir" ---
                 const deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-button';
                 deleteButton.textContent = 'Excluir';
 
                 itemDiv.appendChild(nomeSpan);
                 itemDiv.appendChild(daySelect);
-                itemDiv.appendChild(deleteButton); // Adiciona o botão
+                itemDiv.appendChild(deleteButton); 
 
                 detailPanelContent.appendChild(itemDiv);
             }
@@ -189,7 +190,7 @@
             detailPanelContent.addEventListener('click', (event) => {
                 if (event.target && event.target.classList.contains('delete-button')) {
                     const itemToRemove = event.target.closest('.selected-exercise-item');
-                    const id = itemToRemove.dataset.rawId; // Pega o ID puro (ex: t01)
+                    const id = itemToRemove.dataset.rawId; 
 
                     itemToRemove.remove();
 

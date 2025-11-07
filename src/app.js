@@ -19,7 +19,6 @@ console.log({
 
 const app = express();
 
-// Testando a conexão ao banco de dados
 (async () => {
     try {
         await pool.query('SELECT NOW()'); // Consulta simples para testar a conexão
@@ -32,10 +31,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configurar middleware para servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rotas do servidor
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -62,37 +59,5 @@ app.get('/api/musculos', async (req, res) => {
     res.status(500).json({ erro: 'Erro interno do servidor.' });
   }
 });
-app.get('/api/exercicios/por-musculo', async (req, res) => {
-  
-  const { id } = req.query; 
 
-  try {
-    let sqlQuery;
-    let params = []; 
-
-    if (id) {
-      sqlQuery = `
-        SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
-        FROM exercicios 
-        WHERE musculo_primario_id = $1
-        ORDER BY nome
-      `;
-      params.push(id); 
-    } else {
-      sqlQuery = `
-        SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
-        FROM exercicios 
-        ORDER BY nome
-      `;
-    }
-    
-    const { rows } = await pool.query(sqlQuery, params);
-
-    res.status(200).json(rows);
-
-  } catch (err) {
-    console.error('Erro ao buscar exercícios por músculo:', err);
-    res.status(500).json({ erro: 'Erro interno do servidor.' });
-  }
-});
 export default app;
