@@ -81,10 +81,7 @@ nav ul li {
             background-color: #efefef;
         }
 
-        /* * --- NOVO CSS PARA A SEÇÃO DE BUSCA ---
-         */
 
-        /* A div "em baiso" */
         .search-section {
             margin-top: 30px;
             padding: 20px;
@@ -95,12 +92,10 @@ nav ul li {
         .search-controls {
             display: flex;
             gap: 10px;
-            /* Espaço entre o input e o botão */
         }
 
         .search-controls input {
             flex: 1;
-            /* Input ocupa o máximo de espaço */
             padding: 10px;
         }
 
@@ -109,14 +104,12 @@ nav ul li {
             cursor: pointer;
         }
 
-        /* O contêiner dos resultados */
         #search-results-container {
             margin-top: 20px;
             border-top: 2px solid #eee;
             padding-top: 20px;
         }
 
-        /* 1. A "div para cada linha" */
         .result-item {
             display: flex;
             border: 1px solid #ddd;
@@ -125,23 +118,18 @@ nav ul li {
             background-color: #fdfdfd;
         }
 
-        /* 2. A "div para o gif" */
         .result-gif {
             flex-basis: 150px;
-            /* Tamanho fixo para o GIF */
             margin-right: 15px;
         }
 
         .result-gif img {
             width: 100%;
-            /* Faz a imagem ocupar 100% da div do gif */
             border: 1px solid #eee;
         }
 
-        /* 3. A "olha div para as outras info" */
         .result-info {
             flex: 1;
-            /* Ocupa o resto do espaço */
         }
     </style>
 </head>
@@ -193,16 +181,13 @@ nav ul li {
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- Seleção dos Elementos ---
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');
             const detailPanel = document.getElementById('exercise-detail-content');
 
 
-            // --- 1. FUNÇÃO PARA CARREGAR OS MÚSCULOS (REAL) ---
             async function carregarMusculos() {
                 try {
-                    // CHAMA A API DE VERDADE
                     const response = await fetch('/api/musculos');
 
                     if (!response.ok) {
@@ -218,7 +203,6 @@ nav ul li {
                 }
             }
 
-            // --- 2. FUNÇÃO PARA PREENCHER O SELECT (sem mudança) ---
             function preencherSelect(musculos) {
                 muscleSelect.innerHTML = ''; // Limpa o "Carregando..."
                 muscleSelect.add(new Option('Selecione um músculo', ''));
@@ -227,7 +211,6 @@ nav ul li {
                 });
             }
 
-            // --- 3. "OUVIDOR" DE EVENTOS (sem mudança) ---
             muscleSelect.addEventListener('change', () => {
                 const muscleId = muscleSelect.value;
                 if (muscleId) {
@@ -237,13 +220,11 @@ nav ul li {
                 }
             });
 
-            // --- 4. FUNÇÃO PARA BUSCAR EXERCÍCIOS (REAL) ---
             async function buscarExerciciosPorMusculo(id) {
                 resultsContainer.innerHTML = '<p>Buscando exercícios...</p>';
 
                 try {
-                    // CHAMA A API DE VERDADE
-                    // (Nota: Esta é uma API NOVA que precisamos criar)
+
                     const response = await fetch(`/api/exercicios/por-musculo?id=${id}`);
 
                     if (!response.ok) {
@@ -259,7 +240,6 @@ nav ul li {
                 }
             }
 
-            // --- 5. FUNÇÃO PARA RENDERIZAR OS CARDS (sem mudança) ---
             function renderizarExercicios(exercicios) {
                 resultsContainer.innerHTML = '';
 

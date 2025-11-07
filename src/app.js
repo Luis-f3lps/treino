@@ -42,25 +42,16 @@ app.get('/', (req, res) => {
 
 app.get('/api/musculos', async (req, res) => {
   try {
-    //
-    // A QUERY CORRIGIDA BASEADA NA SUA IMAGEM:
-    //
+
     const sqlQuery = 'SELECT id_musculo, nome_musculo FROM musculos ORDER BY nome_musculo';
     
     const { rows } = await pool.query(sqlQuery);
     
-    // Agora, um problema:
-    // O front-end está esperando { id_musculo: 1, nome: 'Peito' }
-    // Mas o banco vai mandar { id_musculo: 1, nome_musculo: 'Peito' }
-    //
-    // Vamos corrigir isso no front-end... NÃO. 
-    // Vamos corrigir aqui, que é mais fácil.
-    
-    // Mapeamos a resposta para o formato que o front-end espera
+
     const respostaFormatada = rows.map(musculo => {
       return {
-        id_musculo: musculo.id_musculo, // Já está certo
-        nome: musculo.nome_musculo      // Renomeia 'nome_musculo' para 'nome'
+        id_musculo: musculo.id_musculo, 
+        nome: musculo.nome_musculo      
       };
     });
 
@@ -71,38 +62,30 @@ app.get('/api/musculos', async (req, res) => {
     res.status(500).json({ erro: 'Erro interno do servidor.' });
   }
 });
- app.get('/api/exercicios/buscar', async (req, res) => {
+app.get('/api/exercicios/por-musculo', async (req, res) => {
+  
+  const { id } = req.query;
 
-    // 1. Pega o termo de busca da URL (ex: ?termo=supino)
-    const { termo } = req.query;
+  if (!id) {
+    return res.status(400).json({ erro: 'Parâmetro "id" (do músculo) é obrigatório.' });
+  }
 
-    // 2. Se o cliente não mandar o termo, não tem o que buscar
-    if (!termo) {
-        return res.status(400).json({ erro: 'Parâmetro "termo" é obrigatório.' });
-    }
+  try {
 
-    try {
-        // 3. O Pulo do Gato: Query com ILIKE e $1
-        //    - ILIKE: Ignora maiúsculas/minúsculas
-        //    - $1: Parâmetro seguro (evita SQL Injection)
-        //    - %...%: Significa "que contenha" o termo
-        const sqlQuery = `
+    const sqlQuery = `
       SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
       FROM exercicios 
-      WHERE nome ILIKE $1
+      WHERE musculo_primario_id = $1
+      ORDER BY nome
     `;
+    
+    const { rows } = await pool.query(sqlQuery, [id]);
 
-        const valorBusca = `%${termo}%`;
+    res.status(200).json(rows);
 
-        // 4. Executa a query
-        const { rows } = await pool.query(sqlQuery, [valorBusca]);
-
-        // 5. Retorna os resultados (mesmo que seja uma lista vazia)
-        res.status(200).json(rows);
-
-    } catch (err) {
-        console.error('Erro ao buscar exercícios:', err);
-        res.status(500).json({ erro: 'Erro interno do servidor.' });
-    }
+  } catch (err) {
+    console.error('Erro ao buscar exercícios por músculo:', err);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
 });
 export default app;
