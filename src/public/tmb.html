@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de TMB</title>
+    <link rel="icon" href="logo.gif" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <img src="images/tl.webp" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/livros">Livros</a></li>
+                <li><a href="/artigos">Artigos</a></li>
+                <li><a href="/livros">Contato</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+    <div class="container">
+        <header class="no-print">
+            <h1>Calculadora de TMB</h1>
+            <p>(Taxa Metabólica Basal)</p>
+        </header>
+
+        <form id="tbmForm" class="no-print">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="idade">Idade (anos):</label>
+                <input type="number" id="idade" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="altura">Altura (cm):</label>
+                <input type="number" id="altura" min="1" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" min="1" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" required>
+                    <option value="">Selecione...</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
+            </div>
+
+            <button type="submit">Calcular e Salvar</button>
+        </form>
+
+        <div id="resultado" class="no-print"></div>
+
+        <div class="historico-container">
+            <h2>Lista de Alunos</h2>
+            <div class="tabela-wrapper">
+                <table class="historico-tabela" id="tabelaHistorico">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Altura (cm)</th>
+                            <th>Peso (kg)</th>
+                            <th>Sexo</th>
+                            <th>TMB (kcal)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaHistorico">
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Nenhum cálculo salvo ainda.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="botoes-historico no-print">
+                <button id="imprimirHistorico" class="btn">Imprimir dados de Alunos</button>
+                <button id="limparHistorico" class="btn">Limpar Histórico</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

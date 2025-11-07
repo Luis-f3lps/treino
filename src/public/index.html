@@ -1,167 +1,307 @@
-<!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="images/tl.webp" type="image/png">
-    <title>Agência de Projetos de Inovação do IFNMG Salinas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <title>Treinos
+    </title>
+    <style>
+        /* --- CSS do Layout Antigo (Sem Mudanças) --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .workout-interface {
+            display: flex;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            height: 60vh;
+            /* Diminuí um pouco a altura */
+        }
+
+        .exercise-list-panel {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px solid #eee;
+            overflow-y: auto;
+        }
+
+        .exercise-detail-panel {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .exercise-list-panel input[type="text"],
+        .exercise-list-panel select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #exercise-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #exercise-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        #exercise-list li:hover {
+            background-color: #efefef;
+        }
+
+        /* * --- NOVO CSS PARA A SEÇÃO DE BUSCA ---
+         */
+
+        /* A div "em baiso" */
+        .search-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 10px;
+            /* Espaço entre o input e o botão */
+        }
+
+        .search-controls input {
+            flex: 1;
+            /* Input ocupa o máximo de espaço */
+            padding: 10px;
+        }
+
+        .search-controls button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* O contêiner dos resultados */
+        #search-results-container {
+            margin-top: 20px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        /* 1. A "div para cada linha" */
+        .result-item {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fdfdfd;
+        }
+
+        /* 2. A "div para o gif" */
+        .result-gif {
+            flex-basis: 150px;
+            /* Tamanho fixo para o GIF */
+            margin-right: 15px;
+        }
+
+        .result-gif img {
+            width: 100%;
+            /* Faz a imagem ocupar 100% da div do gif */
+            border: 1px solid #eee;
+        }
+
+        /* 3. A "olha div para as outras info" */
+        .result-info {
+            flex: 1;
+            /* Ocupa o resto do espaço */
+        }
+    </style>
 </head>
 
 <body>
 
-    <!------------------Home--------------->
-    <div class="container">
-        <div id="header">
-            <nav>
-                <img src="images/tl.webp" class="logo">
-                <ul id="sidemenu">
-                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#header">Sobre</a></li>
-                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#about">Projetos</a></li>
-                    <li><a href="/livros">Livros</a></li>
-                    <li><a href="/artigos">Artigos</a></li>
-                    <li><a href="https://portifolio-projetos-ifnmg-salinas.vercel.app/#contact">Contato</a></li>
-                    <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
-                </ul>
-                <img src="images/salinas_vertical_jpg (1).jpg" class="logoIFNMG">
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-            </nav>
-        </div>
-        <div class="header-text">
-            <h1 style="color: black; margin-top: 100px">Olá, <span>Bem vindo ao portifolio</span></h1>
-        </div>
-        <div class="row">
-            <div class="about-col-1">
-                <img src="images/a2.png">
-            </div>
-            <div class="sobre">
-                <h1 class="sub-title">Sobre</h1>
+    <div id="header">
+        <nav>
+            <img src="images/tl.webp" class="logo">
+            <ul id="sidemenu">
+                <li><a href="/index">Home</a></li>
+                <li><a href="/monstar">Montar Treino</a></li>
+                <li><a href="/tbm">TBN</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/salinas_vertical_jpg (1).png" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+    <!DOCTYPE html>
+    <div class="workout-interface">
 
-                <h1>Objetivo do Projeto "Agência de Projetos de Inovação do IFNMG"</h1>
+        <div class="exercise-list-panel">
+            <h3>Lista de Exercícios</h3>
 
-                <p>
-                    O principal objetivo do projeto, conforme detalhado no Edital Nº 587, é fortalecer o
-                    ecossistema
-                    de inovação na área de abrangência do Instituto Federal do Norte de Minas Gerais (IFNMG) por
-                    meio do desenvolvimento de sua Agência de Projetos de Inovação.
-                    </br>
-                    Com uma duração de 48 meses, o projeto visa atender às demandas de inovação e extensão
-                    tecnológica da região. Para isso, ele está estruturado em cinco pilares fundamentais:
-                </p>
+            <input type="text" id="name-search-input" placeholder="Buscar por nome...">
 
-                <ul>
-                    <li>Valoração de Tecnologia</li>
-                    <li>Criação de Hubs de Inovação</li>
-                    <li>Agenciamento de Tecnologias e Competências para prospecção de parcerias</li>
-                    <li>Apoio ao Inventor Independente</li>
-                    <li>Gestão dos Ambientes de Inovação</li>
-                </ul>
-            </div>
+            <select id="muscle-group-select">
+                <option value="">Todos os grupos musculares</option>
+                <option value="peito">Peito</option>
+                <option value="costas">Costas</option>
+                <option value="pernas">Pernas</option>
+                <option value="ombros">Ombros</option>
+                <option value="biceps">Bíceps</option>
+                <option value="triceps">Tríceps</option>
+            </select>
+
+            <ul id="exercise-list">
+                <li data-id="1" data-muscle-group="peito">Supino Reto</li>
+                <li data-id="2" data-muscle-group="pernas">Agachamento Livre</li>
+                <li data-id="3" data-muscle-group="costas">Barra Fixa</li>
+                <li data-id="4" data-muscle-group="peito">Supino Inclinado</li>
+                <li data-id="5" data-muscle-group="pernas">Leg Press</li>
+                <li data-id="6" data-muscle-group="ombros">Desenvolvimento Militar</li>
+                <li data-id="7" data-muscle-group="costas">Remada Curvada</li>
+                <li data-id="8" data-muscle-group="biceps">Rosca Direta</li>
+            </ul>
         </div>
 
-        <div id="about">
-            <div class="row">
-                <div class="port1">
-                    <h1 class="sub-title">Projetos</h1>
-                    <p style="background-color: rgba(255, 255, 255, 0.05); 
-           color: black; 
-           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-           font-size: 16px; 
-           line-height: 1.7; 
-           padding: 25px; 
-           border-left: 5px solid #28a745; 
-           border-radius: 5px; 
-           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
-                        No IFNMG - Campus Salinas, a pesquisa científica não fica só na teoria. Nossos projetos são
-                        desenvolvidos para resolver os problemas reais do produtor rural e das empresas do Norte de
-                        Minas. Conectamos diretamente nossos laboratórios com as demandas do campo, criando soluções
-                        práticas para a agropecuária, a tecnologia de alimentos e o meio ambiente. Nosso foco é gerar
-                        inovação aplicada que fortalece a economia local. É a ciência saindo do papel e transformando a
-                        realidade da nossa região.
-                    </p>
-                    </br>
-                    <p></p>
-                    <div>
-                        <form id="portifolio-filter-form">
-                            <select id="tematica-select">
-                                <option value="">Todas as Temáticas</option>
-                            </select>
-                            <select id="coordenador-select">
-                                <option value="">Todos os Coordenadores</option>
-                            </select>
-                            <select id="anoProjeto-select">
-                                <option value="">Todos os Anos</option>
-                            </select>
-                            <button type="submit">Filtrar</button>
-                        </form>
-                        <table>
-                            <thead>
-                                <tr id="green">
-                                    <th>Título</th>
-                                    <th>Temática</th>
-                                    <th>Coordenador</th>
-                                    <th>Ano</th>
-                                </tr>
-                            </thead>
-                            <tbody id="portifolio-tbody">
-                            </tbody>
-                        </table>
-                        <div id="pagination-portifolio">
-                        </div>
-                    </div>
-                </div>
+        <div class="exercise-detail-panel">
+            <h3>Exercício Selecionado</h3>
+            <div id="exercise-detail-content">
+                <p>Clique em um exercício da lista ao lado.</p>
             </div>
         </div>
-        <h1 class="sub-title">Visualização de Dados</h1>
-        <p style="background-color: rgba(255, 255, 255, 0.05); 
-           color: black; 
-           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-           font-size: 16px; 
-           line-height: 1.7; 
-           padding: 25px; 
-           border-left: 5px solid #28a745; 
-           border-radius: 5px; 
-           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
-            A visualização de dados é fundamental pois transforma conjuntos de dados complexos e volumosos em formatos
-            gráficos compreensíveis, como mapas, gráficos e painéis interativos, permitindo que as pessoas identifiquem
-            rapidamente padrões, tendências, correlações e anomalias que seriam difíceis de discernir em tabelas ou
-            textos. Isso facilita a comunicação eficaz, promove uma compreensão mais profunda dos dados por públicos
-            variados e apoia uma tomada de decisão mais rápida, informada e baseada em evidências.
-        </p>
-        <div class="chart-container-linhas">
-            <h2>Projetos por Temática</h2>
-            <canvas id="graficoTematicas"></canvas>
-        </div>
-        <div class="pizza">
-            <div class="chart-container">
-                <canvas id="graficoPizzaTematicas"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="graficoPizzaCoordenadores"></canvas>
-            </div>
-        </div>
-        <!----------------- Contato ------------>
-        <div id="contact" style=" padding-top: 50px;">
+        <section class="search-section">
+            <h2>Buscar Exercício no Banco de Dados</h2>
 
-            <h1 class="sub-title-type-2">Contato do Agente de Inovação do IFNMG Salinas</h1>
-            <p><i class="fa-solid fa-paper-plane"></i> luisphelps671@gmail.com</p>
-            <p><i class="fa-brands fa-square-whatsapp"></i> 38 988643820</p>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=100008665060845"><i
-                        class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://www.instagram.com/luis_f3lps/"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/luis-gustavo-barbosa-santiago-648395280/"><i
-                        class="fa-brands fa-linkedin"></i></a>
-
+            <div class="search-controls">
+                <input type="text" id="db-search-input" placeholder="Digite o nome do exercício...">
+                <button id="db-search-button">Buscar</button>
             </div>
-        </div>
+
+            <div id="search-results-container">
+            </div>
+        </section>
     </div>
 
     <script>
+        // --- JS ANTIGO (Carregar Select, Filtros, etc.) ---
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // (Vou omitir o JS da seção de cima para focar no novo)
+            // ... (lógica de carregarMusculos, preencherSelect, etc.) ...
+
+            // --- NOVO JS PARA A SEÇÃO DE BUSCA ---
+
+            // 1. Selecionar os novos elementos
+            const searchInput = document.getElementById('db-search-input');
+            const searchButton = document.getElementById('db-search-button');
+            const resultsContainer = document.getElementById('search-results-container');
+
+            // 2. Adicionar "ouvidor" ao botão de busca
+            searchButton.addEventListener('click', async () => {
+                const termoBusca = searchInput.value;
+                if (!termoBusca) {
+                    alert('Digite algo para buscar!');
+                    return;
+                }
+
+                // Limpa resultados antigos e mostra "carregando"
+                resultsContainer.innerHTML = '<p>Buscando...</p>';
+
+                try {
+                    // 3. Chamar a API (simulada)
+                    const resultados = await mockApiSearch(termoBusca);
+
+                    // 4. Renderizar os resultados na tela
+                    renderizarResultados(resultados);
+
+                } catch (error) {
+                    resultsContainer.innerHTML = '<p>Erro ao buscar. Tente mais tarde.</p>';
+                    console.error(error);
+                }
+            });
+
+            // 5. Função que SIMULA a API (o seu back-end)
+            async function mockApiSearch(termo) {
+                console.log(`Simulando busca na API por: "${termo}"`);
+
+                // Dados FALSOS (mock) que simulam a resposta da sua API
+                // (SELECT * FROM exercicios WHERE nome ILIKE '%termo%')
+                const mockDatabase = [
+                    { id_exercicio: 't01', nome: 'Supino Reto', link_gif: 'https://i.imgur.com/example.gif', repeticoes_recomendadas: '3x10' },
+                    { id_exercicio: 't02', nome: 'Agachamento Livre', link_gif: 'https://i.imgur.com/example.gif', repeticoes_recomendadas: '3x12' },
+                    { id_exercicio: 't03', nome: 'Barra Fixa', link_gif: 'https://i.imgur.com/example.gif', repeticoes_recomendadas: '4xFalha' },
+                    { id_exercicio: 't04', nome: 'Supino Inclinado', link_gif: 'https://i.imgur.com/example.gif', repeticoes_recomendadas: '3x10' },
+                ];
+
+                // Simula a demora da rede (1 segundo)
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Filtra o "banco"
+                const resultados = mockDatabase.filter(ex =>
+                    ex.nome.toLowerCase().includes(termo.toLowerCase())
+                );
+
+                // Retorna os dados (como a sua API faria)
+                return resultados;
+            }
+
+            // 6. Função que "desenha" os resultados no HTML
+            function renderizarResultados(exercicios) {
+                // Limpa o "Buscando..."
+                resultsContainer.innerHTML = '';
+
+                if (exercicios.length === 0) {
+                    resultsContainer.innerHTML = '<p>Nenhum exercício encontrado.</p>';
+                    return;
+                }
+
+                // Cria os elementos para cada item (como você pediu)
+                exercicios.forEach(ex => {
+                    // "uma dv para cada linha"
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'result-item';
+
+                    // "uma div para o gif do link gif"
+                    const gifDiv = document.createElement('div');
+                    gifDiv.className = 'result-gif';
+                    // (Substitua "placeholder.gif" pelo ex.link_gif real)
+                    gifDiv.innerHTML = `<img src="${ex.link_gif}" alt="${ex.nome}">`;
+
+                    // "e olha div para as outras info"
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'result-info';
+                    infoDiv.innerHTML = `
+                        <h4>${ex.nome}</h4>
+                        <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas}</p>
+                        <p><strong>ID:</strong> ${ex.id_exercicio}</p>
+                    `;
+
+                    // Monta o "card" do resultado
+                    itemDiv.appendChild(gifDiv);
+                    itemDiv.appendChild(infoDiv);
+
+                    // Adiciona o card pronto no contêiner
+                    resultsContainer.appendChild(itemDiv);
+                });
+            }
+        });
+        async function carregarMusculos() {
+            try {
+                const response = await fetch('/api/musculos');
+                const musculos = await response.json();
+                preencherSelect(musculos);
+            } catch (error) {
+                console.error('Erro ao carregar músculos:', error);
+                muscleGroupSelect.innerHTML = '<option value="">Falha ao carregar</option>';
+            }
+        }
         var sidemenu = document.getElementById("sidemenu");
         function openmenu() {
             sidemenu.style.right = "-200px";
@@ -171,7 +311,6 @@
             sidemenu.style.left = "-800px";
         }
     </script>
-    <script src="js/index.js"></script>
 
 </body>
 
