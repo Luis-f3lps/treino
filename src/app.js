@@ -64,22 +64,29 @@ app.get('/api/musculos', async (req, res) => {
 });
 app.get('/api/exercicios/por-musculo', async (req, res) => {
   
-  const { id } = req.query;
-
-  if (!id) {
-    return res.status(400).json({ erro: 'Parâmetro "id" (do músculo) é obrigatório.' });
-  }
+  const { id } = req.query; 
 
   try {
+    let sqlQuery;
+    let params = []; 
 
-    const sqlQuery = `
-      SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
-      FROM exercicios 
-      WHERE musculo_primario_id = $1
-      ORDER BY nome
-    `;
+    if (id) {
+      sqlQuery = `
+        SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
+        FROM exercicios 
+        WHERE musculo_primario_id = $1
+        ORDER BY nome
+      `;
+      params.push(id); 
+    } else {
+      sqlQuery = `
+        SELECT id_exercicio, nome, link_gif, repeticoes_recomendadas 
+        FROM exercicios 
+        ORDER BY nome
+      `;
+    }
     
-    const { rows } = await pool.query(sqlQuery, [id]);
+    const { rows } = await pool.query(sqlQuery, params);
 
     res.status(200).json(rows);
 
