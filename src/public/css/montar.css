@@ -162,7 +162,6 @@
                 color: black;
             }
         }
-         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
     .workout-interface { display: flex; height: 90vh; border: 1px solid #ccc; background-color: #fff; }
     .exercise-list-panel { flex: 1; padding: 20px; border-right: 2px solid #eee; overflow-y: auto; }
     
@@ -415,4 +414,31 @@ ease-in-out;
 
 #save-workout-button:active {
   transform: scale(0.99);
+}
+@media (max-width: 768px) {
+
+    body {
+    margin: 0px;
+}
+.workout-interface {
+    display: inline-block;
+}
+.exercise-list-panel {
+    width: 100%;
+        height: 100%;
+
+}
+.exercise-card {
+    width: 100%;
+}
+.exercise-gif {
+width: 60%;
+min-width: 50%;
+}
+.exercise-detail-panel{
+     /*height: 80vh;
+    position: fixed;
+    top: 170;
+    width: 100%;*/
+}
 }

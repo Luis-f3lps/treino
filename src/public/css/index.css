@@ -210,13 +210,13 @@
         transition: right 0.5s;
         position: fixed;
     }
-        .fa-solid fa-circle-xmark{
-        color: white;
-        top: 50px;
-        position: fixed;
-        left: 350px;
-        font-size: 35px;
-    }
+.fa-solid.fa-circle-xmark {
+    color: white;
+    top: 50px;
+    position: fixed;
+    left: 350px;
+    font-size: 35px;
+}
 
     nav .fa-solid {
         display: block;
