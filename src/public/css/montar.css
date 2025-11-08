@@ -1,6 +1,5 @@
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
             background-color: #f4f4f4;
         }
 
@@ -417,9 +416,6 @@ ease-in-out;
 }
 @media (max-width: 768px) {
 
-    body {
-    margin: 0px;
-}
 .workout-interface {
     display: inline-block;
     height: 80vh;

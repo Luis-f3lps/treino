@@ -1,6 +1,5 @@
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
             background-color: #f4f4f4;
         }
 
@@ -239,11 +238,6 @@
         color: #ffffff;
         transition: background-color 0.3s;
     }
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0px;
-    background-color: #ffffff;
-}
 
     .viewer-container {
         margin: 0px;
