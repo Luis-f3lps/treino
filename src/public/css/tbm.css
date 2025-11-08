@@ -62,7 +62,7 @@ ease-in-out;
 
 #sidemenu li a {
     text-decoration: none;
-    color: #004a99;
+    color: #ffffff;
     font-weight: 600;
     position: relative;
     padding-bottom: 5px;
@@ -268,9 +268,6 @@ ease-in-out;
 }
 
 @media (max-width: 768px) {
-    #header {
-        padding: 15px 5%;
-    }
 
     nav .fa-solid {
         display: block;
@@ -288,7 +285,9 @@ ease-in-out;
         z-index: 100;
         transition: right 0.5s ease;
     }
-
+.container{
+    margin: 0px;
+}
     #sidemenu li {
         margin: 25px;
     }
