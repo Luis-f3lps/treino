@@ -19,12 +19,29 @@ body {
     top: 0;
     z-index: 10;
 }
-
+nav ul li a {
+    text-decoration: none;
+    font-size: 22px;
+    position: relative;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    position: relative;
+}
 nav {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    background: #21202e;
+    width: 100%;
+    display: flex;
+}
+a {
+    color: #007BFF;
+    transition: color 0.3s 
+ease-in-out;
 }
 
 .logo {
@@ -72,11 +89,21 @@ nav {
     width: 100%;
 }
 
-nav .fa-solid {
-    display: none;
-    cursor: pointer;
-    font-size: 25px;
-    color: #333;
+nav ul li a {
+    text-decoration: none;
+    font-size: 22px;
+    position: relative;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    position: relative;
+}
+a {
+    color: #007BFF;
+    transition: color 0.3s 
+ease-in-out;
 }
 
 .container {
