@@ -195,7 +195,6 @@
     color: #007bff; /* Azul de destaque */
     margin-bottom: 10px;
 }
-
 /* --- RESPONSIVIDADE (Ajuste rápido para mobile) --- */
 @media (max-width: 768px) {
     nav ul {
@@ -210,13 +209,13 @@
         transition: right 0.5s;
         position: fixed;
     }
-.fa-solid.fa-circle-xmark {
-    color: white;
-    top: 50px;
-    position: fixed;
-    left: 350px;
-    font-size: 35px;
-}
+    .fa-solid.fa-circle-xmark {
+        color: #fe0000;
+        bottom: 330px;
+        position: relative;
+        left: 300px;
+        font-size: 35px;
+    }
 
     nav .fa-solid {
         display: block;

@@ -1,4 +1,5 @@
-        document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', () => {
 
             const muscleSelect = document.getElementById('muscle-group-select');
             const resultsContainer = document.getElementById('exercise-results-container');

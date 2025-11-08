@@ -1,5 +1,7 @@
 
 
+
+
     document.addEventListener('DOMContentLoaded', () => {
         
         const input = document.getElementById('workout-string-input');

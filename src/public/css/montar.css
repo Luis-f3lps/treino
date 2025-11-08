@@ -422,12 +422,16 @@ ease-in-out;
 }
 .workout-interface {
     display: inline-block;
+    height: 80vh;
 }
 .exercise-list-panel {
     width: 100%;
         height: 100%;
 
 }
+.logoIFNMG {
+    width: 0px;}
+
 .exercise-card {
     width: 100%;
 }
