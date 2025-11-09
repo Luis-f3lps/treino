@@ -1,0 +1,68 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/montar.css">
+    <title>Treinos
+    </title>
+</head>
+
+<body>
+
+    <div id="header">
+        <nav>
+            <ul id="sidemenu">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/montar">Montar Treino</a></li>
+                <li><a href="/tbm">TBN</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/mus.png" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+    <!DOCTYPE html>
+    <div class="workout-interface">
+
+        <div class="exercise-list-panel">
+            <h2>Exercícios</h2>
+
+            <p>Selecione um grupo muscular para ver os exercícios:</p>
+
+            <select id="muscle-group-select">
+                <option value="">Carregando músculos...</option>
+            </select>
+
+            <div id="exercise-results-container">
+                <p>Selecione um músculo acima.</p>
+            </div>
+        </div>
+
+        <div class="exercise-detail-panel">
+            <h3>Exercícios Selecionados</h3>
+
+            <div id="exercise-detail-content" class="is-empty">
+                <p>Adicione exercícios da lista ao lado.</p>
+            </div>
+            <input type="text" id="workout-string-output" 
+       placeholder="Sua string aparecerá aqui..." readonly>
+            <button id="save-workout-button">Salvar Treino (Gerar String)</button>
+        </div>
+
+    </div>
+        <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
+        }
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
+    </script>
+    <script src="js/montar.js"></script>
+
+</body>
+
+</html>

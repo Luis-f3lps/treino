@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/tl.webp" type="image/png">
+    <title>Visualizar Treino - Agência de Projetos</title>
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <script src="https://kit.fontawesome.com/915b45d802.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <ul id="sidemenu" style="right: -200px; left: -800px;">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/montar">Montar Treino</a></li>
+                <li><a href="/tbm">TBN</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="clossmenu()"></i>
+            </ul>
+            <img src="images/mus.png" class="logoIFNMG">
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+    </div>
+
+    <div class="viewer-container">
+        <h2>Visualizar Treino</h2>
+        <div class="input-area">
+            <input type="text" id="workout-string-input" placeholder="Cole sua string aqui...">
+            <button id="load-workout-button">Carregar</button>
+        </div>
+
+        <div id="workout-display-area">
+        </div>
+    </div>
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "-200px";
+            sidemenu.style.left = "0px";
+        }
+        function clossmenu() {
+            sidemenu.style.left = "-800px";
+        }
+    </script>
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>
