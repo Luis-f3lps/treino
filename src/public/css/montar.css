@@ -7,8 +7,6 @@
             width: 80px;
             margin-right: 30px;
         }
-/* Adicione isso ao seu style.css */
-
         .logo {
             width: 40px;
             margin-left: 40px;
@@ -164,7 +162,6 @@
     .workout-interface { display: flex; height: 90vh; border: 1px solid #ccc; background-color: #fff; }
     .exercise-list-panel { flex: 1; padding: 20px; border-right: 2px solid #eee; overflow-y: auto; }
     
-    /* Mudei o padding da div de 30% para o conteúdo não colar na borda */
     .exercise-detail-panel {
         flex-basis: 30%;
         padding: 0 20px; /* Padding só nas laterais */
@@ -176,7 +173,6 @@
     #muscle-group-select { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
     #exercise-results-container { margin-top: 20px;    display: ruby; }
 
-    /* --- MUDANÇAS AQUI --- */
     .exercise-card {
         display: flex;
         border: 1px solid #ddd;
@@ -195,7 +191,6 @@
     .exercise-gif img { width: 100%; border: 1px solid #eee; }
     .exercise-info { flex: 1; }
 
-    /* Estilo para o novo botão "Adicionar" */
     .exercise-info .add-button {
         padding: 8px 12px;
         background-color: #28a745;
@@ -210,16 +205,13 @@
         background-color: #218838;
     }
 
-    /* --- NOVOS ESTILOS PARA A DIV DE 30% --- */
-    
-    /* Remove a mensagem "clique ao lado" */
+
     #exercise-detail-content.is-empty {
         padding-top: 20px;
         text-align: center;
         color: #777;
     }
     
-    /* A linha do exercício selecionado */
     .selected-exercise-item {
         display: flex;
         align-items: center;
@@ -234,7 +226,6 @@
         padding-right: 10px;
     }
 
-    /* O select de dias (A, B, C, D) */
     .selected-exercise-item .day-select {
         padding: 5px;
         font-size: 14px;
@@ -263,13 +254,11 @@ ease-in-out;
     box-sizing: border-box;
 }/* No seu style.css */
 
-/* Deixa o botão "Adicionar" cinza quando desabilitado */
 .add-button:disabled {
     background-color: #6c757d; /* Um cinza */
     cursor: not-allowed;
 }
 
-/* O novo botão "Excluir" na lista da direita */
 .delete-button {
     padding: 3px 8px;
     background-color: #dc3545; /* Vermelho */
@@ -284,7 +273,6 @@ ease-in-out;
     background-color: #c82333;
 }
 
-/* Ajuste no item da direita para caber o botão */
 .selected-exercise-item {
     display: flex;
     align-items: center;
@@ -312,9 +300,7 @@ ease-in-out;
 
   display: flex;
   flex-direction: column;
-  
-  /* Aparência */
-  background-color: var(--panel-bg);
+    background-color: var(--panel-bg);
   border-left: 1px solid var(--panel-border);
   
   padding: 0; 
@@ -379,7 +365,6 @@ ease-in-out;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03); /* Sombra sutil no topo */
 }
 
-/* === 7. O Input da String === */
 #workout-string-output {
   width: 100%;
   padding: 10px;
@@ -415,7 +400,39 @@ ease-in-out;
   transform: scale(0.99);
 }
 @media (max-width: 768px) {
+.exercise-card {
+        flex-direction: column; /* Empilha a imagem e o texto */
+    }
 
+    .exercise-gif {
+        width: 100%;
+        flex-basis: auto; /* Reseta a altura */
+        max-height: 200px; /* Limita a altura do gif */
+    }
+
+    .exercise-gif img {
+        height: 200px; /* Altura fixa no mobile */
+        object-fit: cover;
+    }
+
+    .exercise-info {
+        padding: 20px; /* Mais preenchimento para toque */
+    }
+
+    .exercise-info h4 {
+        font-size: 1.3rem; /* Título maior */
+    }
+
+    .exercise-info p {
+        font-size: 1rem; /* Texto mais legível */
+    }
+
+    .exercise-info .add-button {
+        width: 100%; 
+        padding: 14px;
+        font-size: 1.1rem;
+        margin-top: 15px; /* Espaço acima do botão */
+    }
 .workout-interface {
     display: inline-block;
     height: 80vh;

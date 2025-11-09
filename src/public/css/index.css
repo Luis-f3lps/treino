@@ -178,6 +178,7 @@
     margin-top: 0;
     font-size: 22px;
     color: #111;
+    text-align: center;
 }
 
 .exercise-info p {
@@ -188,14 +189,12 @@
     font-style: normal; /* Sobrescreve o p padrão */
 }
 
-/* Destaque para o DIA A, B, C... */
 .day-highlight {
     font-size: 18px !important; /* !importante para garantir */
     font-weight: bold;
     color: #007bff; /* Azul de destaque */
     margin-bottom: 10px;
 }
-/* --- RESPONSIVIDADE (Ajuste rápido para mobile) --- */
 @media (max-width: 768px) {
     nav ul {
         display: block; 
@@ -245,7 +244,6 @@
         padding: 20px;
     }
 
-    /* Em telas pequenas, o GIF fica em cima e o texto embaixo */
     .exercise-card {
         flex-direction: column;
     }
@@ -287,7 +285,6 @@ ease-in-out;
     border-bottom: 3px solid #007bff; /* Linha azul de destaque */
 }
 
-/* O primeiro título não precisa de espaço em cima */
 #workout-display-area .day-title:first-of-type {
     margin-top: 0;
 }
