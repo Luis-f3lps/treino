@@ -7,6 +7,7 @@
             width: 80px;
             margin-right: 30px;
         }
+
         .logo {
             width: 40px;
             margin-left: 40px;
@@ -159,303 +160,395 @@
                 color: black;
             }
         }
-    .workout-interface { display: flex; height: 90vh; border: 1px solid #ccc; background-color: #fff; }
-    .exercise-list-panel { flex: 1; padding: 20px; border-right: 2px solid #eee; overflow-y: auto; }
-    
-    .exercise-detail-panel {
-        flex-basis: 30%;
-        padding: 0 20px; /* Padding só nas laterais */
-        background-color: #f9f9f9;
-        border-left: 1px solid #ddd;
-        overflow-y: auto; /* Scroll se a lista ficar grande */
-    }
-    
-    #muscle-group-select { width: 100%; padding: 10px; font-size: 16px; margin-bottom: 20px; }
-    #exercise-results-container { margin-top: 20px;    display: ruby; }
 
-    .exercise-card {
-        display: flex;
-        border: 1px solid #ddd;
-        margin-bottom: 15px;
-        padding: 10px;
-        background-color: #fdfdfd;
-        width: 50%;
-        /* Não precisa mais de cursor aqui */
-    }
+        .workout-interface {
+            display: flex;
+            height: 90vh;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
 
-    .exercise-gif {
-        width: 300px;
-        min-width: 300px;
-        margin-right: 15px;
-    }
-    .exercise-gif img { width: 100%; border: 1px solid #eee; }
-    .exercise-info { flex: 1; }
+        .exercise-list-panel {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px solid #eee;
+            overflow-y: auto;
+        }
 
-    .exercise-info .add-button {
-        padding: 8px 12px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        font-size: 14px;
-    }
-    .exercise-info .add-button:hover {
-        background-color: #218838;
-    }
+        .exercise-detail-panel {
+            flex-basis: 30%;
+            padding: 0 20px;
+            /* Padding só nas laterais */
+            background-color: #f9f9f9;
+            border-left: 1px solid #ddd;
+            overflow-y: auto;
+            /* Scroll se a lista ficar grande */
+        }
 
+        #muscle-group-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
 
-    #exercise-detail-content.is-empty {
-        padding-top: 20px;
-        text-align: center;
-        color: #777;
-    }
-    
-    .selected-exercise-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; /* Coloca o select no final */
-        padding: 12px 0;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    
-    .selected-exercise-item span {
-        font-size: 16px;
-        flex: 1; /* Ocupa o espaço */
-        padding-right: 10px;
-    }
+        #exercise-results-container {
+            margin-top: 20px;
+            display: ruby;
+        }
 
-    .selected-exercise-item .day-select {
-        padding: 5px;
-        font-size: 14px;
-        flex-basis: 100px; /* Tamanho fixo para o select */
-    }
-nav ul li a {
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-a {
-    color: #007BFF;
-    transition: color 0.3s 
-ease-in-out;
-}
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    box-sizing: border-box;
-}/* No seu style.css */
+        .exercise-card {
+            display: flex;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fdfdfd;
+            width: 50%;
+            /* Não precisa mais de cursor aqui */
+        }
 
-.add-button:disabled {
-    background-color: #6c757d; /* Um cinza */
-    cursor: not-allowed;
-}
+        .exercise-gif {
+            width: 300px;
+            min-width: 300px;
+            margin-right: 15px;
+        }
 
-.delete-button {
-    padding: 3px 8px;
-    background-color: #dc3545; /* Vermelho */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-left: 10px; /* Espaço do select */
-}
-.delete-button:hover {
-    background-color: #c82333;
-}
+        .exercise-gif img {
+            width: 100%;
+            border: 1px solid #eee;
+        }
 
-.selected-exercise-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid #e0e0e0;
-}
+        .exercise-info {
+            flex: 1;
+        }
 
-:root {
-  --panel-bg: #f8f9fa; /* Um cinza muito claro para o fundo */
-  --panel-border: #e0e0e0;
-  --content-bg: #ffffff; /* Fundo branco para a lista */
-  --text-light: #888;
-  --text-dark: #333;
-  --primary-color: #007bff; /* Azul (para Salvar) */
-  --primary-hover: #0056b3;
-  --string-bg: #f0f0f0;
-  --string-border: #ccc;
-}
+        .exercise-info .add-button {
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
 
-.exercise-detail-panel {
-  flex-basis: 30%;
-  min-width: 320px; /* Garante que não fique muito espremido */
-  
-
-  display: flex;
-  flex-direction: column;
-    background-color: var(--panel-bg);
-  border-left: 1px solid var(--panel-border);
-  
-  padding: 0; 
-  height: 90vh; /* Faz o painel ocupar a altura da tela (ajuste conforme seu layout) */
-}
-
-.exercise-detail-panel h3 {
-  font-size: 20px;
-  color: var(--text-dark);
-  text-align: center;
-  padding: 16px;
-  margin: 0;
-  
-  flex-shrink: 0; 
-  border-bottom: 1px solid var(--panel-border);
-}
-
-#exercise-detail-content {
-  flex-grow: 1; /* Faz a lista ocupar todo o espaço vertical disponível */
-  overflow-y: auto; /* Adiciona scroll SÓ nesta div se a lista for longa */
-  
-  background-color: var(--content-bg);
-  padding: 15px;
-  margin: 0;
-  
-  transition: background-color 0.3s;
-}
-
-#exercise-detail-content.is-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent; /* Remove o fundo branco quando vazio */
-}
-
-#exercise-detail-content.is-empty p {
-  color: var(--text-light);
-  font-style: italic;
-  font-size: 16px;
-  text-align: center;
-}
+        .exercise-info .add-button:hover {
+            background-color: #218838;
+        }
 
 
-.selected-exercise-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
-  animation: fadeIn 0.3s ease; /* Efeito de entrada */
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        #exercise-detail-content.is-empty {
+            padding-top: 20px;
+            text-align: center;
+            color: #777;
+        }
 
-.panel-footer {
-  flex-shrink: 0; /* Impede que o rodapé encolha */
-  padding: 15px;
-  background-color: var(--panel-bg);
-  border-top: 1px solid var(--panel-border);
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03); /* Sombra sutil no topo */
-}
+        .selected-exercise-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* Coloca o select no final */
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
-#workout-string-output {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-family: 'Courier New', Courier, monospace; /* Ótimo para strings de código */
-  font-size: 14px;
-  background-color: var(--string-bg);
-  border: 1px dashed var(--string-border);
-  border-radius: 4px;
-  color: #555;
-  
-  resize: none; 
-}
+        .selected-exercise-item span {
+            font-size: 16px;
+            flex: 1;
+            /* Ocupa o espaço */
+            padding-right: 10px;
+        }
 
-#save-workout-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-}
+        .selected-exercise-item .day-select {
+            padding: 5px;
+            font-size: 14px;
+            flex-basis: 100px;
+            /* Tamanho fixo para o select */
+        }
 
-#save-workout-button:hover {
-  background-color: var(--primary-hover);
-}
+        nav ul li a {
+            text-decoration: none;
+            font-size: 22px;
+            position: relative;
+        }
 
-#save-workout-button:active {
-  transform: scale(0.99);
-}
-@media (max-width: 768px) {
-.exercise-card {
-        flex-direction: column; /* Empilha a imagem e o texto */
-    }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            position: relative;
+        }
 
-    .exercise-gif {
-        width: 100%;
-        flex-basis: auto; /* Reseta a altura */
-        max-height: 200px; /* Limita a altura do gif */
-    }
+        a {
+            color: #007BFF;
+            transition: color 0.3s ease-in-out;
+        }
 
-    .exercise-gif img {
-        height: 200px; /* Altura fixa no mobile */
-        object-fit: cover;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
 
-    .exercise-info {
-        padding: 20px; /* Mais preenchimento para toque */
-    }
+        /* No seu style.css */
 
-    .exercise-info h4 {
-        font-size: 1.3rem; /* Título maior */
-    }
+        .add-button:disabled {
+            background-color: #6c757d;
+            /* Um cinza */
+            cursor: not-allowed;
+        }
 
-    .exercise-info p {
-        font-size: 1rem; /* Texto mais legível */
-    }
+        .delete-button {
+            padding: 3px 8px;
+            background-color: #dc3545;
+            /* Vermelho */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            /* Espaço do select */
+        }
 
-    .exercise-info .add-button {
-        width: 100%; 
-        padding: 14px;
-        font-size: 1.1rem;
-        margin-top: 15px; /* Espaço acima do botão */
-    }
-.workout-interface {
-    display: inline-block;
-    height: 80vh;
-}
-.exercise-list-panel {
-    width: 100%;
-        height: 100%;
+        .delete-button:hover {
+            background-color: #c82333;
+        }
 
-}
-.logoIFNMG {
-    width: 0px;}
+        .selected-exercise-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
-.exercise-card {
-    width: 100%;
-}
-.exercise-gif {
-width: 60%;
-min-width: 50%;
-}
-.exercise-detail-panel{
-     /*height: 80vh;
+        :root {
+            --panel-bg: #f8f9fa;
+            /* Um cinza muito claro para o fundo */
+            --panel-border: #e0e0e0;
+            --content-bg: #ffffff;
+            /* Fundo branco para a lista */
+            --text-light: #888;
+            --text-dark: #333;
+            --primary-color: #007bff;
+            /* Azul (para Salvar) */
+            --primary-hover: #0056b3;
+            --string-bg: #f0f0f0;
+            --string-border: #ccc;
+        }
+
+        .exercise-detail-panel {
+            flex-basis: 30%;
+            min-width: 320px;
+            /* Garante que não fique muito espremido */
+
+
+            display: flex;
+            flex-direction: column;
+            background-color: var(--panel-bg);
+            border-left: 1px solid var(--panel-border);
+
+            padding: 0;
+            height: 90vh;
+            /* Faz o painel ocupar a altura da tela (ajuste conforme seu layout) */
+        }
+
+        .exercise-detail-panel h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            text-align: center;
+            padding: 16px;
+            margin: 0;
+
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        #exercise-detail-content {
+            flex-grow: 1;
+            /* Faz a lista ocupar todo o espaço vertical disponível */
+            overflow-y: auto;
+            /* Adiciona scroll SÓ nesta div se a lista for longa */
+
+            background-color: var(--content-bg);
+            padding: 15px;
+            margin: 0;
+
+            transition: background-color 0.3s;
+        }
+
+        #exercise-detail-content.is-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            /* Remove o fundo branco quando vazio */
+        }
+
+        #exercise-detail-content.is-empty p {
+            color: var(--text-light);
+            font-style: italic;
+            font-size: 16px;
+            text-align: center;
+        }
+
+
+        .selected-exercise-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            animation: fadeIn 0.3s ease;
+            /* Efeito de entrada */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel-footer {
+            flex-shrink: 0;
+            /* Impede que o rodapé encolha */
+            padding: 15px;
+            background-color: var(--panel-bg);
+            border-top: 1px solid var(--panel-border);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03);
+            /* Sombra sutil no topo */
+        }
+
+        #workout-string-output {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            /* Ótimo para strings de código */
+            font-size: 14px;
+            background-color: var(--string-bg);
+            border: 1px dashed var(--string-border);
+            border-radius: 4px;
+            color: #555;
+
+            resize: none;
+        }
+
+        #save-workout-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+        }
+
+        #save-workout-button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        #save-workout-button:active {
+            transform: scale(0.99);
+        }
+
+        .exercise-info h4 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #111;
+            text-align: center;
+        }
+
+        #workout-display-area p {
+            font-size: 16px;
+            color: #777;
+            font-style: italic;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .exercise-card {
+                flex-direction: column;
+                /* Empilha a imagem e o texto */
+            }
+
+            .exercise-gif {
+                width: 100%;
+                flex-basis: auto;
+                /* Reseta a altura */
+                max-height: 200px;
+                /* Limita a altura do gif */
+            }
+
+            .exercise-gif img {
+                object-fit: cover;
+            }
+
+            .exercise-info {
+                padding: 20px;
+                /* Mais preenchimento para toque */
+            }
+
+            .exercise-info h4 {
+                font-size: 1.3rem;
+                /* Título maior */
+            }
+
+            .exercise-info p {
+                font-size: 0px;
+                /* Texto mais legível */
+            }
+
+            .exercise-info .add-button {
+                width: 100%;
+                padding: 14px;
+                font-size: 1.1rem;
+                margin-top: 15px;
+                /* Espaço acima do botão */
+            }
+
+            .workout-interface {
+                display: inline-block;
+                height: 80vh;
+            }
+
+            .exercise-list-panel {
+                width: 100%;
+                height: 100%;
+
+            }
+
+            .logoIFNMG {
+                width: 0px;
+            }
+
+            .exercise-card {
+                width: 100%;
+                height: 500px;
+                text-align: center;
+            }
+
+            .exercise-gif {
+                width: 60%;
+                min-width: 50%;
+            }
+
+            .exercise-detail-panel {
+                /*height: 80vh;
     position: fixed;
     top: 170;
     width: 100%;*/
-}
-}
+            }
+        }
