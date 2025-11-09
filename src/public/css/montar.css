@@ -464,6 +464,14 @@
             transform: scale(0.99);
         }
 
+        .exercise-info {
+            padding: 15px;
+        }
+
+        p {
+            margin: 15px;
+        }
+
         .exercise-info h4 {
             margin-top: 0;
             font-size: 22px;
@@ -487,9 +495,7 @@
             .exercise-gif {
                 width: 100%;
                 flex-basis: auto;
-                /* Reseta a altura */
-                max-height: 200px;
-                /* Limita a altura do gif */
+
             }
 
             .exercise-gif img {
@@ -540,10 +546,7 @@
                 text-align: center;
             }
 
-            .exercise-gif {
-                width: 60%;
-                min-width: 50%;
-            }
+
 
             .exercise-detail-panel {
                 /*height: 80vh;
