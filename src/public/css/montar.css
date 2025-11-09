@@ -187,7 +187,6 @@
 
         #muscle-group-select {
             width: 100%;
-            padding: 10px;
             font-size: 16px;
             margin-bottom: 20px;
         }
@@ -489,7 +488,6 @@
         @media (max-width: 768px) {
             .exercise-card {
                 flex-direction: column;
-                /* Empilha a imagem e o texto */
             }
 
             .exercise-gif {
@@ -504,17 +502,14 @@
 
             .exercise-info {
                 padding: 20px;
-                /* Mais preenchimento para toque */
             }
 
             .exercise-info h4 {
                 font-size: 1.3rem;
-                /* Título maior */
             }
 
             .exercise-info p {
-                font-size: 0px;
-                /* Texto mais legível */
+                display: none;
             }
 
             .exercise-info .add-button {
@@ -522,7 +517,6 @@
                 padding: 14px;
                 font-size: 1.1rem;
                 margin-top: 15px;
-                /* Espaço acima do botão */
             }
 
             .workout-interface {
