@@ -470,13 +470,13 @@
         @media (min-width: 916px) and (max-width: 1750px) {
             .exercise-card {
                 width: 100%;
-                height: 40px;
+                height: 440px;
                 text-align: center;
                 flex-direction: inherit;
             }
 
             .exercise-gif img {
-                width: 90%;
+                width: 100%;
                 border: 1px solid #eee;
             }
 
@@ -491,6 +491,7 @@
                 flex-basis: auto;
                 text-align: center;
                 align-items: center;
+                display: inline-grid;
             }
             #exercise-results-container {
     margin-top: 20px;
