@@ -172,14 +172,10 @@ ease-in-out;
 
 #resultado {
     margin-bottom: 30px;
-    padding: 20px;
-    background-color: #e6f7ff;
-    border: 1px solid #b3e0ff;
     border-radius: 5px;
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #0056b3;
 }
 
 .historico-container h2 {
