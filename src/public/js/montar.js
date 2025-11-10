@@ -80,15 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             detailPanelContent.innerHTML = '';
             detailPanelContent.classList.remove('is-empty');
         }
-        if (document.getElementById(`selected-${id}`)) {
-            alert('Esse exercício já foi adicionado!');
-            return;
-        }
-        button.disabled = true;
-        button.textContent = 'Adicionado';
+
         const itemDiv = document.createElement('div');
         itemDiv.className = 'selected-exercise-item';
-        itemDiv.id = `selected-${id}`;
+itemDiv.id = `selected-${id}-${Date.now()}`;
         itemDiv.dataset.rawId = id;
         const nomeSpan = document.createElement('span');
         nomeSpan.textContent = nome;
@@ -159,11 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemToRemove = event.target.closest('.selected-exercise-item');
             const id = itemToRemove.dataset.rawId;
             itemToRemove.remove();
-            const originalAddButton = resultsContainer.querySelector(`.add-button[data-id="${id}"]`);
-            if (originalAddButton) {
-                originalAddButton.disabled = false;
-                originalAddButton.textContent = 'Adicionar';
-            }
+
             if (detailPanelContent.children.length === 0) {
                 detailPanelContent.classList.add('is-empty');
                 detailPanelContent.innerHTML = '<p>Adicione exercícios da lista ao lado.</p>';
