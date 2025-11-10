@@ -369,71 +369,101 @@ a {
   background-color: #218838;
 }
 
-/* * --- O SEGREDO DO PDF "BONITO" ---
- * Este CSS só é aplicado quando você clica em "Imprimir"
- */
+/* COLE ISSO NO LUGAR DO SEU @media print ANTIGO
+  Ele transforma a página em um documento A4 limpo.
+*/
+
 @media print {
-  /* 1. Esconde tudo que NÃO queremos imprimir */
-  #header,
-  .input-area,
-  .filter-area,
-  #load-workout-button,
-  .print-button {
-    display: none !important; /* !importante para forçar */
-    visibility: hidden !important;
-  }
 
-  /* 2. Esconde os GIFs (não imprimem bem e gastam tinta) */
-  .exercise-gif {
-    display: none !important;
-    visibility: hidden !important;
-  }
+    /* --- 1. RESET E PREPARAÇÃO DA PÁGINA --- */
+    body {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        background-color: #fff;
+        margin: 0;
+        color: #000;
+    }
 
-  /* 3. Prepara a área de treino para ser a única coisa na página */
-  body {
-    background-color: #fff;
-    margin: 0;
-  }
-  .viewer-container {
-    box-shadow: none;
-    border: none;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-  }
-  #workout-display-area {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
+    /* --- 2. ESCONDE TUDO QUE NÃO É O TREINO --- */
+    #header, 
+    .input-area, 
+    .filter-area, 
+    #load-workout-button, 
+    .print-button {
+        display: none !important;
+        visibility: hidden !important;
+    }
 
-  /* 4. Formata os cards para papel */
-  .exercise-card {
-    box-shadow: none;
-    border: 1px solid #ccc;
-    page-break-inside: avoid; /* Tenta não quebrar um card no meio da página */
-  }
+    /* --- 3. ESCONDE OS GIFs --- */
+    .exercise-gif {
+        display: none !important;
+        visibility: hidden !important;
+    }
 
-  .exercise-info {
-    padding: 0;
-  }
+    /* --- 4. CONFIGURA A "FOLHA" DE IMPRESSÃO --- */
+    .viewer-container {
+        box-shadow: none;
+        border: none;
+        margin: 1.5cm; /* Margem padrão de documento */
+        padding: 0;
+        max-width: 100%;
+    }
+    #workout-display-area {
+        position: static;
+        width: 100%;
+    }
 
-  .exercise-info h4 {
-    color: #000;
-    font-size: 16pt;
-  }
-  .exercise-info p {
-    color: #333;
-    font-size: 12pt;
-    line-height: 1.4;
-  }
+    /* --- 5. TÍTULO DO DIA (Ex: Dia A, Dia B ) --- */
+    .day-title {
+        font-size: 22pt;
+        font-weight: 600;
+        color: #000;
+        border-bottom: 2px solid #000; /* Linha preta grossa */
+        padding-bottom: 8px;
+        margin-top: 25px; /* Espaço entre os dias */
+        page-break-after: avoid; /* Não quebra a página logo depois */
+    }
+    .day-title:first-of-type {
+        margin-top: 0;
+    }
+    
+    /* --- 6. ITEM DE EXERCÍCIO (Ex: Afundo no Smith [cite: 2]) --- */
+    .exercise-card {
+        border: none;
+        border-bottom: 1px solid #ccc; /* Apenas uma linha fina de separação */
+        padding: 12px 0;
+        margin: 0;
+        page-break-inside: avoid; /* Tenta não quebrar o card no meio da página */
+        box-shadow: none;
+    }
 
-  .day-title {
-    color: #000;
-    border-bottom: 2px solid #000;
-    padding-top: 15px;
-    font-size: 18pt;
-    page-break-after: avoid; /* Não quebra a página logo depois do título */
-  }
+    .exercise-info {
+        padding: 0;
+    }
+    
+    /* Título do Exercício (Ex: Afundo (Halteres) [cite: 11]) */
+    .exercise-info h4 {
+        color: #000;
+        font-size: 16pt;
+        font-weight: 600;
+        margin-bottom: 8px;
+        text-align: left; /* Garante alinhamento */
+    }
+    
+    /* Detalhes (Repetições [cite: 3], Músculo Primário[cite: 4]...) */
+    .exercise-info p {
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #333;
+        margin: 4px 0;
+        text-align: left;
+        font-style: normal;
+    }
+
+    /* A MÁGICA: Alinha os rótulos */
+    .exercise-info p strong {
+        display: inline-block;
+        width: 180px; /* <-- Isso alinha todos os rótulos */
+        color: #000;
+        font-weight: 500;
+    }
 }
