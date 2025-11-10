@@ -52,8 +52,11 @@ ease-in-out;
     list-style: none;
 }
 
-#sidemenu li {
-    margin-left: 25px;
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+    color: rgb(255, 255, 255);
 }
 
 #sidemenu li a {

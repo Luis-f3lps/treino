@@ -29,15 +29,7 @@ nav {
 
         }
 
-        nav ul .fa-solid {
-            position: absolute;
-            top: 25px;
-            left: 200px;
-            display: none;
 
-            cursor: pointer;
-            color: white;
-        }
 
         .workout-interface {
             display: flex;
@@ -150,14 +142,6 @@ nav {
 
         .a {
             color: white;
-        }
-
-        @media only screen and (min-width: 901px) and (min-height: 1601px) {
-            nav .fa-solid {
-                display: block;
-                font-size: 40px;
-                color: black;
-            }
         }
 
         .workout-interface {
@@ -547,11 +531,60 @@ nav {
                 height: 500px;
                 text-align: center;
             }
-
-            .exercise-detail-panel {
-                /*height: 80vh;
-    position: fixed;
-    top: 170;
-    width: 100%;*/
-            }
         }
+        /* --- LÓGICA CORRETA DO MENU --- */
+
+/* 1. Desktop: Esconde os ícones (X e Barras) */
+nav .fa-solid {
+    display: none;
+    color: white; /* Garante que a cor seja branca */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 2. Mobile: Ativa o menu hamburguer */
+@media (max-width: 768px) {
+    
+    /* Esconde os links do menu (Home, Montar, TBN) */
+    nav ul li {
+        display: none;
+    }
+
+    /* Define o menu "slide-in" (que começa escondido) */
+    nav ul {
+        display: block;
+        background: black;
+        top: 0;
+        right: -600px; /* Começa fora da tela */
+        width: 600px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+        position: fixed;
+    }
+    
+    /* Mostra os links DENTRO do menu "slide-in" */
+    nav ul li {
+        display: block; /* Faz os links ficarem um embaixo do outro */
+        margin: 25px;
+    }
+
+    /* Mostra o ícone de "Barras" (hamburguer) */
+    nav .fa-bars {
+        display: block;
+        margin-right: 30px;
+    }
+
+    /* Mostra e posiciona o ícone "X" (fechar) */
+    nav .fa-circle-xmark {
+        display: block;
+        color: #fe0000;
+        font-size: 35px;
+        
+        /* Posicionamento correto (dentro do 'nav ul') */
+        position: absolute;
+        top: 25px;
+        right: 25px; 
+    }
+}
