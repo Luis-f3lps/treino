@@ -438,13 +438,6 @@
             text-align: center;
         }
 
-        nav ul li {
-            display: inline-block;
-            list-style: none;
-            margin: 10px 20px;
-            color: rgb(255, 255, 255);
-        }
-
         #sidemenu li a {
             text-decoration: none;
             color: #ffffff;
