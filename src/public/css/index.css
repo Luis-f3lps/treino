@@ -231,18 +231,19 @@
                 top: 0;
                 z-index: 10;
             }
-    #sidemenu {
-        display: block;
-        background: #21202e;
-        position: fixed;
-        top: 0;
-        right: -250px;
-        width: 250px;
-        height: 100vh;
-        padding-top: 60px;
-        z-index: 100;
-        transition: right 0.5s ease;
-    }
+
+            #sidemenu {
+                display: block;
+                background: #21202e;
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                padding-top: 60px;
+                z-index: 100;
+                transition: right 0.5s ease;
+            }
 
             #sidemenu .fa-solid.fa-circle-xmark {
                 display: block;
@@ -254,6 +255,16 @@
                 bottom: 330px;
             }
 
+
+            nav ul li {
+                display: none;
+            }
+
+
+            nav ul li {
+                display: block;
+                margin: 25px;
+            }
 
             nav .fa-solid {
                 display: block;
@@ -274,15 +285,15 @@
                 display: block;
             }
 
-#sidemenu li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 5px;
-    transition: color 0.3s;
-    font-size: 22px;
-}
+            #sidemenu li a {
+                text-decoration: none;
+                color: #ffffff;
+                font-weight: 600;
+                position: relative;
+                padding-bottom: 5px;
+                transition: color 0.3s;
+                font-size: 22px;
+            }
 
             .viewer-container {
                 margin: 0px;
