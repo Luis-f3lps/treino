@@ -488,7 +488,11 @@ nav {
         transition: right 0.5s;
         position: fixed;
     }
-
+    nav .fa-solid {
+        display: block;
+        color: white;
+        margin-right: 30px;
+    }
             .exercise-gif {
                 width: 100%;
                 flex-basis: auto;
