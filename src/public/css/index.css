@@ -222,7 +222,14 @@
         #sidemenu li a:hover::after {
             width: 100%;
         }
-
+        #sidemenu li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
         @media (max-width: 768px) {
             #header {
                 background: #ffffff;
@@ -271,30 +278,9 @@
                 color: white;
                 margin-right: 30px;
             }
-
-            nav ul li {
-                display: block;
-                margin: 45px;
-            }
-
-            nav ul li a {
-                font-size: 52px;
-            }
-
             fa-solid fa-bars {
                 display: block;
             }
-
-            #sidemenu li a {
-                text-decoration: none;
-                color: #ffffff;
-                font-weight: 600;
-                position: relative;
-                padding-bottom: 5px;
-                transition: color 0.3s;
-                font-size: 22px;
-            }
-
             .viewer-container {
                 margin: 0px;
                 padding: 20px;
