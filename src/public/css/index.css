@@ -9,11 +9,9 @@
             margin-right: 30px;
         }
 
-        /* Adicione isso ao seu style.css */
 
         #save-workout-button {
             display: block;
-            /* Ocupa a largura toda */
             width: 100%;
             padding: 12px;
             margin-top: 20px;
@@ -31,7 +29,6 @@
             background-color: #0056b3;
         }
 
-        /* Adicione isso ao seu style.css */
 
         #workout-string-output {
             display: block;
@@ -74,13 +71,10 @@
 
         .viewer-container {
             max-width: 900px;
-            /* Limita a largura do conteúdo */
             margin: 40px auto;
-            /* Centraliza e dá espaço do header */
             padding: 30px;
             background-color: #ffffff;
             border-radius: 12px;
-            /* Cantos mais arredondados */
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
         }
 
@@ -93,17 +87,14 @@
             margin-bottom: 25px;
         }
 
-        /* --- ÁREA DO INPUT --- */
         .input-area {
             display: flex;
             gap: 10px;
-            /* Espaço entre o input e o botão */
             margin-bottom: 30px;
         }
 
         #workout-string-input {
             flex: 1;
-            /* Faz o input crescer */
             padding: 12px 15px;
             font-size: 16px;
             border: 2px solid #ddd;
@@ -111,7 +102,6 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Efeito "bonito" quando clica no input */
         #workout-string-input:focus {
             border-color: #007bff;
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
@@ -132,30 +122,23 @@
 
         #load-workout-button:hover {
             background-color: #0056b3;
-            /* Azul mais escuro no hover */
         }
 
         #load-workout-button:active {
             transform: scale(0.98);
-            /* Efeito de clique */
         }
 
-        /* --- ÁREA DE DISPLAY (Resultados) --- */
         #workout-display-area {
             border-top: 2px solid #f0f0f0;
             padding-top: 20px;
         }
 
-        /* Estilo para as mensagens de "Buscando..." ou "Erro" */
         #workout-display-area p {
             font-size: 16px;
             color: #777;
             font-style: italic;
             text-align: center;
         }
-
-        /* --- O CARD DE EXERCÍCIO (O mais importante) --- */
-        /* Estilos para o que o seu JavaScript vai criar */
 
         .exercise-card {
             display: flex;
@@ -179,10 +162,8 @@
         .exercise-gif {
             width: 300px;
             min-width: 300px;
-            /* Garante o tamanho */
             margin-right: 20px;
             flex-shrink: 0;
-            /* Impede o GIF de encolher */
         }
 
         .exercise-gif img {

@@ -223,7 +223,9 @@ ease-in-out;
     margin-top: 20px;
     flex-wrap: wrap;
 }
-
+        .fa-solid {
+            color: #21202e;
+        }
 .btn {
     padding: 10px 20px;
     font-size: 1rem;
@@ -285,11 +287,19 @@ ease-in-out;
         transition: right 0.5s;
         position: fixed;
     }
-        nav .fa-solid {
-        display: block;
-        color: white;
-        margin-right: 30px;
-    }
+ .fa-solid.fa-circle-xmark {
+                color: #fe0000;
+                bottom: 330px;
+                position: relative;
+                left: 300px;
+                font-size: 35px;
+            }
+
+            nav .fa-solid {
+                display: block;
+                color: white;
+                margin-right: 30px;
+            }
     #sidemenu li {
         margin: 25px;
     }

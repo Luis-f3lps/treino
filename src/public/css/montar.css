@@ -457,7 +457,9 @@ nav {
         p {
             margin: 15px;
         }
-
+        .fa-solid {
+            color: #21202e;
+        }
         .exercise-info h4 {
             margin-top: 0;
             font-size: 22px;
@@ -488,11 +490,19 @@ nav {
         transition: right 0.5s;
         position: fixed;
     }
-    nav .fa-solid {
-        display: block;
-        color: white;
-        margin-right: 30px;
-    }
+ .fa-solid.fa-circle-xmark {
+                color: #fe0000;
+                bottom: 330px;
+                position: relative;
+                left: 300px;
+                font-size: 35px;
+            }
+
+            nav .fa-solid {
+                display: block;
+                color: white;
+                margin-right: 30px;
+            }
             .exercise-gif {
                 width: 100%;
                 flex-basis: auto;
