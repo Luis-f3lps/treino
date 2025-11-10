@@ -45,7 +45,7 @@
 
         nav {
             align-items: center;
-            justify-content:  center;
+            justify-content: center;
             flex-wrap: wrap;
             background: #21202e;
             width: 100%;
@@ -187,66 +187,74 @@
             color: #007bff;
             margin-bottom: 10px;
         }
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 10px 20px;
-    color: rgb(255, 255, 255);
-}#sidemenu li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 5px;
-    transition: color 0.3s;
-}
 
-#sidemenu li a::after {
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #004a99;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transition: width 0.4s;
-}
+        nav ul li {
+            display: inline-block;
+            list-style: none;
+            margin: 10px 20px;
+            color: rgb(255, 255, 255);
+        }
 
-#sidemenu li a:hover {
-    color: #000;
-}
+        #sidemenu li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
 
-#sidemenu li a:hover::after {
-    width: 100%;
-}
+        #sidemenu li a::after {
+            content: '';
+            width: 0;
+            height: 3px;
+            background: #004a99;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transition: width 0.4s;
+        }
+
+        #sidemenu li a:hover {
+            color: #000;
+        }
+
+        #sidemenu li a:hover::after {
+            width: 100%;
+        }
+
         @media (max-width: 768px) {
             #header {
-    background: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-    #sidemenu {
-        display: block;
-        background: #21202e;
-        position: fixed;
-        top: 0;
-        right: -250px;
-        width: 250px;
-        height: 100vh;
-        padding-top: 60px;
-        z-index: 100;
-        transition: right 0.5s ease;
-    }
-
-            .fa-solid.fa-circle-xmark {
-                color: #fe0000;
-                bottom: 330px;
-                position: relative;
-                left: 300px;
-                font-size: 35px;
+                background: #ffffff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 10;
             }
+
+            #sidemenu {
+                display: block;
+                background: #21202e;
+                position: fixed;
+                bottom: 0px;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                padding-top: 60px;
+                z-index: 100;
+                transition: right 0.5s ease;
+            }
+
+            #sidemenu .fa-solid.fa-circle-xmark {
+                display: block;
+                color: white;
+                top: 25px;
+                position: absolute;
+                left: 25px;
+                font-size: 30px;
+                bottom: 330px;
+            }
+
 
             nav .fa-solid {
                 display: block;
