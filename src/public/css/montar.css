@@ -12,14 +12,15 @@
             width: 40px;
             margin-left: 40px;
         }
-nav {
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: #21202e;
-    width: 100%;
-    display: flex;
-}
+
+        nav {
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: #21202e;
+            width: 100%;
+            display: flex;
+        }
 
         nav ul li {
             display: inline-block;
@@ -28,8 +29,6 @@ nav {
             color: rgb(255, 255, 255);
 
         }
-
-
 
         .workout-interface {
             display: flex;
@@ -161,11 +160,9 @@ nav {
         .exercise-detail-panel {
             flex-basis: 30%;
             padding: 0 20px;
-            /* Padding só nas laterais */
             background-color: #f9f9f9;
             border-left: 1px solid #ddd;
             overflow-y: auto;
-            /* Scroll se a lista ficar grande */
         }
 
         #muscle-group-select {
@@ -186,7 +183,6 @@ nav {
             padding: 10px;
             background-color: #fdfdfd;
             width: 50%;
-            /* Não precisa mais de cursor aqui */
         }
 
         .exercise-gif {
@@ -230,7 +226,6 @@ nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /* Coloca o select no final */
             padding: 12px 0;
             border-bottom: 1px solid #e0e0e0;
         }
@@ -238,7 +233,6 @@ nav {
         .selected-exercise-item span {
             font-size: 16px;
             flex: 1;
-            /* Ocupa o espaço */
             padding-right: 10px;
         }
 
@@ -246,8 +240,8 @@ nav {
             padding: 5px;
             font-size: 14px;
             flex-basis: 100px;
-            /* Tamanho fixo para o select */
         }
+
         nav ul li a {
             color: white;
             text-decoration: none;
@@ -267,25 +261,20 @@ nav {
             box-sizing: border-box;
         }
 
-        /* No seu style.css */
-
         .add-button:disabled {
             background-color: #6c757d;
-            /* Um cinza */
             cursor: not-allowed;
         }
 
         .delete-button {
             padding: 3px 8px;
             background-color: #dc3545;
-            /* Vermelho */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
             margin-left: 10px;
-            /* Espaço do select */
         }
 
         .delete-button:hover {
@@ -302,14 +291,11 @@ nav {
 
         :root {
             --panel-bg: #f8f9fa;
-            /* Um cinza muito claro para o fundo */
             --panel-border: #e0e0e0;
             --content-bg: #ffffff;
-            /* Fundo branco para a lista */
             --text-light: #888;
             --text-dark: #333;
             --primary-color: #007bff;
-            /* Azul (para Salvar) */
             --primary-hover: #0056b3;
             --string-bg: #f0f0f0;
             --string-border: #ccc;
@@ -339,10 +325,7 @@ nav {
 
         #exercise-detail-content {
             flex-grow: 1;
-            /* Faz a lista ocupar todo o espaço vertical disponível */
             overflow-y: auto;
-            /* Adiciona scroll SÓ nesta div se a lista for longa */
-
             background-color: var(--content-bg);
             padding: 15px;
             margin: 0;
@@ -355,7 +338,6 @@ nav {
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            /* Remove o fundo branco quando vazio */
         }
 
         #exercise-detail-content.is-empty p {
@@ -373,7 +355,6 @@ nav {
             padding: 12px 0;
             border-bottom: 1px solid #f0f0f0;
             animation: fadeIn 0.3s ease;
-            /* Efeito de entrada */
         }
 
         @keyframes fadeIn {
@@ -390,12 +371,10 @@ nav {
 
         .panel-footer {
             flex-shrink: 0;
-            /* Impede que o rodapé encolha */
             padding: 15px;
             background-color: var(--panel-bg);
             border-top: 1px solid var(--panel-border);
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03);
-            /* Sombra sutil no topo */
         }
 
         #workout-string-output {
@@ -403,7 +382,6 @@ nav {
             padding: 10px;
             margin-bottom: 10px;
             font-family: 'Courier New', Courier, monospace;
-            /* Ótimo para strings de código */
             font-size: 14px;
             background-color: var(--string-bg);
             border: 1px dashed var(--string-border);
@@ -441,9 +419,11 @@ nav {
         p {
             margin: 15px;
         }
+
         .fa-solid {
             color: #21202e;
         }
+
         .exercise-info h4 {
             margin-top: 0;
             font-size: 22px;
@@ -462,19 +442,21 @@ nav {
             .exercise-card {
                 flex-direction: column;
             }
-    nav ul {
-        display: block;
-        background: black;
-        top: 0;
-        right: -600px;
-        width: 600px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-        position: fixed;
-    }
- .fa-solid.fa-circle-xmark {
+
+            #sidemenu {
+                display: block;
+                background: #21202e;
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                padding-top: 60px;
+                z-index: 100;
+                transition: right 0.5s ease;
+            }
+
+            .fa-solid.fa-circle-xmark {
                 color: #fe0000;
                 bottom: 330px;
                 position: relative;
@@ -487,6 +469,7 @@ nav {
                 color: white;
                 margin-right: 30px;
             }
+
             .exercise-gif {
                 width: 100%;
                 flex-basis: auto;
@@ -526,65 +509,45 @@ nav {
                 height: 100%;
 
             }
+
             .exercise-card {
                 width: 100%;
                 height: 500px;
                 text-align: center;
             }
         }
-        /* --- LÓGICA CORRETA DO MENU --- */
 
-/* 1. Desktop: Esconde os ícones (X e Barras) */
-nav .fa-solid {
-    display: none;
-    color: white; /* Garante que a cor seja branca */
-    font-size: 24px;
-    cursor: pointer;
-}
+        nav .fa-solid {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-/* 2. Mobile: Ativa o menu hamburguer */
-@media (max-width: 768px) {
-    
-    /* Esconde os links do menu (Home, Montar, TBN) */
-    nav ul li {
-        display: none;
-    }
+        @media (max-width: 768px) {
 
-    /* Define o menu "slide-in" (que começa escondido) */
-    nav ul {
-        display: block;
-        background: black;
-        top: 0;
-        right: -600px; /* Começa fora da tela */
-        width: 600px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-        position: fixed;
-    }
-    
-    /* Mostra os links DENTRO do menu "slide-in" */
-    nav ul li {
-        display: block; /* Faz os links ficarem um embaixo do outro */
-        margin: 25px;
-    }
+            nav ul li {
+                display: none;
+            }
 
-    /* Mostra o ícone de "Barras" (hamburguer) */
-    nav .fa-bars {
-        display: block;
-        margin-right: 30px;
-    }
 
-    /* Mostra e posiciona o ícone "X" (fechar) */
-    nav .fa-circle-xmark {
-        display: block;
-        color: #fe0000;
-        font-size: 35px;
-        
-        /* Posicionamento correto (dentro do 'nav ul') */
-        position: absolute;
-        top: 25px;
-        right: 25px; 
-    }
-}
+            nav ul li {
+                display: block;
+                margin: 25px;
+            }
+
+            nav .fa-bars {
+                display: block;
+                margin-right: 30px;
+            }
+
+            nav .fa-circle-xmark {
+                display: block;
+                color: #fe0000;
+                font-size: 35px;
+
+                position: absolute;
+                top: 25px;
+                right: 25px;
+            }
+        }
