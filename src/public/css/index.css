@@ -1,362 +1,439 @@
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0px;
-        }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0px;
+}
 
-        .logoIFNMG {
-            width: 80px;
-            margin-right: 30px;
-        }
+.logoIFNMG {
+  width: 80px;
+  margin-right: 30px;
+}
 
+#save-workout-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-        #save-workout-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+#save-workout-button:hover {
+  background-color: #0056b3;
+}
 
-        #save-workout-button:hover {
-            background-color: #0056b3;
-        }
+#workout-string-output {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
+.logo {
+  width: 40px;
+  margin-left: 40px;
+}
 
-        #workout-string-output {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #eee;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
+nav {
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #21202e;
+  width: 100%;
+  display: flex;
+}
 
-        .logo {
-            width: 40px;
-            margin-left: 40px;
-        }
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+  color: rgb(255, 255, 255);
+}
 
-        nav {
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            background: #21202e;
-            width: 100%;
-            display: flex;
-        }
+.fa-solid {
+  color: #21202e;
+}
 
-        nav ul li {
-            display: inline-block;
-            list-style: none;
-            margin: 10px 20px;
-            color: rgb(255, 255, 255);
+.viewer-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+}
 
-        }
+.viewer-container h2 {
+  font-size: 28px;
+  color: #222;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
 
-        .fa-solid {
-            color: #21202e;
-        }
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
 
+#workout-string-input {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .viewer-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-        }
+#workout-string-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
 
-        .viewer-container h2 {
-            font-size: 28px;
-            color: #222;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
+#load-workout-button {
+  padding: 0 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
 
-        .input-area {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
+#load-workout-button:hover {
+  background-color: #0056b3;
+}
 
-        #workout-string-input {
-            flex: 1;
-            padding: 12px 15px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+#load-workout-button:active {
+  transform: scale(0.98);
+}
 
-        #workout-string-input:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
-            outline: none;
-        }
+#workout-display-area p {
+  font-size: 16px;
+  color: #777;
+  font-style: italic;
+  text-align: center;
+}
 
-        #load-workout-button {
-            padding: 0 25px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
+.exercise-card {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
 
-        #load-workout-button:hover {
-            background-color: #0056b3;
-        }
+.exercise-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
 
-        #load-workout-button:active {
-            transform: scale(0.98);
-        }
+.exercise-gif {
+  width: 300px;
+  min-width: 300px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
 
-        #workout-display-area p {
-            font-size: 16px;
-            color: #777;
-            font-style: italic;
-            text-align: center;
-        }
+.exercise-gif img {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
 
-        .exercise-card {
-            display: flex;
-            flex-wrap: wrap;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fdfdfd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-            transition: box-shadow 0.3s ease;
-        }
+.exercise-info {
+  flex: 1;
+  min-width: 250px;
+}
 
-        .exercise-card:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-        }
+.exercise-info h4 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #111;
+  text-align: center;
+}
 
-        .exercise-gif {
-            width: 300px;
-            min-width: 300px;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
+.exercise-info p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  text-align: left;
+  font-style: normal;
+}
 
-        .exercise-gif img {
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #eee;
-        }
+.day-highlight {
+  font-size: 18px !important;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
 
-        .exercise-info {
-            flex: 1;
-            min-width: 250px;
-        }
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 10px 20px;
+  color: rgb(255, 255, 255);
+}
 
-        .exercise-info h4 {
-            margin-top: 0;
-            font-size: 22px;
-            color: #111;
-            text-align: center;
-        }
+#sidemenu li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s;
+}
 
-        .exercise-info p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #555;
-            text-align: left;
-            font-style: normal;
-        }
+#sidemenu li a::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  background: #004a99;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: width 0.4s;
+}
 
-        .day-highlight {
-            font-size: 18px !important;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
+#sidemenu li a:hover {
+  color: #000;
+}
 
-        nav ul li {
-            display: inline-block;
-            list-style: none;
-            margin: 10px 20px;
-            color: rgb(255, 255, 255);
-        }
+#sidemenu li a:hover::after {
+  width: 100%;
+}
+#sidemenu li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s;
+}
+@media (max-width: 768px) {
+  #header {
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
 
-        #sidemenu li a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: 600;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color 0.3s;
-        }
+  #sidemenu {
+    display: block;
+    background: #21202e;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
+    padding-top: 60px;
+    z-index: 100;
+    transition: right 0.5s ease;
+    margin-top: 0px;
+    padding-left: 0px;
+  }
 
-        #sidemenu li a::after {
-            content: '';
-            width: 0;
-            height: 3px;
-            background: #004a99;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            transition: width 0.4s;
-        }
+  #sidemenu .fa-solid.fa-circle-xmark {
+    display: block;
+    color: white;
+    top: 25px;
+    position: absolute;
+    left: 25px;
+    font-size: 30px;
+    bottom: 330px;
+  }
 
-        #sidemenu li a:hover {
-            color: #000;
-        }
+  nav ul li {
+    display: none;
+  }
 
-        #sidemenu li a:hover::after {
-            width: 100%;
-        }
-        #sidemenu li a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: 600;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color 0.3s;
-        }
-        @media (max-width: 768px) {
-            #header {
-                background: #ffffff;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                position: sticky;
-                top: 0;
-                z-index: 10;
-            }
+  nav ul li {
+    display: block;
+    margin: 25px;
+  }
 
-            #sidemenu {
-                display: block;
-                background: #21202e;
-                position: fixed;
-                top: 0;
-                right: -250px;
-                width: 250px;
-                height: 100vh;
-                padding-top: 60px;
-                z-index: 100;
-                transition: right 0.5s ease;
-                        margin-top: 0px;
-padding-left: 0px;
-            }
+  nav .fa-solid {
+    display: block;
+    color: white;
+    margin-right: 30px;
+  }
+  fa-solid fa-bars {
+    display: block;
+  }
+  .viewer-container {
+    margin: 0px;
+    padding: 20px;
+  }
 
-            #sidemenu .fa-solid.fa-circle-xmark {
-                display: block;
-                color: white;
-                top: 25px;
-                position: absolute;
-                left: 25px;
-                font-size: 30px;
-                bottom: 330px;
-            }
+  .exercise-card {
+    flex-direction: column;
+  }
 
+  .exercise-gif {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
 
-            nav ul li {
-                display: none;
-            }
+  .logo {
+    margin-left: 40px;
+  }
+}
 
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  position: relative;
+}
 
-            nav ul li {
-                display: block;
-                margin: 25px;
-            }
+a {
+  color: #007bff;
+  transition: color 0.3s ease-in-out;
+}
 
-            nav .fa-solid {
-                display: block;
-                color: white;
-                margin-right: 30px;
-            }
-            fa-solid fa-bars {
-                display: block;
-            }
-            .viewer-container {
-                margin: 0px;
-                padding: 20px;
-            }
+.day-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #111;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #007bff;
+}
 
-            .exercise-card {
-                flex-direction: column;
-            }
+#workout-display-area .day-title:first-of-type {
+  margin-top: 0;
+}
 
-            .exercise-gif {
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
+.filter-area {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+}
 
-            .logo {
-                margin-left: 40px;
+.filter-area label {
+  font-size: 16px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
 
-            }
+#day-filter-select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+}
 
-        }
+#day-filter-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+/* --- Estilo para o novo botão "Imprimir" --- */
+.print-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #28a745; /* Um verde bonito */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 15px; /* Espaço do select */
+  transition: background-color 0.2s ease;
+}
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 22px;
-            position: relative;
-        }
+.print-button:hover {
+  background-color: #218838;
+}
 
-        a {
-            color: #007BFF;
-            transition: color 0.3s ease-in-out;
-        }
+/* * --- O SEGREDO DO PDF "BONITO" ---
+ * Este CSS só é aplicado quando você clica em "Imprimir"
+ */
+@media print {
+  /* 1. Esconde tudo que NÃO queremos imprimir */
+  #header,
+  .input-area,
+  .filter-area,
+  #load-workout-button,
+  .print-button {
+    display: none !important; /* !importante para forçar */
+    visibility: hidden !important;
+  }
 
-        .day-title {
-            font-size: 26px;
-            font-weight: bold;
-            color: #111;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #007bff;
-        }
+  /* 2. Esconde os GIFs (não imprimem bem e gastam tinta) */
+  .exercise-gif {
+    display: none !important;
+    visibility: hidden !important;
+  }
 
-        #workout-display-area .day-title:first-of-type {
-            margin-top: 0;
-        }
+  /* 3. Prepara a área de treino para ser a única coisa na página */
+  body {
+    background-color: #fff;
+    margin: 0;
+  }
+  .viewer-container {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  #workout-display-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 
+  /* 4. Formata os cards para papel */
+  .exercise-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid; /* Tenta não quebrar um card no meio da página */
+  }
 
-        .filter-area {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
+  .exercise-info {
+    padding: 0;
+  }
 
-        .filter-area label {
-            font-size: 16px;
-            margin-right: 10px;
-            font-weight: bold;
-            color: #333;
-        }
+  .exercise-info h4 {
+    color: #000;
+    font-size: 16pt;
+  }
+  .exercise-info p {
+    color: #333;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
 
-        #day-filter-select {
-            padding: 8px 12px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: 2px solid #ddd;
-            background-color: #fff;
-            cursor: pointer;
-        }
-
-        #day-filter-select:focus {
-            border-color: #007bff;
-            outline: none;
-        }
+  .day-title {
+    color: #000;
+    border-bottom: 2px solid #000;
+    padding-top: 15px;
+    font-size: 18pt;
+    page-break-after: avoid; /* Não quebra a página logo depois do título */
+  }
+}

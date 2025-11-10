@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('load-workout-button');
     const displayArea = document.getElementById('workout-display-area');
     const dayFilterSelect = document.getElementById('day-filter-select'); 
-
+const printButton = document.getElementById('print-pdf-button');
     let workoutData = {}; 
     let sortedDays = []; 
 
@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDay = dayFilterSelect.value;
         renderizarTreino(selectedDay); 
     });
-
+printButton.addEventListener('click', () => {
+        window.print(); // O CSS @media print faz o resto!
+    });
     function renderizarTreino(filter = 'all') { 
         
         displayArea.innerHTML = ''; 
