@@ -20,7 +20,7 @@ body {
 }
 nav {
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     background: #21202e;
     width: 100%;
@@ -43,7 +43,8 @@ ease-in-out;
 }
 
 .logoIFNMG {
-    width: 90px;
+    width: 80px;
+    margin-right: 30px;
 }
 
 #sidemenu {
