@@ -1,98 +1,48 @@
+var sidemenu = document.getElementById("sidemenu");
+function openmenu() {
+    sidemenu.style.right = "0";
+}
+function clossmenu() {
+    sidemenu.style.right = "-200px";
+}
 
-
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        const input = document.getElementById('workout-string-input');
-        const button = document.getElementById('load-workout-button');
-        const displayArea = document.getElementById('workout-display-area');
-
-        button.addEventListener('click', () => {
-            carregarTreino();
-        });
-
-        async function carregarTreino(stringOverride = null) {
+document.addEventListener('DOMContentLoaded', () => {
     
-    // Pega os elementos (coloque isso dentro do DOMContentLoaded)
     const input = document.getElementById('workout-string-input');
+    const button = document.getElementById('load-workout-button');
     const displayArea = document.getElementById('workout-display-area');
+    const dayFilterSelect = document.getElementById('day-filter-select'); 
 
-    const rawString = stringOverride ? stringOverride : input.value;
+    let workoutData = {}; 
+    let sortedDays = []; 
 
-    if (stringOverride) {
-        input.value = rawString;
-    }
-
-    if (!rawString || !rawString.startsWith('exercicio/')) {
-        displayArea.innerHTML = '<p>String inválida ou vazia. Deve começar com "exercicio/".</p>';
-        return;
-    }
-
-    // 1. Parsear a string (igual antes)
-    const pairs = rawString.replace('exercicio/', '').split('+');
-    const exercisesToFetch = [];
-    const idList = [];
-
-    pairs.forEach(pair => {
-        const parts = pair.split(',');
-        if (parts[0] && parts[1]) {
-            exercisesToFetch.push({ id: parts[0], day: parts[1] });
-            idList.push(parts[0]);
-        }
+    button.addEventListener('click', () => {
+        carregarTreino();
+    });
+    
+    dayFilterSelect.addEventListener('change', () => {
+        const selectedDay = dayFilterSelect.value;
+        renderizarTreino(selectedDay); 
     });
 
-    if (idList.length === 0) {
-        displayArea.innerHTML = '<p>Nenhum exercício válido na string.</p>';
-        return;
-    }
-
-    // 2. Buscar as infos (igual antes)
-    try {
-        displayArea.innerHTML = '<p>Buscando dados...</p>';
+    function renderizarTreino(filter = 'all') { 
         
-        const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
-        if (!response.ok) {
-            throw new Error(`Erro da API: ${response.statusText}`);
+        displayArea.innerHTML = ''; 
+        let hasResults = false;
+
+        if (sortedDays.length === 0) {
+            displayArea.innerHTML = '<p>Nenhum treino carregado.</p>';
+            return;
         }
-        
-        const exercisesInfo = await response.json(); // Array de infos
 
-        //
-        // --- 3. MÁGICA DE AGRUPAMENTO (AQUI QUE MUDA TUDO) ---
-        //
-        
-        // Primeiro, junte as infos da API (nome, gif) com o DIA (a, b)
-        const fullWorkoutList = exercisesToFetch.map(exercise => {
-            const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
-            return {
-                ...info, // Traz nome, gif, etc.
-                day: exercise.day // Traz o dia (a, b, c...)
-            };
-        }).filter(ex => ex.nome); // Filtra se algum ID não foi achado
-
-        // Agora, agrupe essa lista por dia
-        // O resultado será: { a: [exercicio1, exercicio2], b: [exercicio3] }
-        const groupedByDay = fullWorkoutList.reduce((acc, exercise) => {
-            const day = exercise.day;
-            if (!acc[day]) {
-                acc[day] = []; // Cria o array para o "Dia A"
-            }
-            acc[day].push(exercise); // Adiciona o exercício nesse dia
-            return acc;
-        }, {}); // Começa com um objeto vazio
-
-        //
-        // --- 4. RENDERIZAR AGRUPADO ---
-        //
-        displayArea.innerHTML = ''; // Limpa o "Buscando..."
-
-        // Pega as chaves (ex: ['b', 'a', 'd']) e ordena
-        const sortedDays = Object.keys(groupedByDay).sort(); // Agora fica ['a', 'b', 'd']
-
-        // Loop 1: Para cada DIA (a, b, c...)
         for (const day of sortedDays) {
-            const exercisesForDay = groupedByDay[day];
+            
+            if (filter !== 'all' && day !== filter) {
+                continue; 
+            }
+
+            hasResults = true;
+            const exercisesForDay = workoutData[day];
             
             const diaFormatado = `Dia ${day.toUpperCase()}`;
             displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
@@ -115,22 +65,88 @@
             }
         }
 
-    } catch (err) {
-        displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
-        console.error(err);
+        if (!hasResults && filter !== 'all') {
+            displayArea.innerHTML = `<p>Nenhum exercício encontrado para o Dia ${filter.toUpperCase()}.</p>`;
+        }
     }
-}
-
-        function checarURL() {
-            const params = new URLSearchParams(window.location.search);
-            
-            const treinoParam = params.get('treino'); 
-
-            if (treinoParam) {
-                const decodedString = decodeURIComponent(treinoParam);
-                                carregarTreino(decodedString);
-            }
+    
+    async function carregarTreino(stringOverride = null) {
+        
+        const rawString = stringOverride ? stringOverride : input.value;
+        
+        if (stringOverride) input.value = rawString;
+        if (!rawString || !rawString.startsWith('exercicio/')) {
+            displayArea.innerHTML = '<p>String inválida ou vazia. Deve começar com "exercicio/".</p>';
+            return;
         }
 
-        checarURL();
-    });
+        const pairs = rawString.replace('exercicio/', '').split('+');
+        const exercisesToFetch = [];
+        const idList = [];
+        pairs.forEach(pair => {
+            const parts = pair.split(',');
+            if (parts[0] && parts[1]) {
+                exercisesToFetch.push({ id: parts[0], day: parts[1] });
+                idList.push(parts[0]);
+            }
+        });
+        if (idList.length === 0) {
+            displayArea.innerHTML = '<p>Nenhum exercício válido na string.</p>';
+            return;
+        }
+
+        try {
+            displayArea.innerHTML = '<p>Buscando dados...</p>';
+            const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
+            if (!response.ok) throw new Error(`Erro da API: ${response.statusText}`);
+            
+            const exercisesInfo = await response.json(); 
+            const fullWorkoutList = exercisesToFetch.map(exercise => {
+                const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
+                return { ...info, day: exercise.day };
+            }).filter(ex => ex.nome); 
+
+            workoutData = fullWorkoutList.reduce((acc, exercise) => {
+                const day = exercise.day;
+                if (!acc[day]) acc[day] = [];
+                acc[day].push(exercise);
+                return acc;
+            }, {});
+
+            sortedDays = Object.keys(workoutData).sort();
+
+            popularFiltroDeDias(sortedDays);
+            
+            renderizarTreino('all');
+
+        } catch (err) {
+            displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
+            console.error(err);
+        }
+    }
+    
+    function popularFiltroDeDias(days) {
+        while (dayFilterSelect.options.length > 1) {
+            dayFilterSelect.remove(1);
+        }
+        dayFilterSelect.value = 'all'; 
+
+        days.forEach(day => {
+            const option = document.createElement('option');
+            option.value = day; 
+            option.textContent = `Dia ${day.toUpperCase()}`; 
+            dayFilterSelect.appendChild(option);
+        });
+    }
+
+    function checarURL() {
+        const params = new URLSearchParams(window.location.search);
+        const treinoParam = params.get('treino'); 
+        if (treinoParam) {
+            const decodedString = decodeURIComponent(treinoParam);
+            carregarTreino(decodedString);
+        }
+    }
+
+    checarURL(); 
+});
