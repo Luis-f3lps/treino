@@ -274,18 +274,7 @@ ease-in-out;
 .container{
     margin: 0px;
 }
-    nav ul {
-        display: block;
-        background: black;
-        top: 0;
-        right: -600px;
-        width: 600px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
-        position: fixed;
-    }
+
  .fa-solid.fa-circle-xmark {
                 color: #fe0000;
                 bottom: 330px;
