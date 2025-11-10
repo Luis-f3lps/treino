@@ -259,11 +259,7 @@
     }
 
 }
-nav ul li a {
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
+
 nav ul li a {
     color: white;
     text-decoration: none;

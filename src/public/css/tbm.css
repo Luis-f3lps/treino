@@ -18,17 +18,6 @@ body {
     top: 0;
     z-index: 10;
 }
-nav ul li a {
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
 nav {
     align-items: center;
     justify-content: space-between;
@@ -88,17 +77,6 @@ ease-in-out;
     width: 100%;
 }
 
-nav ul li a {
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-    position: relative;
-}
 a {
     color: #007BFF;
     transition: color 0.3s 
