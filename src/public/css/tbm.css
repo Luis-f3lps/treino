@@ -26,6 +26,12 @@ nav {
     width: 100%;
     display: flex;
 }
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    position: relative;
+}
 a {
     color: #007BFF;
     transition: color 0.3s 
@@ -266,6 +272,18 @@ ease-in-out;
 .container{
     margin: 0px;
 }
+    nav ul {
+        display: block;
+        background: black;
+        top: 0;
+        right: -600px;
+        width: 600px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+        position: fixed;
+    }
     #sidemenu li {
         margin: 25px;
     }

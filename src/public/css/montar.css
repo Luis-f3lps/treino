@@ -477,7 +477,18 @@
             .exercise-card {
                 flex-direction: column;
             }
-
+    nav ul {
+        display: block;
+        background: black;
+        top: 0;
+        right: -600px;
+        width: 600px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+        position: fixed;
+    }
             .exercise-gif {
                 width: 100%;
                 flex-basis: auto;

@@ -237,6 +237,7 @@
         text-decoration: none;
         color: #ffffff;
         transition: background-color 0.3s;
+        font-size: 30px;
     }
 
     .viewer-container {
