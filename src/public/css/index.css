@@ -62,7 +62,7 @@ nav ul li {
 }
 
 .viewer-container {
-  max-width: 900px;
+  max-width: 1600px;
   margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
@@ -128,7 +128,7 @@ nav ul li {
 }
 
 .exercise-card {
-  display: flex;
+  display: inline-block;
   flex-wrap: wrap;
   border: 1px solid #e0e0e0;
   margin-bottom: 20px;
@@ -268,7 +268,10 @@ nav ul li {
     display: block;
     margin: 25px;
   }
+.print-header{
+  display: none;
 
+}
   nav .fa-solid {
     display: block;
     color: white;

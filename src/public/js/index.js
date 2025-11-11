@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', () => {
     
     const input = document.getElementById('workout-string-input');
@@ -45,6 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const diaFormatado = `Dia ${day.toUpperCase()}`;
             displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
 
+            // Adiciona o cabeçalho (visível apenas na impressão)
+            displayArea.innerHTML += `
+                <div class="print-header">
+                    <span>EXERCÍCIO</span>
+                    <span>SÉRIE | REP.</span>
+                </div>
+            `;
+
             for (const info of exercisesForDay) {
                 // --- MUDANÇA NO HTML GERADO ---
                 // Agora o card tem 3 colunas: gif, details, reps
@@ -57,9 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h4>${info.nome}</h4>
                             <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
                             <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
-                        </div>
-                        <div class="exercise-reps">
-                            <p>${info.repeticoes_recomendadas || 'N/A'}</p>
+                                                        <p>${info.repeticoes_recomendadas || 'N/A'}</p>
+
                         </div>
                     </div>
                 `;
@@ -141,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // --- 6. FUNÇÃO POPULAR SELECT (NÃO MUDA) ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
@@ -154,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 7. FUNÇÃO CHECAR URL (NÃO MUDA) ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
         const treinoParam = params.get('treino'); 
