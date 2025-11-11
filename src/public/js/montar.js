@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('exercise-results-container');
     const detailPanelContent = document.getElementById('exercise-detail-content');
     const saveButton = document.getElementById('save-workout-button');
+    const alunoInput = document.getElementById('aluno-name-input');
+        const instrutorInput = document.getElementById('instrutor-name-input');
+
     async function carregarMusculos() {
         try {
             const response = await fetch('/api/musculos');
@@ -120,16 +123,16 @@ itemDiv.id = `selected-${id}-${Date.now()}`;
             outputBox.value = '';
             return null; // <-- Retorna nulo se falhar
         }
-
+const aluno = alunoInput.value || 'aluno anonimo';
+            const instrutor = instrutorInput.value || 'instrutor automatico';
         const workoutParts = [];
         items.forEach(item => {
             const id = item.dataset.rawId;
             const dia = item.querySelector('.day-select').value;
             workoutParts.push(`${id},${dia}`);
         });
-
-        const finalString = `exercicio/${workoutParts.join('+')}`;
-
+const treinoString = `exercicio/${workoutParts.join('+')}`;
+const finalString = `${aluno}/${instrutor}/${treinoString}`;
         console.log(finalString);
         outputBox.value = finalString;
 

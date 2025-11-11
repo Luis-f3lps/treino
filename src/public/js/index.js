@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- 1. SELEÇÃO DE ELEMENTOS ---
     const input = document.getElementById('workout-string-input');
     const button = document.getElementById('load-workout-button');
     const displayArea = document.getElementById('workout-display-area');
     const dayFilterSelect = document.getElementById('day-filter-select'); 
-const printButton = document.getElementById('print-pdf-button');
+    const printButton = document.getElementById('print-pdf-button');
+    
+    // Elementos novos para os nomes
+    const alunoNameSpan = document.getElementById('display-aluno-name');
+    const instrutorNameSpan = document.getElementById('display-instrutor-name');
+
+    // --- 2. VARIÁVEIS DE ESTADO ---
     let workoutData = {}; 
     let sortedDays = []; 
 
+    // --- 3. "OUVIDORES" DE EVENTOS ---
     button.addEventListener('click', () => {
         carregarTreino();
     });
@@ -16,31 +24,28 @@ const printButton = document.getElementById('print-pdf-button');
         const selectedDay = dayFilterSelect.value;
         renderizarTreino(selectedDay); 
     });
-printButton.addEventListener('click', () => {
-        window.print(); // O CSS @media print faz o resto!
+
+    printButton.addEventListener('click', () => {
+        window.print();
     });
+
+    // --- 4. FUNÇÃO DE RENDERIZAÇÃO (DESENHO) ---
+    // (Esta função não muda)
     function renderizarTreino(filter = 'all') { 
-        
         displayArea.innerHTML = ''; 
         let hasResults = false;
-
         if (sortedDays.length === 0) {
             displayArea.innerHTML = '<p>Nenhum treino carregado.</p>';
             return;
         }
-
         for (const day of sortedDays) {
-            
             if (filter !== 'all' && day !== filter) {
                 continue; 
             }
-
             hasResults = true;
             const exercisesForDay = workoutData[day];
-            
             const diaFormatado = `Dia ${day.toUpperCase()}`;
             displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
-
             for (const info of exercisesForDay) {
                 const cardHTML = `
                     <div class="exercise-card">
@@ -58,23 +63,42 @@ printButton.addEventListener('click', () => {
                 displayArea.innerHTML += cardHTML;
             }
         }
-
         if (!hasResults && filter !== 'all') {
             displayArea.innerHTML = `<p>Nenhum exercício encontrado para o Dia ${filter.toUpperCase()}.</p>`;
         }
     }
     
+    // --- 5. FUNÇÃO DE CARREGAMENTO (MODIFICADA) ---
     async function carregarTreino(stringOverride = null) {
         
         const rawString = stringOverride ? stringOverride : input.value;
         
         if (stringOverride) input.value = rawString;
-        if (!rawString || !rawString.startsWith('exercicio/')) {
-            displayArea.innerHTML = '<p>String inválida ou vazia. Deve começar com "exercicio/".</p>';
+        
+        // --- MUDANÇA AQUI: Nova lógica de parse ---
+        const parts = rawString.split('/');
+        if (!rawString || parts.length < 3) {
+            displayArea.innerHTML = '<p>String inválida. Formato esperado: aluno/instrutor/exercicio...</p>';
+            alunoNameSpan.textContent = 'N/A';
+            instrutorNameSpan.textContent = 'N/A';
             return;
         }
 
-        const pairs = rawString.replace('exercicio/', '').split('+');
+        const alunoName = parts[0];
+        const instrutorName = parts[1];
+        const workoutString = parts.slice(2).join('/'); // Reconstrói a parte do treino
+
+        // Mostra os nomes na tela
+        alunoNameSpan.textContent = alunoName;
+        instrutorNameSpan.textContent = instrutorName;
+        // --- FIM DA MUDANÇA ---
+
+        if (!workoutString || !workoutString.startsWith('exercicio/')) {
+            displayArea.innerHTML = '<p>String de treino inválida.</p>';
+            return;
+        }
+
+        const pairs = workoutString.replace('exercicio/', '').split('+');
         const exercisesToFetch = [];
         const idList = [];
         pairs.forEach(pair => {
@@ -108,9 +132,7 @@ printButton.addEventListener('click', () => {
             }, {});
 
             sortedDays = Object.keys(workoutData).sort();
-
             popularFiltroDeDias(sortedDays);
-            
             renderizarTreino('all');
 
         } catch (err) {
@@ -119,12 +141,12 @@ printButton.addEventListener('click', () => {
         }
     }
     
+    // --- 6. FUNÇÃO PARA POPULAR O SELECT ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
         }
         dayFilterSelect.value = 'all'; 
-
         days.forEach(day => {
             const option = document.createElement('option');
             option.value = day; 
@@ -133,6 +155,7 @@ printButton.addEventListener('click', () => {
         });
     }
 
+    // --- 7. FUNÇÃO DE INICIALIZAÇÃO ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
         const treinoParam = params.get('treino'); 
@@ -142,5 +165,5 @@ printButton.addEventListener('click', () => {
         }
     }
 
-    checarURL(); 
+    checarURL(); // Roda a checagem assim que a página carrega
 });

@@ -466,7 +466,20 @@
         #sidemenu li a:hover::after {
             width: 100%;
         }
+/* Estilo para os novos inputs de nome */
+.user-inputs-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
+.user-inputs-area input {
+    width: 50%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
         @media (min-width: 916px) and (max-width: 1750px) {
             .exercise-card {
                 width: 100%;
