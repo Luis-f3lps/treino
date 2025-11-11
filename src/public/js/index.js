@@ -1,25 +1,25 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const input = document.getElementById('workout-string-input');
     const button = document.getElementById('load-workout-button');
     const displayArea = document.getElementById('workout-display-area');
-    const dayFilterSelect = document.getElementById('day-filter-select'); 
+    const dayFilterSelect = document.getElementById('day-filter-select');
     const printButton = document.getElementById('print-pdf-button');
-    
+
     const alunoNameSpan = document.getElementById('display-aluno-name');
     const instrutorNameSpan = document.getElementById('display-instrutor-name');
 
-    let workoutData = {}; 
-    let sortedDays = []; 
+    let workoutData = {};
+    let sortedDays = [];
 
     button.addEventListener('click', () => {
         carregarTreino();
     });
-    
+
     dayFilterSelect.addEventListener('change', () => {
         const selectedDay = dayFilterSelect.value;
-        renderizarTreino(selectedDay); 
+        renderizarTreino(selectedDay);
     });
 
     printButton.addEventListener('click', () => {
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 4. FUNÇÃO DE RENDERIZAÇÃO (MODIFICADA) ---
-    function renderizarTreino(filter = 'all') { 
-        displayArea.innerHTML = ''; 
+    function renderizarTreino(filter = 'all') {
+        displayArea.innerHTML = '';
         let hasResults = false;
         if (sortedDays.length === 0) {
             displayArea.innerHTML = '<p>Nenhum treino carregado.</p>';
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (const day of sortedDays) {
             if (filter !== 'all' && day !== filter) {
-                continue; 
+                continue;
             }
             hasResults = true;
             const exercisesForDay = workoutData[day];
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h4>${info.nome}</h4>
                             <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
                             <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
-                                                        <p>${info.repeticoes_recomendadas || 'N/A'}</p>
+                                                        <p><strong>Repetições Sugeridas:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
 
                         </div>
                     </div>
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
             displayArea.innerHTML = `<p>Nenhum exercício encontrado para o Dia ${filter.toUpperCase()}.</p>`;
         }
     }
-    
+
     // --- 5. FUNÇÃO DE CARREGAMENTO (NÃO MUDA) ---
     async function carregarTreino(stringOverride = null) {
-        
+
         const rawString = stringOverride ? stringOverride : input.value;
-        
+
         if (stringOverride) input.value = rawString;
-        
+
         const parts = rawString.split('/');
         if (!rawString || parts.length < 3) {
             displayArea.innerHTML = '<p>String inválida. Formato esperado: aluno/instrutor/exercicio...</p>';
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const alunoName = parts[0];
         const instrutorName = parts[1];
-        const workoutString = parts.slice(2).join('/'); 
+        const workoutString = parts.slice(2).join('/');
 
         alunoNameSpan.textContent = alunoName;
         instrutorNameSpan.textContent = instrutorName;
@@ -123,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
             displayArea.innerHTML = '<p>Buscando dados...</p>';
             const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
             if (!response.ok) throw new Error(`Erro da API: ${response.statusText}`);
-            
-            const exercisesInfo = await response.json(); 
+
+            const exercisesInfo = await response.json();
             const fullWorkoutList = exercisesToFetch.map(exercise => {
                 const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
                 return { ...info, day: exercise.day };
-            }).filter(ex => ex.nome); 
+            }).filter(ex => ex.nome);
 
             workoutData = fullWorkoutList.reduce((acc, exercise) => {
                 const day = exercise.day;
@@ -146,17 +146,17 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(err);
         }
     }
-    
+
     // --- 6. FUNÇÃO POPULAR SELECT (NÃO MUDA) ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
         }
-        dayFilterSelect.value = 'all'; 
+        dayFilterSelect.value = 'all';
         days.forEach(day => {
             const option = document.createElement('option');
-            option.value = day; 
-            option.textContent = `Dia ${day.toUpperCase()}`; 
+            option.value = day;
+            option.textContent = `Dia ${day.toUpperCase()}`;
             dayFilterSelect.appendChild(option);
         });
     }
@@ -164,12 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 7. FUNÇÃO CHECAR URL (NÃO MUDA) ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
-        const treinoParam = params.get('treino'); 
+        const treinoParam = params.get('treino');
         if (treinoParam) {
             const decodedString = decodeURIComponent(treinoParam);
             carregarTreino(decodedString);
         }
     }
 
-    checarURL(); 
+    checarURL();
 });
