@@ -1,10 +1,4 @@
-var sidemenu = document.getElementById("sidemenu");
-function openmenu() {
-    sidemenu.style.right = "0";
-}
-function clossmenu() {
-    sidemenu.style.right = "-200px";
-}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -50,14 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const exercisesForDay = workoutData[day];
             const diaFormatado = `Dia ${day.toUpperCase()}`;
             displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
-
-            // Adiciona o cabeçalho (visível apenas na impressão)
-            displayArea.innerHTML += `
-                <div class="print-header">
-                    <span>EXERCÍCIO</span>
-                    <span>SÉRIE | REP.</span>
-                </div>
-            `;
 
             for (const info of exercisesForDay) {
                 // --- MUDANÇA NO HTML GERADO ---
@@ -155,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- 6. FUNÇÃO POPULAR SELECT (NÃO MUDA) ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
@@ -169,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 7. FUNÇÃO CHECAR URL (NÃO MUDA) ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
         const treinoParam = params.get('treino'); 
