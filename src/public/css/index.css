@@ -459,7 +459,6 @@ a {
     border-radius: 8px;
     padding: 10px 20px;
     margin-bottom: 25px;
-    display: flex;
     justify-content: space-between;
 }
 .workout-header p {
