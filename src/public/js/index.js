@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. SELEÇÃO DE ELEMENTOS ---
     const input = document.getElementById('workout-string-input');
     const button = document.getElementById('load-workout-button');
     const displayArea = document.getElementById('workout-display-area');
     const dayFilterSelect = document.getElementById('day-filter-select'); 
     const printButton = document.getElementById('print-pdf-button');
     
-    // Elementos novos para os nomes
     const alunoNameSpan = document.getElementById('display-aluno-name');
     const instrutorNameSpan = document.getElementById('display-instrutor-name');
 
-    // --- 2. VARIÁVEIS DE ESTADO ---
     let workoutData = {}; 
     let sortedDays = []; 
 
-    // --- 3. "OUVIDORES" DE EVENTOS ---
     button.addEventListener('click', () => {
         carregarTreino();
     });
@@ -29,8 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     });
 
-    // --- 4. FUNÇÃO DE RENDERIZAÇÃO (DESENHO) ---
-    // (Esta função não muda)
     function renderizarTreino(filter = 'all') { 
         displayArea.innerHTML = ''; 
         let hasResults = false;
@@ -68,14 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- 5. FUNÇÃO DE CARREGAMENTO (MODIFICADA) ---
     async function carregarTreino(stringOverride = null) {
         
         const rawString = stringOverride ? stringOverride : input.value;
         
         if (stringOverride) input.value = rawString;
         
-        // --- MUDANÇA AQUI: Nova lógica de parse ---
         const parts = rawString.split('/');
         if (!rawString || parts.length < 3) {
             displayArea.innerHTML = '<p>String inválida. Formato esperado: aluno/instrutor/exercicio...</p>';
@@ -86,12 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const alunoName = parts[0];
         const instrutorName = parts[1];
-        const workoutString = parts.slice(2).join('/'); // Reconstrói a parte do treino
+        const workoutString = parts.slice(2).join('/'); 
 
-        // Mostra os nomes na tela
         alunoNameSpan.textContent = alunoName;
         instrutorNameSpan.textContent = instrutorName;
-        // --- FIM DA MUDANÇA ---
 
         if (!workoutString || !workoutString.startsWith('exercicio/')) {
             displayArea.innerHTML = '<p>String de treino inválida.</p>';
@@ -141,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- 6. FUNÇÃO PARA POPULAR O SELECT ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
@@ -155,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 7. FUNÇÃO DE INICIALIZAÇÃO ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
         const treinoParam = params.get('treino'); 
@@ -165,5 +153,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    checarURL(); // Roda a checagem assim que a página carrega
+    checarURL(); 
 });
