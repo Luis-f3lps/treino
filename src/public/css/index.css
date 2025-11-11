@@ -371,7 +371,7 @@ a {
 @media print {
 
     body {
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
         background-color: #fff;
         margin: 0;
         color: #000;
@@ -380,12 +380,7 @@ a {
     #header, 
     .input-area, 
     .filter-area, 
-    #load-workout-button, 
-    .print-button {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
+    .print-button, 
     .exercise-gif {
         display: none !important;
         visibility: hidden !important;
@@ -394,7 +389,7 @@ a {
     .viewer-container {
         box-shadow: none;
         border: none;
-        margin: 1.5cm; /* Margem padrão de documento */
+        margin: 1.5cm; 
         padding: 0;
         max-width: 100%;
     }
@@ -402,57 +397,117 @@ a {
         position: static;
         width: 100%;
     }
+    
+    .viewer-container::before {
+        content: "FICHA DE TREINO";
+        display: block;
+        font-size: 32pt;
+        font-weight: 900;
+        text-align: center;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    .viewer-container h2 {
+        display: none; 
+    }
+
+    .workout-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border: 1.5px solid #000;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    .workout-header p { 
+        font-size: 12pt; 
+        color: #000; 
+        margin: 0; 
+    }
+    .workout-header p strong { 
+        font-weight: 600; 
+    }
 
     .day-title {
-        font-size: 22pt;
-        font-weight: 600;
-        color: #000;
-        border-bottom: 2px solid #000; /* Linha preta grossa */
-        padding-bottom: 8px;
-        margin-top: 25px; /* Espaço entre os dias */
-        page-break-after: avoid; /* Não quebra a página logo depois */
-    }
-    .day-title:first-of-type {
-        margin-top: 0;
+        background-color: #000;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 8px; 
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 25px;
+        border-bottom: none;
+        page-break-after: avoid; 
     }
     
-    .exercise-card {
-        border: none;
-        border-bottom: 1px solid #ccc; /* Apenas uma linha fina de separação */
-        padding: 12px 0;
-        margin: 0;
-        page-break-inside: avoid; /* Tenta não quebrar o card no meio da página */
-        box-shadow: none;
+    .day-title + .exercise-card::before {
+        content: "EXERCÍCIO";
+        display: inline-block;
+        width: 65%; 
+        font-size: 10pt;
+        font-weight: bold;
+        color: #333;
+        padding: 10px 5px 5px 5px;
+    }
+    .day-title + .exercise-card::after {
+        content: "SÉRIE | REP.";
+        display: inline-block;
+        width: 35%; 
+        font-size: 10pt;
+        font-weight: bold;
+        color: #333;
+        padding: 10px 5px 5px 5px;
+        text-align: right;
     }
 
-    .exercise-info {
-        padding: 0;
+    .exercise-card {
+        border: none;
+        border-bottom: 1px solid #ccc; 
+        padding: 10px 5px;
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
+    .exercise-info {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+    }
+
     .exercise-info h4 {
+        font-size: 12pt;
+        font-weight: 500;
         color: #000;
-        font-size: 16pt;
-        font-weight: 600;
-        margin-bottom: 8px;
-        text-align: left; /* Garante alinhamento */
+        margin: 0;
+        text-align: left;
+        flex-basis: 65%; 
     }
     
     .exercise-info p {
-        font-size: 11pt;
-        line-height: 1.5;
-        color: #333;
-        margin: 4px 0;
-        text-align: left;
-        font-style: normal;
+        display: none;
     }
-
-    .exercise-info p strong {
-        display: inline-block;
-        width: 180px; /* <-- Isso alinha todos os rótulos */
+    
+    .exercise-info p:nth-of-type(1) {
+        display: block;
+        font-size: 12pt;
         color: #000;
-        font-weight: 500;
+        margin: 0;
+        text-align: right;
+        font-style: normal;
+        flex-basis: 35%; 
     }
-}/* Estilo para o cabeçalho do treino (Aluno/Instrutor) */
+    
+    .exercise-info p:nth-of-type(1) strong {
+        display: none;
+    }
+}
 .workout-header {
     /* Remove a caixa cinza */
     background-color: transparent;
