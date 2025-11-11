@@ -368,7 +368,6 @@ a {
   background-color: #218838;
 }
 @media print {
-
     body {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         background-color: #fff;
@@ -388,7 +387,7 @@ a {
     .viewer-container {
         box-shadow: none;
         border: none;
-        margin: 1.5cm; 
+        margin: 1.5cm;
         padding: 0;
         max-width: 100%;
     }
@@ -440,23 +439,22 @@ a {
         page-break-after: avoid; 
     }
     
-    .day-title + .exercise-card::before {
-        content: "EXERCÍCIO";
-        display: inline-block;
-        width: 65%; 
+    .print-header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
         font-size: 10pt;
         font-weight: bold;
         color: #333;
         padding: 10px 5px 5px 5px;
+        border-bottom: 2px solid #000;
     }
-    .day-title + .exercise-card::after {
-        content: "SÉRIE | REP.";
-        display: inline-block;
-        width: 35%; 
-        font-size: 10pt;
-        font-weight: bold;
-        color: #333;
-        padding: 10px 5px 5px 5px;
+    .print-header span:nth-child(1) {
+        flex-basis: 65%;
+        text-align: left;
+    }
+     .print-header span:nth-child(2) {
+        flex-basis: 35%;
         text-align: right;
     }
 
@@ -472,39 +470,32 @@ a {
         align-items: center;
     }
     
-    .exercise-info {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        align-items: center;
+    .exercise-details {
+        flex-basis: 65%;
         padding: 0;
     }
-
-    .exercise-info h4 {
+    .exercise-details h4 {
         font-size: 12pt;
         font-weight: 500;
         color: #000;
         margin: 0;
         text-align: left;
-        flex-basis: 65%; 
     }
-    
-    .exercise-info p {
+    .exercise-details p {
         display: none;
     }
     
-    .exercise-info p:nth-of-type(1) {
-        display: block;
+    .exercise-reps {
+        flex-basis: 35%;
+        text-align: right;
         font-size: 12pt;
         color: #000;
-        margin: 0;
+        font-weight: 500;
+    }
+    .exercise-reps p {
         text-align: right;
         font-style: normal;
-        flex-basis: 35%; 
-    }
-    
-    .exercise-info p:nth-of-type(1) strong {
-        display: none;
+        margin: 0;
     }
 }
 .workout-header {
