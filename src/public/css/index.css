@@ -469,7 +469,13 @@ a {
         justify-content: space-between;
         align-items: center;
     }
-    
+    .exercise-info h4 { 
+    margin-top: 0; 
+    font-size: 22px; 
+    color: #111; 
+    text-align: center; /* A CORREÇÃO */
+    margin-bottom: 20px; /* Espaçamento */
+}
     .exercise-details {
         flex-basis: 65%;
         padding: 0;
