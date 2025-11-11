@@ -1,3 +1,11 @@
+var sidemenu = document.getElementById("sidemenu");
+function openmenu() {
+    sidemenu.style.right = "0";
+}
+function clossmenu() {
+    sidemenu.style.right = "-200px";
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     
     const input = document.getElementById('workout-string-input');
@@ -25,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.print();
     });
 
+    // --- 4. FUNÇÃO DE RENDERIZAÇÃO (MODIFICADA) ---
     function renderizarTreino(filter = 'all') { 
         displayArea.innerHTML = ''; 
         let hasResults = false;
@@ -32,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             displayArea.innerHTML = '<p>Nenhum treino carregado.</p>';
             return;
         }
+
         for (const day of sortedDays) {
             if (filter !== 'all' && day !== filter) {
                 continue; 
@@ -40,17 +50,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const exercisesForDay = workoutData[day];
             const diaFormatado = `Dia ${day.toUpperCase()}`;
             displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
+
+            // Adiciona o cabeçalho (visível apenas na impressão)
+            displayArea.innerHTML += `
+                <div class="print-header">
+                    <span>EXERCÍCIO</span>
+                    <span>SÉRIE | REP.</span>
+                </div>
+            `;
+
             for (const info of exercisesForDay) {
+                // --- MUDANÇA NO HTML GERADO ---
+                // Agora o card tem 3 colunas: gif, details, reps
                 const cardHTML = `
                     <div class="exercise-card">
                         <div class="exercise-gif">
                             <img src="${info.link_gif}" alt="${info.nome}">
                         </div>
-                        <div class="exercise-info">
+                        <div class="exercise-details">
                             <h4>${info.nome}</h4>
-                            <p><strong>Repetições:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
                             <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
                             <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
+                        </div>
+                        <div class="exercise-reps">
+                            <p>${info.repeticoes_recomendadas || 'N/A'}</p>
                         </div>
                     </div>
                 `;
@@ -62,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // --- 5. FUNÇÃO DE CARREGAMENTO (NÃO MUDA) ---
     async function carregarTreino(stringOverride = null) {
         
         const rawString = stringOverride ? stringOverride : input.value;
@@ -131,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // --- 6. FUNÇÃO POPULAR SELECT (NÃO MUDA) ---
     function popularFiltroDeDias(days) {
         while (dayFilterSelect.options.length > 1) {
             dayFilterSelect.remove(1);
@@ -144,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 7. FUNÇÃO CHECAR URL (NÃO MUDA) ---
     function checarURL() {
         const params = new URLSearchParams(window.location.search);
         const treinoParam = params.get('treino'); 
