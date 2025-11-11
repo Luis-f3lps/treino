@@ -454,18 +454,25 @@ a {
     }
 }/* Estilo para o cabeçalho do treino (Aluno/Instrutor) */
 .workout-header {
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 10px 20px;
+    /* Remove a caixa cinza */
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     margin-bottom: 25px;
-    justify-content: space-between;
+    
+    display: block; /* Faz Aluno e Instrutor ficarem um embaixo do outro */
 }
+
 .workout-header p {
     margin: 5px 0;
-    font-size: 16px;
-    color: #333;
+    font-size: 18px; /* Aumenta um pouco a fonte */
+    color: #444; /* Cor mais suave */
 }
+
 .workout-header p strong {
     color: #000;
+    font-weight: 600;
+    display: inline-block; /* Permite definir uma largura */
+    min-width: 90px;     /* Isso alinha "Luis" e "Marcos" */
 }
