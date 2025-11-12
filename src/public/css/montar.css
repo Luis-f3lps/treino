@@ -588,11 +588,14 @@
 
             .exercise-card {
                 width: 100%;
-                height: 470px;
+                height: 480px;
                 text-align: center;
             }
             .exercise-list-panel {
     padding: 30px;}
+    .exercise-detail-panel h3 {
+        padding: 9px;
+    }
         }
 
         nav .fa-solid {
