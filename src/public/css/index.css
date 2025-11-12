@@ -439,7 +439,6 @@ a {
     /* Estiliza o bloco Aluno/Instrutor */
     .workout-header {
         display: flex;
-        justify-content: space-between;
         padding: 10px 15px;
         border: 1.5px solid #000;
         border-radius: 8px;
@@ -484,7 +483,6 @@ a {
     /* Container (Nome + Reps) */
     .exercise-info {
         display: flex; /* Cria as 2 colunas */
-        justify-content: space-between;
         width: 100%;
         align-items: center;
         padding: 0;
@@ -546,7 +544,6 @@ a {
 .workout-header p strong {
   color: #000;
   font-weight: 600;
-  display: inline-block;
   /* Permite definir uma largura */
   min-width: 90px;
   /* Isso alinha "Luis" e "Marcos" */
