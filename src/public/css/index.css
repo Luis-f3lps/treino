@@ -301,6 +301,7 @@ nav ul li {
 
   .exercise-card {
     flex-direction: column;
+    width: 80%;
   }
 
   .exercise-gif {
