@@ -468,8 +468,7 @@ a {
     
     /* --- 6. CABEÇALHO DA TABELA (EXERCÍCIO | SÉRIE) --- */
     .print-header {
-        display: grid !important; /* USA GRID */
-        grid-template-columns: 65% 35%; /* 2 colunas */
+        display: block !important;
         width: 100%;
         font-size: 10pt;
         font-weight: bold;
@@ -479,17 +478,21 @@ a {
         margin-top: 5px;
         page-break-after: avoid;
     }
+    .print-header span {
+        display: inline-block;
+    }
     .print-header span:nth-child(1) {
+        width: 65%;
         text-align: left;
     }
      .print-header span:nth-child(2) {
+        width: 34%; /* 34% para não quebrar a linha */
         text-align: right;
     }
 
     /* --- 7. LINHA DO EXERCÍCIO --- */
     .exercise-card {
-        display: grid !important; /* USA GRID */
-        grid-template-columns: 65% 35%; /* 2 colunas */
+        display: block !important; /* Remove o flex/grid */
         border: none;
         border-bottom: 1px solid #ccc; 
         padding: 10px 5px;
@@ -501,8 +504,10 @@ a {
     
     /* Coluna 1: Nome */
     .exercise-details {
-        display: block; /* Ocupa a célula do grid */
+        display: inline-block; /* Fica na mesma linha */
+        width: 65%;
         padding: 0;
+        vertical-align: top;
     }
     .exercise-details h4 {
         font-size: 12pt;
@@ -517,11 +522,13 @@ a {
     
     /* Coluna 2: Repetições */
     .exercise-reps {
-        display: block; /* Ocupa a célula do grid */
+        display: inline-block; /* Fica na mesma linha */
+        width: 34%;
         text-align: right;
         font-size: 12pt;
         color: #000;
         font-weight: 500;
+        vertical-align: top;
     }
     .exercise-reps p {
         text-align: right;
