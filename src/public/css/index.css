@@ -516,7 +516,7 @@ a {
 
   /* --- 7. LINHA DO EXERCÍCIO --- */
   .exercise-card {
-    display: block !important;
+    display:inline-grid;
     /* Remove o flex/grid */
     border: none;
     padding: 0px;
@@ -532,7 +532,7 @@ a {
   .exercise-details {
     display: flex;
     /* Fica na mesma linha */
-    width: 100%;
+    width: 20%;
     padding: 0;
     vertical-align: top;
   }

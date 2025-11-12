@@ -62,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="exercise-details">
 <p style="font-weight: bold; color: #000000; font-style: italic; text-align: center;">  <strong>${info.nome}</strong>
 </p>
-                            <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
-                            <p><strong>Músculos Secundários:</strong> ${info.musculos_secundarios_nomes || 'Nenhum'}</p>
                                                         <p><strong>Repetições Sugeridas:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
 
                         </div>
