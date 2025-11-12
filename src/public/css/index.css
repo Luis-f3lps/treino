@@ -388,157 +388,140 @@ a {
 .print-button:hover {
   background-color: #218838;
 }
-
 @media print {
-  body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #fff;
-    margin: 0;
-    color: #000;
-  }
 
-  #header,
-  .input-area,
-  .filter-area,
-  .print-button,
-  .exercise-gif {
-    display: none !important;
-    visibility: hidden !important;
-  }
+    /* --- 1. RESET E PREPARAÇÃO DA PÁGINA --- */
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background-color: #fff;
+        margin: 0;
+        color: #000;
+    }
 
-  .viewer-container {
-    box-shadow: none;
-    border: none;
-    margin: 1.5cm;
-    padding: 0;
-    max-width: 100%;
-  }
+    /* --- 2. ESCONDE TUDO QUE NÃO É O TREINO --- */
+    #header, 
+    .input-area, 
+    .filter-area, 
+    .print-button, 
+    .exercise-gif {
+        display: none !important;
+        visibility: hidden !important;
+    }
 
-  #workout-display-area {
-    position: static;
-    width: 100%;
-  }
+    /* --- 3. CONFIGURA A "FOLHA" DE IMPRESSÃO --- */
+    .viewer-container {
+        box-shadow: none;
+        border: none;
+        margin: 1.5cm; /* Margem de documento A4 */
+        padding: 0;
+        max-width: 100%;
+    }
+    #workout-display-area {
+        position: static;
+        width: 100%;
+    }
 
-  .viewer-container::before {
-    content: "FICHA DE TREINO";
-    display: block;
-    font-size: 32pt;
-    font-weight: 900;
-    text-align: center;
-    color: #000;
-    margin-bottom: 20px;
-  }
+    /* --- 4. CABEÇALHO (TÍTULO E NOMES) --- */
+    
+    /* Adiciona "FICHA DE TREINO" no topo */
+    .viewer-container::before {
+        content: "FICHA DE TREINO";
+        display: block;
+        font-size: 32pt;
+        font-weight: 900;
+        text-align: center;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    .viewer-container h2 {
+        display: none; /* Esconde o "Visualizar Treino" original */
+    }
 
-  .viewer-container h2 {
-    display: none;
-  }
+    /* Estiliza o bloco Aluno/Instrutor */
+    .workout-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border: 1.5px solid #000;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+    .workout-header p { 
+        font-size: 12pt; 
+        color: #000; 
+        margin: 0; 
+    }
+    .workout-header p strong { 
+        font-weight: 600; 
+    }
 
-  .workout-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border: 1.5px solid #000;
-    border-radius: 8px;
-    margin-bottom: 30px;
-  }
+    /* --- 5. TÍTULO DO DIA (Ex: TREINO A) --- */
+    .day-title {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 25px;
+        border-bottom: none;
+        page-break-after: avoid; /* Não quebra a página logo depois */
+    }
+    
+    /* --- 6. O ITEM DE EXERCÍCIO (A Linha) --- */
+    /* (Removemos o ::before e ::after que quebravam o layout) */
+    
+    .exercise-card {
+        border: none;
+        border-bottom: 1px solid #ccc; /* Linha de separação */
+        padding: 12px 5px;
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+        display: block; /* Remove o flex da tela */
+    }
+    
+    /* Container (Nome + Reps) */
+    .exercise-info {
+        display: flex; /* Cria as 2 colunas */
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        padding: 0;
+    }
 
-  .workout-header p {
-    font-size: 12pt;
-    color: #000;
-    margin: 0;
-  }
-
-  .workout-header p strong {
-    font-weight: 600;
-  }
-
-  .day-title {
-    background-color: #000;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 8px;
-    font-size: 16pt;
-    font-weight: bold;
-    text-align: left;
-    margin-top: 25px;
-    border-bottom: none;
-    page-break-after: avoid;
-  }
-
-  .print-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 10pt;
-    font-weight: bold;
-    color: #333;
-    padding: 10px 5px 5px 5px;
-    border-bottom: 2px solid #000;
-  }
-
-  .print-header span:nth-child(1) {
-    flex-basis: 65%;
-    text-align: left;
-  }
-
-  .print-header span:nth-child(2) {
-    flex-basis: 35%;
-    text-align: right;
-  }
-
-  .exercise-card {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 5px;
-    margin: 0;
-    box-shadow: none;
-    page-break-inside: avoid;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-      width: 80%;
-  }
-
-  .exercise-info h4 {
-    margin-top: 0;
-    font-size: 22px;
-    color: #111;
-    text-align: center;
-    /* A CORREÇÃO */
-    margin-bottom: 20px;
-    /* Espaçamento */
-  }
-
-  .exercise-details {
-    flex-basis: 65%;
-    padding: 0;
-  }
-
-  .exercise-details h4 {
-    font-size: 12pt;
-    font-weight: 500;
-    color: #000;
-    margin: 0;
-    text-align: left;
-  }
-
-  .exercise-details p {
-    display: none;
-  }
-
-  .exercise-reps {
-    flex-basis: 35%;
-    text-align: right;
-    font-size: 12pt;
-    color: #000;
-    font-weight: 500;
-  }
-
-  .exercise-reps p {
-    text-align: right;
-    font-style: normal;
-    margin: 0;
-  }
+    /* Coluna 1: Nome */
+    .exercise-info h4 {
+        font-size: 12pt;
+        font-weight: 500;
+        color: #000;
+        margin: 0;
+        text-align: left;
+        flex-basis: 65%; /* Largura da coluna 1 */
+    }
+    
+    /* Esconde Músculo Primário e Secundário */
+    .exercise-info p {
+        display: none;
+    }
+    
+    /* Coluna 2: Repetições */
+    /* Mostra SOMENTE o primeiro <p> (que é o de Repetições) */
+    .exercise-info p:nth-of-type(1) {
+        display: block;
+        font-size: 12pt;
+        color: #000;
+        margin: 0;
+        text-align: right;
+        font-style: normal;
+        flex-basis: 35%; /* Largura da coluna 2 */
+    }
+    
+    /* Esconde o rótulo "Repetições:" */
+    .exercise-info p:nth-of-type(1) strong {
+        display: none;
+    }
 }
 
 .workout-header {
