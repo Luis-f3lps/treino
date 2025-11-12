@@ -218,7 +218,10 @@ nav ul li {
 #sidemenu li a:hover::after {
   width: 100%;
 }
+ .print-header {
+    display: none;
 
+  }
 #sidemenu li a {
   text-decoration: none;
   color: #ffffff;
