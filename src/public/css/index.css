@@ -454,7 +454,6 @@ a {
     /* --- 5. TÍTULO DO DIA (TREINO A) --- */
     .day-title {
         display: block !important;
-        color: #fff;
         padding: 8px 15px;
         border-radius: 8px; 
         font-size: 16pt;
