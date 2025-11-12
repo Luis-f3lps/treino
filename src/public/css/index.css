@@ -453,6 +453,7 @@ a {
 
     /* --- 5. TÍTULO DO DIA (TREINO A) --- */
     .day-title {
+        display: block !important; /* Garante que apareça */
         background-color: #000;
         color: #fff;
         padding: 8px 15px;
@@ -462,11 +463,12 @@ a {
         text-align: left;
         margin-top: 25px;
         border-bottom: none;
+        page-break-after: avoid;
     }
     
     /* --- 6. CABEÇALHO DA TABELA (EXERCÍCIO | SÉRIE) --- */
     .print-header {
-        display: block !important;
+        display: block !important; /* Garante que apareça */
         width: 100%;
         font-size: 10pt;
         font-weight: bold;
@@ -474,9 +476,10 @@ a {
         padding: 10px 5px 5px 5px;
         border-bottom: 2px solid #000;
         margin-top: 5px;
+        page-break-after: avoid;
     }
     .print-header span {
-        display: inline-block; /* Fica na mesma linha */
+        display: inline-block;
     }
     .print-header span:nth-child(1) {
         width: 65%;
@@ -489,13 +492,14 @@ a {
 
     /* --- 7. LINHA DO EXERCÍCIO --- */
     .exercise-card {
-        display: block !important; /* Remove o flex */
+        display: block !important; /* Remove o flex/table */
         border: none;
         border-bottom: 1px solid #ccc; 
         padding: 10px 5px;
         margin: 0;
         box-shadow: none;
         width: 100%;
+        page-break-inside: avoid; /* Tenta não quebrar o card */
     }
     
     /* Coluna 1: Nome */
