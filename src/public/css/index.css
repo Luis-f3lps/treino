@@ -503,7 +503,7 @@ a {
         box-shadow: none;
         width: 100%;
         page-break-inside: avoid; /* Tenta não quebrar o card */
-        height: 0px;
+        height: 100px;
     }
     
     /* Coluna 1: Nome */
