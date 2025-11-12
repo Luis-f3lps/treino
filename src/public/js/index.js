@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${info.link_gif}" alt="${info.nome}">
                         </div>
                         <div class="exercise-details">
-<p style="font-size: 16px; color: #000000; font-style: italic; text-align: center;">
+<p style="font-size: 22px; color: #000000; font-style: italic; text-align: center;">
   <strong>${info.nome}</strong>
 </p>
                             <p><strong>Músculo Primário:</strong> ${info.musculo_primario_nome || 'N/A'}</p>
