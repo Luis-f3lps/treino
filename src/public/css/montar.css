@@ -591,6 +591,8 @@
                 height: 470px;
                 text-align: center;
             }
+            .exercise-list-panel {
+    padding: 30px;}
         }
 
         nav .fa-solid {
