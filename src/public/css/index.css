@@ -522,7 +522,7 @@ a {
     padding: 0px;
     margin: 0;
     box-shadow: none;
-    width: 100%;
+    width: 20%;
     page-break-inside: avoid;
     /* Tenta não quebrar o card */
     height: 80px;
@@ -532,7 +532,7 @@ a {
   .exercise-details {
     display: flex;
     /* Fica na mesma linha */
-    width: 20%;
+    width: 100%;
     padding: 0;
     vertical-align: top;
   }
