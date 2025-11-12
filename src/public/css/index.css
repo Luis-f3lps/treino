@@ -75,8 +75,8 @@ nav ul li {
   color: #222;
   border-bottom: 2px solid #f0f0f0;
   padding-bottom: 15px;
-  margin-top: 0;
   margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 .input-area {
@@ -138,8 +138,10 @@ nav ul li {
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.3s ease;
+    width: 20%;
+    height: 520px;
+    margin: 15px;
 }
-
 .exercise-card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
