@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
             displayArea.innerHTML += `
                 <div class="print-header">
                     <span>EXERCÍCIO</span>
-                    <span>SÉRIE | REP.</span>
                 </div>
             `;
 
