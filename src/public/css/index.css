@@ -407,7 +407,13 @@ a {
         display: none !important;
         visibility: hidden !important;
     }
-
+#workout-display-area p {
+    font-size: 16px;
+    color: #777;
+    font-style: italic;
+    text-align: center;
+    margin: 15px;
+}
     /* --- 3. CONFIGURA A FOLHA A4 --- */
     .viewer-container {
         box-shadow: none;
@@ -492,12 +498,12 @@ a {
     .exercise-card {
         display: block !important; /* Remove o flex/grid */
         border: none;
-        border-bottom: 1px solid #ccc; 
         padding: 10px 5px;
         margin: 0;
         box-shadow: none;
         width: 100%;
         page-break-inside: avoid; /* Tenta não quebrar o card */
+        height: 0px;
     }
     
     /* Coluna 1: Nome */
