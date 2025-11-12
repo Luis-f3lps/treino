@@ -406,20 +406,6 @@ a {
         display: none !important;
         visibility: hidden !important;
     }
-
-    /* --- 3. CONFIGURA A "FOLHA" DE IMPRESSÃO --- */
-    .viewer-container {
-        box-shadow: none;
-        border: none;
-        margin: 1.5cm; /* Margem de documento A4 */
-        padding: 0;
-        max-width: 100%;
-    }
-    #workout-display-area {
-        position: static;
-        width: 100%;
-    }
-
     /* --- 4. CABEÇALHO (TÍTULO E NOMES) --- */
     
     /* Adiciona "FICHA DE TREINO" no topo */
@@ -453,50 +439,6 @@ a {
         font-weight: 600; 
     }
 
-    /* --- 5. TÍTULO DO DIA (Ex: TREINO A) --- */
-    .day-title {
-        background-color: #000;
-        color: #fff;
-        padding: 8px 15px;
-        border-radius: 8px;
-        font-size: 16pt;
-        font-weight: bold;
-        text-align: left;
-        margin-top: 25px;
-        border-bottom: none;
-        page-break-after: avoid; /* Não quebra a página logo depois */
-    }
-    
-    /* --- 6. O ITEM DE EXERCÍCIO (A Linha) --- */
-    /* (Removemos o ::before e ::after que quebravam o layout) */
-    
-    .exercise-card {
-        border: none;
-        border-bottom: 1px solid #ccc; /* Linha de separação */
-        padding: 12px 5px;
-        margin: 0;
-        box-shadow: none;
-        page-break-inside: avoid;
-        display: block; /* Remove o flex da tela */
-    }
-    
-    /* Container (Nome + Reps) */
-    .exercise-info {
-        display: flex; /* Cria as 2 colunas */
-        width: 100%;
-        align-items: center;
-        padding: 0;
-    }
-
-    /* Coluna 1: Nome */
-    .exercise-info h4 {
-        font-size: 12pt;
-        font-weight: 500;
-        color: #000;
-        margin: 0;
-        text-align: left;
-        flex-basis: 65%; /* Largura da coluna 1 */
-    }
     
     /* Esconde Músculo Primário e Secundário */
     .exercise-info p {
