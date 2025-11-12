@@ -419,7 +419,7 @@ a {
     text-align: center;
     margin-right: 30px;
     width: 20%;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   /* --- 3. CONFIGURA A FOLHA A4 --- */
@@ -451,7 +451,7 @@ a {
     margin: 0px;
     border-bottom: 2px solid #ffffff;
     padding: 0px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .workout-header {
