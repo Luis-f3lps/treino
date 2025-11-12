@@ -419,13 +419,14 @@ a {
     text-align: center;
     margin-right: 30px;
     width: 20%;
+    font-size: 14px;
   }
 
   /* --- 3. CONFIGURA A FOLHA A4 --- */
   .viewer-container {
     box-shadow: none;
     border: none;
-    margin: 1.5cm;
+    margin: 0;
     padding: 0;
     max-width: 100%;
   }
@@ -450,6 +451,7 @@ a {
     margin: 0px;
     border-bottom: 2px solid #ffffff;
     padding: 0px;
+    font-size: 16px;
   }
 
   .workout-header {
@@ -523,7 +525,7 @@ a {
     width: 100%;
     page-break-inside: avoid;
     /* Tenta não quebrar o card */
-    height: 100px;
+    height: 80px;
   }
 
   /* Coluna 1: Nome */
