@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4>${ex.nome}</h4>
             <p><strong>Repetições:</strong> ${ex.repeticoes_recomendadas || 'N/A'}</p>
             <p><strong>Músculo Primário:</strong> ${ex.musculo_primario_nome || 'N/A'}</p>
-            <p><strong>Músculos Secundários:</strong> ${ex.musculos_secundarios_nomes || 'Nenhum'}</p>
             <p><strong>ID:</strong> ${ex.id_exercicio}</p>
             <button class="add-button">Adicionar</button>
         `;
