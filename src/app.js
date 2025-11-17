@@ -2,13 +2,11 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import pool from './database.js'; // Importa a pool de conexões do arquivo database.js
+import pool from './database.js'; 
 
-// Definindo __filename e __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Carregando variáveis de ambiente do arquivo .env
 dotenv.config({ path: path.resolve(__dirname, 'variaveis.env') });
 console.log({
     DB_HOST: process.env.DB_HOST,
@@ -21,7 +19,7 @@ const app = express();
 
 (async () => {
     try {
-        await pool.query('SELECT NOW()'); // Consulta simples para testar a conexão
+        await pool.query('SELECT NOW()'); 
         console.log('Conexão bem-sucedida ao banco de dados!');
     } catch (err) {
         console.error('Erro ao conectar ao banco de dados:', err);

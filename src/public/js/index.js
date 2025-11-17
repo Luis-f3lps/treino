@@ -1,173 +1,174 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("workout-string-input");
+  const button = document.getElementById("load-workout-button");
+  const displayArea = document.getElementById("workout-display-area");
+  const dayFilterSelect = document.getElementById("day-filter-select");
+  const printButton = document.getElementById("print-pdf-button");
 
-document.addEventListener('DOMContentLoaded', () => {
+  const alunoNameSpan = document.getElementById("display-aluno-name");
+  const instrutorNameSpan = document.getElementById("display-instrutor-name");
 
-    const input = document.getElementById('workout-string-input');
-    const button = document.getElementById('load-workout-button');
-    const displayArea = document.getElementById('workout-display-area');
-    const dayFilterSelect = document.getElementById('day-filter-select');
-    const printButton = document.getElementById('print-pdf-button');
+  let workoutData = {};
+  let sortedDays = [];
 
-    const alunoNameSpan = document.getElementById('display-aluno-name');
-    const instrutorNameSpan = document.getElementById('display-instrutor-name');
+  button.addEventListener("click", () => {
+    carregarTreino();
+  });
 
-    let workoutData = {};
-    let sortedDays = [];
+  dayFilterSelect.addEventListener("change", () => {
+    const selectedDay = dayFilterSelect.value;
+    renderizarTreino(selectedDay);
+  });
 
-    button.addEventListener('click', () => {
-        carregarTreino();
-    });
+  printButton.addEventListener("click", () => {
+    window.print();
+  });
 
-    dayFilterSelect.addEventListener('change', () => {
-        const selectedDay = dayFilterSelect.value;
-        renderizarTreino(selectedDay);
-    });
+  function renderizarTreino(filter = "all") {
+    displayArea.innerHTML = "";
+    let hasResults = false;
+    if (sortedDays.length === 0) {
+      displayArea.innerHTML = "<p>Nenhum treino carregado.</p>";
+      return;
+    }
 
-    printButton.addEventListener('click', () => {
-        window.print();
-    });
+    for (const day of sortedDays) {
+      if (filter !== "all" && day !== filter) {
+        continue;
+      }
+      hasResults = true;
+      const exercisesForDay = workoutData[day];
+      const diaFormatado = `Dia ${day.toUpperCase()}`;
+      displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
 
-    // --- 4. FUNÇÃO DE RENDERIZAÇÃO (MODIFICADA) ---
-    function renderizarTreino(filter = 'all') {
-        displayArea.innerHTML = '';
-        let hasResults = false;
-        if (sortedDays.length === 0) {
-            displayArea.innerHTML = '<p>Nenhum treino carregado.</p>';
-            return;
-        }
-
-        for (const day of sortedDays) {
-            if (filter !== 'all' && day !== filter) {
-                continue;
-            }
-            hasResults = true;
-            const exercisesForDay = workoutData[day];
-            const diaFormatado = `Dia ${day.toUpperCase()}`;
-            displayArea.innerHTML += `<h2 class="day-title">${diaFormatado}</h2>`;
-
-            // Adiciona o cabeçalho (visível apenas na impressão)
-            displayArea.innerHTML += `
+      displayArea.innerHTML += `
                 <div class="print-header">
                     <span>EXERCÍCIO</span>
                 </div>
             `;
 
-            for (const info of exercisesForDay) {
-                // --- MUDANÇA NO HTML GERADO ---
-                // Agora o card tem 3 colunas: gif, details, reps
-                const cardHTML = `
+      for (const info of exercisesForDay) {
+        const cardHTML = `
                     <div class="exercise-card">
                         <div class="exercise-gif">
                             <img src="${info.link_gif}" alt="${info.nome}">
                         </div>
                         <div class="exercise-details">
-<p style="font-weight: bold; color: #000000; font-style: italic; text-align: center;">  <strong>${info.nome}</strong>
+<p style="font-weight: bold; color: #000000; font-style: italic; text-align: center;">  <strong>${
+          info.nome
+        }</strong>
 </p>
-                                                        <p><strong>Repetições Sugeridas:</strong> ${info.repeticoes_recomendadas || 'N/A'}</p>
+                                                        <p><strong>Repetições Sugeridas:</strong> ${
+                                                          info.repeticoes_recomendadas ||
+                                                          "N/A"
+                                                        }</p>
 
                         </div>
                     </div>
                 `;
-                displayArea.innerHTML += cardHTML;
-            }
-        }
-        if (!hasResults && filter !== 'all') {
-            displayArea.innerHTML = `<p>Nenhum exercício encontrado para o Dia ${filter.toUpperCase()}.</p>`;
-        }
+        displayArea.innerHTML += cardHTML;
+      }
+    }
+    if (!hasResults && filter !== "all") {
+      displayArea.innerHTML = `<p>Nenhum exercício encontrado para o Dia ${filter.toUpperCase()}.</p>`;
+    }
+  }
+
+  async function carregarTreino(stringOverride = null) {
+    const rawString = stringOverride ? stringOverride : input.value;
+
+    if (stringOverride) input.value = rawString;
+
+    const parts = rawString.split("/");
+    if (!rawString || parts.length < 3) {
+      displayArea.innerHTML =
+        "<p>String inválida. Formato esperado: aluno/instrutor/exercicio...</p>";
+      alunoNameSpan.textContent = "N/A";
+      instrutorNameSpan.textContent = "N/A";
+      return;
     }
 
-    // --- 5. FUNÇÃO DE CARREGAMENTO (NÃO MUDA) ---
-    async function carregarTreino(stringOverride = null) {
+    const alunoName = parts[0];
+    const instrutorName = parts[1];
+    const workoutString = parts.slice(2).join("/");
 
-        const rawString = stringOverride ? stringOverride : input.value;
+    alunoNameSpan.textContent = alunoName;
+    instrutorNameSpan.textContent = instrutorName;
 
-        if (stringOverride) input.value = rawString;
-
-        const parts = rawString.split('/');
-        if (!rawString || parts.length < 3) {
-            displayArea.innerHTML = '<p>String inválida. Formato esperado: aluno/instrutor/exercicio...</p>';
-            alunoNameSpan.textContent = 'N/A';
-            instrutorNameSpan.textContent = 'N/A';
-            return;
-        }
-
-        const alunoName = parts[0];
-        const instrutorName = parts[1];
-        const workoutString = parts.slice(2).join('/');
-
-        alunoNameSpan.textContent = alunoName;
-        instrutorNameSpan.textContent = instrutorName;
-
-        if (!workoutString || !workoutString.startsWith('exercicio/')) {
-            displayArea.innerHTML = '<p>String de treino inválida.</p>';
-            return;
-        }
-
-        const pairs = workoutString.replace('exercicio/', '').split('+');
-        const exercisesToFetch = [];
-        const idList = [];
-        pairs.forEach(pair => {
-            const parts = pair.split(',');
-            if (parts[0] && parts[1]) {
-                exercisesToFetch.push({ id: parts[0], day: parts[1] });
-                idList.push(parts[0]);
-            }
-        });
-        if (idList.length === 0) {
-            displayArea.innerHTML = '<p>Nenhum exercício válido na string.</p>';
-            return;
-        }
-
-        try {
-            displayArea.innerHTML = '<p>Buscando dados...</p>';
-            const response = await fetch(`/api/exercicios/info?ids=${idList.join(',')}`);
-            if (!response.ok) throw new Error(`Erro da API: ${response.statusText}`);
-
-            const exercisesInfo = await response.json();
-            const fullWorkoutList = exercisesToFetch.map(exercise => {
-                const info = exercisesInfo.find(ex => ex.id_exercicio === exercise.id);
-                return { ...info, day: exercise.day };
-            }).filter(ex => ex.nome);
-
-            workoutData = fullWorkoutList.reduce((acc, exercise) => {
-                const day = exercise.day;
-                if (!acc[day]) acc[day] = [];
-                acc[day].push(exercise);
-                return acc;
-            }, {});
-
-            sortedDays = Object.keys(workoutData).sort();
-            popularFiltroDeDias(sortedDays);
-            renderizarTreino('all');
-
-        } catch (err) {
-            displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
-            console.error(err);
-        }
+    if (!workoutString || !workoutString.startsWith("exercicio/")) {
+      displayArea.innerHTML = "<p>String de treino inválida.</p>";
+      return;
     }
 
-    // --- 6. FUNÇÃO POPULAR SELECT (NÃO MUDA) ---
-    function popularFiltroDeDias(days) {
-        while (dayFilterSelect.options.length > 1) {
-            dayFilterSelect.remove(1);
-        }
-        dayFilterSelect.value = 'all';
-        days.forEach(day => {
-            const option = document.createElement('option');
-            option.value = day;
-            option.textContent = `Dia ${day.toUpperCase()}`;
-            dayFilterSelect.appendChild(option);
-        });
+    const pairs = workoutString.replace("exercicio/", "").split("+");
+    const exercisesToFetch = [];
+    const idList = [];
+    pairs.forEach((pair) => {
+      const parts = pair.split(",");
+      if (parts[0] && parts[1]) {
+        exercisesToFetch.push({ id: parts[0], day: parts[1] });
+        idList.push(parts[0]);
+      }
+    });
+    if (idList.length === 0) {
+      displayArea.innerHTML = "<p>Nenhum exercício válido na string.</p>";
+      return;
     }
 
-    // --- 7. FUNÇÃO CHECAR URL (NÃO MUDA) ---
-    function checarURL() {
-        const params = new URLSearchParams(window.location.search);
-        const treinoParam = params.get('treino');
-        if (treinoParam) {
-            const decodedString = decodeURIComponent(treinoParam);
-            carregarTreino(decodedString);
-        }
-    }
+    try {
+      displayArea.innerHTML = "<p>Buscando dados...</p>";
+      const response = await fetch(
+        `/api/exercicios/info?ids=${idList.join(",")}`
+      );
+      if (!response.ok) throw new Error(`Erro da API: ${response.statusText}`);
 
-    checarURL();
+      const exercisesInfo = await response.json();
+      const fullWorkoutList = exercisesToFetch
+        .map((exercise) => {
+          const info = exercisesInfo.find(
+            (ex) => ex.id_exercicio === exercise.id
+          );
+          return { ...info, day: exercise.day };
+        })
+        .filter((ex) => ex.nome);
+
+      workoutData = fullWorkoutList.reduce((acc, exercise) => {
+        const day = exercise.day;
+        if (!acc[day]) acc[day] = [];
+        acc[day].push(exercise);
+        return acc;
+      }, {});
+
+      sortedDays = Object.keys(workoutData).sort();
+      popularFiltroDeDias(sortedDays);
+      renderizarTreino("all");
+    } catch (err) {
+      displayArea.innerHTML = `<p><b>Falha ao carregar treino:</b> ${err.message}</p>`;
+      console.error(err);
+    }
+  }
+
+  function popularFiltroDeDias(days) {
+    while (dayFilterSelect.options.length > 1) {
+      dayFilterSelect.remove(1);
+    }
+    dayFilterSelect.value = "all";
+    days.forEach((day) => {
+      const option = document.createElement("option");
+      option.value = day;
+      option.textContent = `Dia ${day.toUpperCase()}`;
+      dayFilterSelect.appendChild(option);
+    });
+  }
+
+  function checarURL() {
+    const params = new URLSearchParams(window.location.search);
+    const treinoParam = params.get("treino");
+    if (treinoParam) {
+      const decodedString = decodeURIComponent(treinoParam);
+      carregarTreino(decodedString);
+    }
+  }
+
+  checarURL();
 });

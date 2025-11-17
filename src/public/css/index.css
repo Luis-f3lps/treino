@@ -394,7 +394,6 @@ a {
 
 @media print {
 
-  /* --- 1. RESET E PREPARAÇÃO --- */
   body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #fff;
@@ -402,7 +401,6 @@ a {
     color: #000;
   }
 
-  /* --- 2. ESCONDE O QUE NÃO É O TREINO --- */
   #header,
   .input-area,
   .filter-area,
@@ -421,7 +419,6 @@ a {
     font-size: 12px;
   }
 
-  /* --- 3. CONFIGURA A FOLHA A4 --- */
   .viewer-container {
     box-shadow: none;
     border: none;
@@ -435,7 +432,6 @@ a {
     width: 100%;
   }
 
-  /* --- 4. CABEÇALHO (TÍTULO E NOMES) --- */
   .viewer-container::before {
     content: "FICHA DE TREINO";
     display: block;
@@ -451,7 +447,7 @@ a {
     border-bottom: 2px solid #ffffff;
     padding: 0px;
     font-size: 14px;
-            margin-top: 20px;
+    margin-top: 20px;
 
   }
 
@@ -474,7 +470,6 @@ a {
     font-weight: 600;
   }
 
-  /* --- 5. TÍTULO DO DIA (TREINO A) --- */
   .day-title {
     display: block !important;
     padding: 8px 15px;
@@ -487,7 +482,6 @@ a {
     page-break-after: avoid;
   }
 
-  /* --- 6. CABEÇALHO DA TABELA (EXERCÍCIO | SÉRIE) --- */
   .print-header {
     display: block !important;
     width: 100%;
@@ -511,28 +505,22 @@ a {
 
   .print-header span:nth-child(2) {
     width: 34%;
-    /* 34% para não quebrar a linha */
     text-align: right;
   }
 
-  /* --- 7. LINHA DO EXERCÍCIO --- */
   .exercise-card {
-    display:inline-grid;
-    /* Remove o flex/grid */
+    display: inline-grid;
     border: none;
     padding: 0px;
     margin: 0;
     box-shadow: none;
     width: 24%;
     page-break-inside: avoid;
-    /* Tenta não quebrar o card */
     height: 50px;
   }
 
-  /* Coluna 1: Nome */
   .exercise-details {
     display: flex;
-    /* Fica na mesma linha */
     width: 100%;
     padding: 0;
     vertical-align: top;
@@ -546,10 +534,8 @@ a {
     text-align: left;
   }
 
-  /* Coluna 2: Repetições */
   .exercise-reps {
     display: inline-block;
-    /* Fica na mesma linha */
     width: 34%;
     text-align: right;
     font-size: 12pt;
@@ -566,29 +552,22 @@ a {
 }
 
 .workout-header {
-  /* Remove a caixa cinza */
   background-color: transparent;
   border: none;
   border-radius: 0;
   padding: 0;
   margin-bottom: 25px;
-
   display: block;
-  /* Faz Aluno e Instrutor ficarem um embaixo do outro */
 }
 
 .workout-header p {
   margin: 5px 0;
   font-size: 18px;
-  /* Aumenta um pouco a fonte */
   color: #444;
-  /* Cor mais suave */
 }
 
 .workout-header p strong {
   color: #000;
   font-weight: 600;
-  /* Permite definir uma largura */
   min-width: 90px;
-  /* Isso alinha "Luis" e "Marcos" */
 }
